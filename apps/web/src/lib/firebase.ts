@@ -8,7 +8,7 @@ import { initializeAppCheck, ReCaptchaEnterpriseProvider } from 'firebase/app-ch
 export const configSchema = z.object({
   projectId: z.string().min(6), apiKey: z.string().min(1), authDomain: z.string().min(1), appId: z.string().min(1),
   oauthClientId: z.string().min(1), region: z.string().min(1), appCheckSiteKey: z.string().min(1),
-  emulator: z.boolean().default(false), addAppEnabled:z.boolean().default(false), financeEnabled:z.boolean().default(false), preferencesEnabled:z.boolean().default(false),
+  emulator: z.boolean().default(false), addAppEnabled:z.boolean().default(false), financeEnabled:z.boolean().default(false), preferencesEnabled:z.boolean().default(false), monitoringEnabled:z.boolean().default(false),
 }).strict();
 export type ClientConfig = z.infer<typeof configSchema>;
 export async function loadClient() {

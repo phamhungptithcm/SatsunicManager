@@ -34,7 +34,7 @@ it('keeps every release callable on the dedicated identity with App Check and bo
  vi.stubEnv('MANAGER_ORIGINS','https://satsunicmanager.web.app,https://satsunicmanager.firebaseapp.com');
  try{
   const api=await import('../../functions/src/index');
-  for(const name of ['bootstrapOwner','listApps','checkConnection','listIncidents','updateIncident','listNotifications','markNotificationRead','getOperations','addApp'] as const){
+  for(const name of ['bootstrapOwner','listApps','checkConnection','listIncidents','updateIncident','listNotifications','markNotificationRead','getOperations','addApp','listMonitoringSnapshots'] as const){
    const endpoint=api[name].__endpoint;
    expect(endpoint.serviceAccountEmail).toBe('manager-api@satsunicmanager.iam.gserviceaccount.com');
    expect(endpoint.region).toEqual(['us-central1']);
@@ -59,3 +59,13 @@ it('keeps every release callable on the dedicated identity with App Check and bo
   }
  }finally{vi.unstubAllEnvs();}
 });
+
+ it('pins the private monitoring worker to only the approved scheduler and worker identities', async () => {
+  const {collectMonitoring}=await import('../../functions/src/index');
+  const endpoint=collectMonitoring.__endpoint;
+  expect(endpoint.region).toEqual(['us-central1']);
+  expect(endpoint.serviceAccountEmail).toBe('manager-worker@satsunicmanager.iam.gserviceaccount.com');
+  expect(endpoint.httpsTrigger?.invoker).toEqual(['manager-scheduler@satsunicmanager.iam.gserviceaccount.com']);
+  expect(endpoint.maxInstances).toBe(1); expect(endpoint.concurrency).toBe(1);
+  expect(endpoint.timeoutSeconds).toBe(60); expect(endpoint.availableMemoryMb).toBe(256);
+ });

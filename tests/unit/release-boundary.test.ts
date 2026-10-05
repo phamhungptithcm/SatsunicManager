@@ -35,3 +35,13 @@ it('release driver fails closed for stale or unauthenticated release bindings',(
   expect(result.status).not.toBe(0);expect(result.stderr).toContain('Exact SM-RELEASE-009 approval and tested candidate required');
  }finally{rmSync(directory,{recursive:true,force:true});}
 });
+it('monitoring release rejects broad selectors and mismatched runtime before cloud',()=>{
+ const extra=spawnSync(process.execPath,['scripts/cloud/deploy-monitoring.mjs','backend','--force'],{encoding:'utf8',env:{...process.env,MANAGER_DEPLOY_CONFIG:'/nonexistent'}});
+ expect(extra.status).not.toBe(0);expect(extra.stderr).toContain('Select exact backend or hosting phase');
+ const directory=mkdtempSync(join(tmpdir(),'sm-monitor-runtime-'));
+ try{
+  const path=join(directory,'config.json');writeFileSync(path,JSON.stringify({production:{projectId:'satsunicmanager',region:'us-central1',apiServiceAccount:'manager-worker@satsunicmanager.iam.gserviceaccount.com',origins:['https://satsunicmanager.web.app','https://satsunicmanager.firebaseapp.com']},candidateHash:candidateHash(),approvalRef:'docs/approval-SM-MONITOR-010.md'}));
+  const result=spawnSync(process.execPath,['scripts/cloud/deploy-monitoring.mjs','backend'],{encoding:'utf8',env:{...process.env,MANAGER_DEPLOY_CONFIG:path,MANAGER_RELEASE_APPROVAL:'SM-MONITOR-010'}});
+  expect(result.status).not.toBe(0);expect(result.stderr).toContain('Exact approved runtime identity, region and origins required');
+ }finally{rmSync(directory,{recursive:true,force:true});}
+});

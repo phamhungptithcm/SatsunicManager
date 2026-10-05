@@ -160,7 +160,7 @@ test('incident source signal and workflow stay separate, inbox read persists',as
 });
 
 test('operations and finance show missing official sources without manual entry',async({page})=>{
- await login(page);await page.getByRole('link',{name:'Vận hành',exact:true}).click();await expect(page.getByRole('heading',{name:'Vận hành',exact:true,level:1})).toBeVisible();const responsePromise=page.waitForResponse(response=>response.url().endsWith('/getOperations')&&response.request().postDataJSON()?.data?.scope?.appId==='befam',{timeout:30000});await page.getByRole('combobox',{name:'Ứng dụng',exact:true}).selectOption('befam');await expect(page).toHaveURL(/\/operations\?app=befam/);const response=await responsePromise;expect(response.status(),await response.text()).toBe(200);await expect(page.locator('.operation-section')).toContainText('Chưa kết nối',{timeout:15000});
+ await login(page);await page.getByRole('link',{name:'Vận hành',exact:true}).click();await expect(page.getByRole('heading',{name:'Vận hành',exact:true,level:1})).toBeVisible();const responsePromise=page.waitForResponse(response=>response.url().endsWith('/getOperations')&&response.request().postDataJSON()?.data?.scope?.appId==='befam',{timeout:30000});await page.getByRole('combobox',{name:'Ứng dụng',exact:true}).selectOption('befam');await expect(page).toHaveURL(/\/operations\?app=befam/);const response=await responsePromise;expect(response.status(),await response.text()).toBe(200);const manualCard=page.locator('.operation-section').filter({has:page.getByRole('heading',{name:'BeFam',exact:true,level:2})});await expect(manualCard).toHaveCount(1);await expect(manualCard).toContainText('Chưa kết nối',{timeout:15000});
  await page.getByRole('link',{name:'Tài chính',exact:true}).click();await expect(page.getByRole('heading',{name:'Chưa kết nối nguồn tài chính',exact:true})).toBeVisible();await expect(page.getByRole('textbox',{name:'CSV',exact:true})).toHaveCount(0);await page.screenshot({path:'docs/evidence/finance-unconfigured.png'});
 });
 
@@ -209,4 +209,88 @@ test('composer IME, backdrop pairing and mobile capsule remain usable',async({pa
  await expect(input).toBeFocused();
  expect(await page.evaluate(()=>document.body.style.overflow)).not.toBe('hidden');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});
+
+test('automatic history keeps partial attempts separate from older successful metrics',async({page})=>{
+ const {initializeApp,deleteApp}=await import('firebase-admin/app');
+ const {getFirestore,Timestamp}=await import('firebase-admin/firestore');
+ const {createHash}=await import('node:crypto');
+ if(process.env.FIRESTORE_EMULATOR_HOST!=='127.0.0.1:28080'||process.env.GCLOUD_PROJECT!=='demo-satsunicmanager')throw Error('Dedicated emulator only');
+ const app=initializeApp({projectId:'demo-satsunicmanager'},'browser-monitoring-fixture');const db=getFirestore(app);
+ const job='operations_metrics_v1_satsunicplan',now=Date.now();
+ const successId=createHash('sha256').update(`browser-monitor-success-${now}`).digest('hex');
+ const failedId=createHash('sha256').update(`browser-monitor-partial-${now}`).digest('hex');
+ const olderIds=Array.from({length:5},(_,i)=>createHash('sha256').update(`browser-monitor-older-${now}-${i}`).digest('hex'));
+ const statusRef=db.doc(`connectorStatuses/${job}`),checkpointRef=db.doc(`connectorCheckpoints/${job}`);
+ const priorStatus=await statusRef.get(),priorCheckpoint=await checkpointRef.get();
+ const end=new Date(now-2*3600000).toISOString(),failedEnd=new Date(now-3600000).toISOString();
+ const makeReport=(id:string,to:string,partial:boolean)=>({id,scope:{appId:'satsunicplan',environment:'production',timezone:'America/Chicago',from:new Date(Date.parse(to)-3600000).toISOString(),to},status:partial?'failed':'complete',fixture:true,queryVersion:'collector-v1',createdAt:Timestamp.fromDate(new Date(to)),data:[{appId:'satsunicplan',projectId:'satsunicplan',services:['emulator-service'],metrics:{status:partial?'partial':'available',requestCount:partial?null:321,serverErrorCount:partial?null:3,errorRate:partial?null:3/321,points:[],reason:partial?'incomplete_or_invalid_series':null},provenance:{provider:'Google Cloud',resourceRef:'projects/satsunicplan',queryVersion:'operations-v1',metricDefinitionVersion:'cloud-run-requests-v1'},freshness:{fetchedAt:to,observedThrough:partial?null:to}}]});
+ try{
+  await db.doc(`operationsCollectionRuns/${successId}`).set(makeReport(successId,end,false));
+  await db.doc(`operationsSnapshots/${successId}`).set({...makeReport(successId,end,false),queriedThrough:end});
+  await db.doc(`operationsCollectionRuns/${failedId}`).set(makeReport(failedId,failedEnd,true));
+  await Promise.all(olderIds.map((id,i)=>{const to=new Date(Date.parse(end)-(i+1)*900000).toISOString();return db.doc(`operationsSnapshots/${id}`).set({...makeReport(id,to,false),queriedThrough:to});}));
+  await statusRef.set({status:'failed',runId:failedId,lastSuccessfulSnapshotId:successId,attemptedThrough:failedEnd});
+  await checkpointRef.set({cursor:end});
+  await login(page);await page.getByRole('link',{name:'Vận hành',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Vận hành',exact:true,level:1})).toBeVisible();
+  await page.getByRole('combobox',{name:'Ứng dụng',exact:true}).selectOption('satsunicplan');
+  const history=page.getByTestId('monitoring-history');
+  await expect(history.getByRole('heading',{name:'Lịch sử theo dõi tự động',exact:true})).toBeVisible();
+  await expect(page.getByText('EMULATOR — danh tính kiểm thử, không phải phiên production',{exact:true})).toBeVisible();
+  await expect(history.getByText('Dữ liệu kiểm thử trên emulator.',{exact:true})).toHaveCount(0);
+  await expect(history).toContainText('Một phần lịch sử chưa được tải.');
+  await expect(history).toContainText('Dữ liệu thành công gần nhất đã hơn 30 phút.');
+  const latest=history.locator('details').filter({has:page.getByText('Lần thử gần nhất',{exact:true})});
+  await expect(latest).toContainText('Dữ liệu chưa đầy đủ');
+  await expect(latest.locator('.metrics strong')).toHaveText(['—','—','—']);
+  await expect(latest).toContainText('projects/satsunicplan');
+  await expect(latest.getByText('Lần thử này ngoài khoảng đang chọn.',{exact:true})).toHaveCount(0);
+  const successful=history.locator('details').filter({has:page.getByText('Các lần thành công · 5',{exact:true})});
+  await successful.locator('summary').click();
+  await expect(successful.getByText('Lịch sử gần đây trong khoảng đã chọn; chưa phải toàn bộ lịch sử.',{exact:true})).toBeVisible();
+  await expect(successful.locator('.metrics')).toHaveCount(5);
+  await expect(successful.locator('.metrics').first().locator('strong')).toHaveText(['321','3',new Intl.NumberFormat('vi',{style:'percent',maximumFractionDigits:2}).format(3/321)]);
+  await page.setViewportSize({width:1280,height:960});
+  await page.evaluate(()=>window.scrollTo(0,0));
+  const workspace=page.locator('.workspace');
+  const settleWorkspace=async()=>{await workspace.evaluate(async element=>{
+   await new Promise<void>(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>resolve())));
+   await Promise.all(element.getAnimations({subtree:true}).filter(animation=>animation.effect?.getComputedTiming().iterations!==Infinity).map(animation=>animation.finished.catch(()=>{})));
+  });await expect.poll(()=>workspace.evaluate(element=>getComputedStyle(element).opacity==='1'&&Array.from(element.querySelectorAll('.registry')).every(section=>getComputedStyle(section).opacity==='1'))).toBe(true);};
+  await settleWorkspace();
+  await expect.poll(()=>page.evaluate(()=>window.scrollY)).toBe(0);
+  await page.screenshot({path:'docs/evidence/monitoring-history-desktop-demo.png'});
+  // Reader and durable fixtures are real demo paths; an explicit transport fixture
+  // then exercises recoverable error presentation without inventing zero totals.
+  await page.route('**/listMonitoringSnapshots',route=>route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({error:{status:'UNAVAILABLE',message:'Emulator transport fixture'}})}));
+  await page.getByRole('button',{name:'Làm mới',exact:true}).click();
+  await expect(history.getByRole('alert')).toContainText('Chưa tải được lịch sử theo dõi.');
+  await expect(history.getByRole('button',{name:'Thử lại',exact:true})).toBeVisible();
+  await page.unroute('**/listMonitoringSnapshots');await history.getByRole('button',{name:'Thử lại',exact:true}).click();
+  await expect(history.getByRole('alert')).toHaveCount(0);
+  await expect(history).toContainText('Dữ liệu chưa đầy đủ');
+  await page.getByRole('combobox',{name:'Ứng dụng',exact:true}).selectOption('befam');
+  await expect(history).toContainText('Chưa kết nối');
+  await expect(history.getByText('Chưa có lần theo dõi.',{exact:true})).toHaveCount(1);
+  await expect(history.getByText('Chưa có lần thành công trong phần lịch sử được tải của khoảng này.',{exact:true})).toHaveCount(0);
+  await expect(history).not.toContainText('Lần thử: Chưa có');
+  await expect(history).not.toContainText('Lần thành công: Chưa có');
+  await expect(history.locator('.metrics strong')).toHaveCount(0);
+  await page.setViewportSize({width:390,height:844});
+  const closeNavigation=page.getByRole('button',{name:'Đóng điều hướng',exact:true});
+  if(await closeNavigation.isVisible())await closeNavigation.click();
+  await page.evaluate(()=>window.scrollTo(0,0));
+  await settleWorkspace();
+  await expect.poll(()=>page.locator('.sidebar').evaluate(element=>element.getBoundingClientRect().right)).toBeLessThanOrEqual(0);
+  await expect.poll(()=>page.locator('.sidebar').evaluate(element=>element.getBoundingClientRect().width)).toBe(240);
+  await expect.poll(()=>page.evaluate(()=>innerWidth)).toBe(390);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.screenshot({path:'docs/evidence/monitoring-history-empty-mobile-demo.png'});
+ }finally{
+  await Promise.all([db.doc(`operationsCollectionRuns/${successId}`).delete(),db.doc(`operationsSnapshots/${successId}`).delete(),db.doc(`operationsCollectionRuns/${failedId}`).delete(),...olderIds.map(id=>db.doc(`operationsSnapshots/${id}`).delete())]);
+  if(priorStatus.exists)await statusRef.set(priorStatus.data()!);else await statusRef.delete();
+  if(priorCheckpoint.exists)await checkpointRef.set(priorCheckpoint.data()!);else await checkpointRef.delete();
+  await deleteApp(app);
+ }
 });

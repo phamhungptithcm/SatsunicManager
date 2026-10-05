@@ -4,7 +4,9 @@ import {financeSnapshot} from './finance/snapshot.js';
 import {readOperations} from './integrations/operations.js';
 import { consumeRate } from './shared/rate.js';
 import { ZodError } from 'zod';
-import { onCall, HttpsError, type CallableRequest } from 'firebase-functions/v2/https';
+import { onCall, onRequest, HttpsError, type CallableRequest } from 'firebase-functions/v2/https';
+import { monitoringSnapshots } from './api/monitoring.js';
+import { MONITORING_WORKER_ACCOUNT, MONITORING_SCHEDULER_ACCOUNT, runMonitoringCollection, validateMonitoringTransport } from './sync/monitoring.js';
 import { listIncidents as incidents, changeIncident } from './api/incidents.js';
 import { listNotifications as notifications, setNotificationRead } from './api/notifications.js';
 import { setGlobalOptions } from 'firebase-functions/v2';
@@ -68,3 +70,24 @@ export const getFinanceSnapshot = onCall(options,safe(async request=>{const owne
 
 export const getOwnerPreferences = onCall(options,safe(async request=>{const owner=await authorize(request);await consumeRate(owner.uid,'preferences.read');return getPreferences(owner);}));
 export const saveOwnerPreferences = onCall(options,safe(async request=>{const owner=await authorize(request);await consumeRate(owner.uid,'preferences.write',20);return savePreferences(request.data,owner);}));
+
+export const listMonitoringSnapshots = onCall(options, safe(async request => {
+  const owner = await authorize(request);
+  await consumeRate(owner.uid, 'monitoring.read', 10);
+  return monitoringSnapshots(request.data);
+}));
+
+// Platform IAM verifies Scheduler OIDC before this handler; headers/body grant no authority.
+export const collectMonitoring = onRequest({
+  region: 'us-central1', serviceAccount: MONITORING_WORKER_ACCOUNT,
+  invoker: [MONITORING_SCHEDULER_ACCOUNT], cors: false,
+  maxInstances: 1, concurrency: 1, memory: '256MiB', timeoutSeconds: 60,
+}, async (request, response) => {
+  try {
+    validateMonitoringTransport(request.method, request.body);
+    const result = await runMonitoringCollection();
+    response.status(result.status === 'blocked' ? 503 : 200).json(result);
+  } catch (error) {
+    response.status(error instanceof HttpsError && error.code === 'invalid-argument' ? 400 : 503).json({ status: 'failed', reason: 'collection_unavailable' });
+  }
+});
