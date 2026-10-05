@@ -20,3 +20,8 @@ it('requires exact caps and private single scheduler transport binding',()=>{
  expect(()=>validateMonitoringWorker(fn,{bindings:[]})).toThrow();
  expect(()=>validateMonitoringWorker(fn,{bindings:[{role:'roles/run.invoker',members:[...policy.bindings[0].members,'serviceAccount:other@example.com']}]})).toThrow();
 });
+
+it('accepts only the provider canonical root slash and rejects different paths or queries',()=>{
+ expect(()=>validateMonitoringJob({...job(),httpTarget:{...job().httpTarget,uri:`${uri}/`}},uri)).not.toThrow();
+ for(const target of [`${uri}/other`,`${uri}/?x=1`,`${uri}?x=1`,'https://other.example/'])expect(()=>validateMonitoringJob({...job(),httpTarget:{...job().httpTarget,uri:target}},uri)).toThrow();
+});
