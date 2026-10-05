@@ -33,3 +33,5 @@ Pre-release source review found Hosting CSP lacked reCAPTCHA connection and chal
 Production archive correction: Functions now carries its own npm-generated lockfile and the same existing root security overrides. Direct dependency versions are unchanged; isolated installation audit reports zero vulnerabilities. This makes Cloud Build resolution reproducible within the approved release source scope.
 
 Live login diagnostic correction: bounded SDK auth error codes only are logged locally to the browser console; no account, credential or exception payload is exposed. Required to diagnose observed failed production login within approved auth flow.
+
+Sanity workflow diagnostic: add manual workflow_dispatch to the same read-only/demo job because actual GitHub push events were received but no check-run was scheduled. No deployment or production credentials are added.
