@@ -6,6 +6,7 @@ import { consumeRate } from './shared/rate.js';
 import { ZodError } from 'zod';
 import { onCall, onRequest, HttpsError, type CallableRequest } from 'firebase-functions/v2/https';
 import { monitoringSnapshots } from './api/monitoring.js';
+import { generateReport, getReport, listReports, exportReport } from './api/reports.js';
 import { MONITORING_WORKER_ACCOUNT, MONITORING_SCHEDULER_ACCOUNT, runMonitoringCollection, validateMonitoringTransport } from './sync/monitoring.js';
 import { listIncidents as incidents, changeIncident } from './api/incidents.js';
 import { listNotifications as notifications, setNotificationRead } from './api/notifications.js';
@@ -75,6 +76,23 @@ export const listMonitoringSnapshots = onCall(options, safe(async request => {
   const owner = await authorize(request);
   await consumeRate(owner.uid, 'monitoring.read', 10);
   return monitoringSnapshots(request.data);
+}));
+
+export const generateOperationsReport = onCall(options, safe(async request => {
+  const owner = await authorize(request, true); await consumeRate(owner.uid, 'reports.generate', 5);
+  return generateReport(request.data, owner);
+}));
+export const listOperationsReports = onCall(options, safe(async request => {
+  const owner = await authorize(request); await consumeRate(owner.uid, 'reports.read', 10);
+  return listReports(request.data, owner);
+}));
+export const getOperationsReport = onCall(options, safe(async request => {
+  const owner = await authorize(request); await consumeRate(owner.uid, 'reports.read', 10);
+  return getReport(request.data, owner);
+}));
+export const exportOperationsReportCsv = onCall(options, safe(async request => {
+  const owner = await authorize(request, true); await consumeRate(owner.uid, 'reports.export', 5);
+  return exportReport(request.data, owner);
 }));
 
 // Platform IAM verifies Scheduler OIDC before this handler; headers/body grant no authority.

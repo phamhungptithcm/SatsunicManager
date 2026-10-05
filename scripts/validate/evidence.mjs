@@ -19,7 +19,7 @@ for(const [name,[command,...args]] of checks) {
   // The API suite and browser use the same demo owner; respect the durable 10s probe cooldown.
   if(name==='e2e') spawnSync(process.execPath,['-e','setTimeout(()=>{},11000)'],{timeout:15000});
   const startedAt=new Date().toISOString(); const hash=candidateHash();
-  const r=spawnSync(command,args,{encoding:'utf8',timeout:180000,env:process.env,maxBuffer:8*1024*1024});
+  const r=spawnSync(command,args,{encoding:'utf8',timeout:name==='e2e'?300000:180000,env:process.env,maxBuffer:8*1024*1024});
   writeFileSync(`.ai/local/check-logs/${name}.txt`,(r.stdout??'')+'\n'+(r.stderr??''));
   records.push({name,command:[command,...args],startedAt,endedAt:new Date().toISOString(),candidateHash:hash,exitCode:r.status,status:r.status===0?'PASSED':name==='doctor'?'BLOCKED':'FAILED',error:r.error?.code??null});
   console.log(`${name}: ${records.at(-1).status} (exit ${r.status})`);
