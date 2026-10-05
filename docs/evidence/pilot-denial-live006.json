@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-10-05T00:31:23.792825+00:00",
+  "mode": "Live anonymous negative requests; no owner token or production data; cannot prove valid App Check/owner flow",
+  "checks": [
+    {
+      "function": "bootstrapOwner",
+      "case": "anonymous_missing_appcheck",
+      "httpStatus": 401,
+      "errorStatus": "UNAUTHENTICATED",
+      "passed": true
+    },
+    {
+      "function": "bootstrapOwner",
+      "case": "anonymous_invalid_appcheck",
+      "httpStatus": 401,
+      "errorStatus": "UNAUTHENTICATED",
+      "passed": true
+    },
+    {
+      "function": "listApps",
+      "case": "anonymous_missing_appcheck",
+      "httpStatus": 401,
+      "errorStatus": "UNAUTHENTICATED",
+      "passed": true
+    },
+    {
+      "function": "listApps",
+      "case": "anonymous_invalid_appcheck",
+      "httpStatus": 401,
+      "errorStatus": "UNAUTHENTICATED",
+      "passed": true
+    },
+    {
+      "function": "getOperations",
+      "case": "anonymous_missing_appcheck",
+      "httpStatus": 401,
+      "errorStatus": "UNAUTHENTICATED",
+      "passed": true
+    },
+    {
+      "function": "getOperations",
+      "case": "anonymous_invalid_appcheck",
+      "httpStatus": 401,
+      "errorStatus": "UNAUTHENTICATED",
+      "passed": true
+    }
+  ]
+}

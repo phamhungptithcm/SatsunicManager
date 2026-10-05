@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "id": "ai-agent-kit-canonical-router-v1",
+  "fallback_route": "start-task",
+  "thresholds": {
+    "minimum_score": 2,
+    "minimum_margin": 1
+  },
+  "priority": [
+    "investigate-agent-runtime",
+    "audit-plugin-trust",
+    "resume-and-recover-run",
+    "author-governed-plugin",
+    "benchmark-agent-reliability",
+    "trace-decisions-and-runs",
+    "security-review",
+    "fix-bug",
+    "code-review",
+    "orchestrate-agent-department",
+    "design-scalable-systems",
+    "seo-geo-website",
+    "write-product-content",
+    "implement-feature",
+    "start-task"
+  ],
+  "routes": {
+    "investigate-agent-runtime": {
+      "label": "Investigate an agent runtime failure",
+      "skill": "investigate-agent-runtime/SKILL.md",
+      "rules": [
+        { "any": ["agent runtime failure", "agent runtime repeated work", "run repeated work", "lost agent context", "runtime trace corrupted", "agent bị mất context", "agent chạy lặp"], "weight": 3 }
+      ]
+    },
+    "audit-plugin-trust": {
+      "label": "Audit plugin trust",
+      "skill": "audit-plugin-trust/SKILL.md",
+      "rules": [
+        { "any": ["plugin trust", "plugin security", "plugin signature", "plugin permission review", "kiểm tra plugin", "quyền plugin"], "exclude": ["create", "scaffold", "tạo plugin"], "weight": 3 }
+      ]
+    },
+    "resume-and-recover-run": {
+      "label": "Recover and resume an interrupted run",
+      "skill": "resume-and-recover-run/SKILL.md",
+      "rules": [
+        { "any": ["resume run", "recover run", "interrupted agent", "agent crash", "continue previous work", "tiếp tục run", "khôi phục agent"], "weight": 3 }
+      ]
+    },
+    "author-governed-plugin": {
+      "label": "Author a governed plugin",
+      "skill": "author-governed-plugin/SKILL.md",
+      "rules": [
+        { "any": ["create plugin", "scaffold plugin", "plugin manifest", "build plugin", "tạo plugin", "viết plugin"], "weight": 3 }
+      ]
+    },
+    "benchmark-agent-reliability": {
+      "label": "Benchmark agent reliability",
+      "skill": "benchmark-agent-reliability/SKILL.md",
+      "rules": [
+        { "any": ["agent reliability benchmark", "benchmark agent", "trace lab", "failure scenario", "đánh giá độ tin cậy agent"], "weight": 3 }
+      ]
+    },
+    "trace-decisions-and-runs": {
+      "label": "Trace decisions and runs",
+      "skill": "trace-decisions-and-runs/SKILL.md",
+      "rules": [
+        { "any": ["trace decision", "trace the implementation run", "record this decision", "trace run", "decision history", "run evidence", "aakrun", "lưu quyết định", "theo dõi run"], "weight": 3 }
+      ]
+    },
+    "security-review": {
+      "label": "Review security boundaries",
+      "skill": "security-review/SKILL.md",
+      "rules": [
+        { "any": ["security review", "audit security", "threat", "authorization", "bảo mật"], "weight": 3 }
+      ]
+    },
+    "fix-bug": {
+      "label": "Fix a defect",
+      "skill": "fix-bug/SKILL.md",
+      "rules": [
+        { "any": ["bug", "defect", "regression", "broken", "sửa lỗi", "lỗi"], "weight": 2 },
+        { "all": ["fix", "test"], "weight": 2 }
+      ]
+    },
+    "code-review": {
+      "label": "Review a code change",
+      "skill": "code-review/SKILL.md",
+      "rules": [
+        { "any": ["code review", "review pull request", "review pr", "review code", "kiểm tra code"], "exclude": ["fix"], "weight": 3 }
+      ]
+    },
+    "orchestrate-agent-department": {
+      "label": "Coordinate an agent workcell",
+      "skill": "orchestrate-agent-department/SKILL.md",
+      "rules": [
+        { "any": ["multi-agent", "subagents", "agent team", "agent department", "nhiều agent"], "weight": 3 }
+      ]
+    },
+    "design-scalable-systems": {
+      "label": "Design a scalable system",
+      "skill": "design-scalable-systems/SKILL.md",
+      "rules": [
+        { "any": ["system design", "scalability", "capacity planning", "throughput", "kiến trúc hệ thống"], "weight": 3 }
+      ]
+    },
+    "seo-geo-website": {
+      "label": "Review website SEO and GEO",
+      "skill": "seo-geo-website/SKILL.md",
+      "rules": [
+        { "any": ["seo", "geo", "search visibility", "structured data", "crawler"], "weight": 2 },
+        { "all": ["website", "search"], "weight": 2 }
+      ]
+    },
+    "write-product-content": {
+      "label": "Write and review product interface content",
+      "skill": "write-product-content/SKILL.md",
+      "rules": [
+        { "any": ["ux writing", "ui copy", "product copy", "microcopy", "button label", "form label", "empty state", "error message", "displayed data", "data label", "apple hig writing", "apple ux writing", "human interface copy", "viết label", "nhãn nút", "nội dung giao diện", "thông báo lỗi", "dữ liệu hiển thị", "viết ui ux như apple", "chuẩn apple hig cho nội dung"], "exclude": ["bug", "fix", "defect", "regression", "sửa lỗi", "implement feature", "build feature", "add feature", "phát triển tính năng", "thêm tính năng", "code review", "review pr", "review pull request"], "weight": 4 },
+        { "all": ["ui", "content"], "exclude": ["bug", "fix", "defect", "regression", "sửa lỗi", "implement feature", "build feature", "add feature", "phát triển tính năng", "thêm tính năng", "code review", "review pr", "review pull request"], "weight": 3 }
+      ]
+    },
+    "implement-feature": {
+      "label": "Implement a feature",
+      "skill": "implement-feature/SKILL.md",
+      "rules": [
+        { "any": ["implement feature", "build feature", "add feature", "phát triển tính năng", "thêm tính năng"], "weight": 3 }
+      ]
+    },
+    "start-task": {
+      "label": "Start a governed task",
+      "skill": "start-task/SKILL.md",
+      "rules": [
+        { "any": ["start task", "new task", "plan task", "bắt đầu task", "lập kế hoạch"], "weight": 2 }
+      ]
+    }
+  }
+}

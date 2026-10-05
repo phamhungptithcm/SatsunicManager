@@ -1,0 +1,76 @@
+{
+  "revision": 1,
+  "knowledge_revision": 2,
+  "briefHash": "5702cfe85ca49486423efc2640259f87a2b9b12e7e11de7130fa858e6cfd67b3",
+  "dependencies": [
+    {
+      "path": "docs/approval-SM-AUTO-007.md",
+      "sha256": "099bf9eec4ee7caaba5d51e5c9f17e75e823e61b042764298fb29473abee1a86"
+    },
+    {
+      "path": "docs/team/brief-v2.json",
+      "sha256": "5702cfe85ca49486423efc2640259f87a2b9b12e7e11de7130fa858e6cfd67b3"
+    },
+    {
+      "path": "functions/src/shared/leases.ts",
+      "sha256": "de2665a3b46aee98ac772c37a6e0f51348adf34e6361d5a0fad5593258c3573f"
+    },
+    {
+      "path": "functions/src/integrations/operations.ts",
+      "sha256": "3e8de263509b1a364382d8671a326ac6d742cb38663940d08d7f5f0db24c156a"
+    },
+    {
+      "path": "functions/src/integrations/resources.ts",
+      "sha256": "410db254cd1b26da30f3c88ee8f3c3a966bf15944b9eed6d1ba40dbb401cc52b"
+    },
+    {
+      "path": "packages/contracts/src/metrics.ts",
+      "sha256": "4afe1c8285e9f0eb03532f1b2b8b59e7fee6e4f3aae1aeeb41103bfb05a484f7"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "functions/src/sync/collector.ts",
+      "sha256": "d94c990501ce37af5a5ebaafe2d4f062ce209c351324cf3b76e782b20b6950c1"
+    },
+    {
+      "path": "tests/integration/collector.test.ts",
+      "sha256": "f35c3dda6dca5753d10adb855c4b49e8dc9aaefc6218f5cbc2c0d218afb1fc28"
+    }
+  ],
+  "scope": [
+    "functions/src/sync/collector.ts",
+    "tests/integration/collector.test.ts"
+  ],
+  "behavior": [
+    "Internal collectOperations with disabled-by-default env gate, explicit collector identity config gate outside demo, injected readers demo-only.",
+    "Only three compiled verified IDs; no dynamic registry or inferred grants. Scope selected app-set gets independent fenced job/checkpoint. Max one-hour collection window and five-minute future tolerance; provider adapter transport supplies response-size/time bounds.",
+    "One immutable run ID hashes version+scope+selected IDs. Duplicate completed or failed window returns existing result without reads; later windows can retry failed sources. All selected metrics available/empty required for success.",
+    "Success materialized metrics-only snapshot, run report, lastSuccessfulSnapshotId and watermark commit atomically. Failure persists metrics-only status/run, no successful snapshot or watermark advance. No raw logs, thresholds, signal generation, provider secrets or scheduler added.",
+    "Collection snapshot queriedThrough is requested coverage bound; actual per-source observedThrough remains provider point bound or null, never invented empty-source health."
+  ],
+  "testsAuthored": [
+    "Disabled blocks no network",
+    "Contended in-flight lease prevents second provider call",
+    "Same-window retry returns immutable dedup report",
+    "Empty metrics remain null and no logs stored",
+    "403 and partial pagination retain successful checkpoint/snapshot",
+    "Unverified app and overlong window fail before reader"
+  ],
+  "checks": "NOT RUN by instruction: no test/build/emulator/index/provider/deploy commands. Lead final review/compiler/integration pending.",
+  "sourceContractDependency": "includeLogs:false guard corrected by lead to skip Logging only. Requested follow-up empty-point-series null semantics; lead owns source adapter change.",
+  "limitations": [
+    "Failed-window run immutable, so same window retries deduplicate failure; retry next scheduled window rather than overwrite evidence.",
+    "Collector entry is internal only and disabled until separate approved deployment identity/schedule configuration. MANAGER_COLLECTOR_SERVICE_ACCOUNT config cannot independently prove deployed principal; cloud readback mandatory.",
+    "No claim of finance/revenue/analytics/webhook/incident/external delivery or full live acceptance.",
+    "Opaque successful cursor is schedule window end; late provider data requires later approved overlap/backfill semantics.",
+    "Consumer-defined external official reader uses existing platform credential path; identity setup and provider-source rights not changed."
+  ],
+  "qualityProfiles": [
+    "universal",
+    "typescript-javascript",
+    "database",
+    "concurrency"
+  ],
+  "productionReadiness": "NOT_READY; local authored slice awaiting lead tests/review and approved exact cloud diff"
+}

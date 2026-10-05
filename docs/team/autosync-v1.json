@@ -1,0 +1,216 @@
+{
+  "revision": 1,
+  "assignment": "autosync",
+  "mode": "READ_ONLY source inspection; only this immutable handoff written",
+  "briefHash": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf",
+  "expectedBriefHash": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf",
+  "intelligence": "DEGRADED per revision-1 shared brief; no index/compiler/tests/provider calls run by this agent",
+  "evidence": [
+    {
+      "path": "docs/team/brief-v1.json",
+      "sha256": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "sha256": "8515e8d03567c5f5628d892cdb5c7012168fbb12cb078d038ee51c2a69e1e8fa"
+    },
+    {
+      "path": "packages/contracts/src/finance.ts",
+      "sha256": "b77cf3e67cceb799364b0879f27357e3701e6132f27ff955bc939c3dfc3bb4b2"
+    },
+    {
+      "path": "packages/contracts/src/operations.ts",
+      "sha256": "a38a8ea987164be9a1180d4c285a15e40c21ca4434a2377371b0e592b4d049ba"
+    },
+    {
+      "path": "functions/src/api/registry.ts",
+      "sha256": "90e603066d78346eaa31f3ef2d04251a72cf9ff9faaeb167ffa87b983f9eaf98"
+    },
+    {
+      "path": "functions/src/api/connections.ts",
+      "sha256": "8d06aa6f297c8db9c70d78b9d1615952a1e3826b75b9842528c867fb7c769903"
+    },
+    {
+      "path": "functions/src/integrations/catalog.ts",
+      "sha256": "82770b17c1e462b48f085ab2e5119eb225a4ea947599e44220291585ac92429b"
+    },
+    {
+      "path": "functions/src/integrations/resources.ts",
+      "sha256": "410db254cd1b26da30f3c88ee8f3c3a966bf15944b9eed6d1ba40dbb401cc52b"
+    },
+    {
+      "path": "functions/src/integrations/operations.ts",
+      "sha256": "ec818d496b9184c83376a34be7eede7671463d99be35edcf0d29fe3bd845c7a4"
+    },
+    {
+      "path": "functions/src/alerts/ingest.ts",
+      "sha256": "0e75cefc11f59ec0dca7aa2f7cf362dc3b1ae7d3a9456f751a8b3b7af9b3af02"
+    },
+    {
+      "path": "functions/src/finance/import.ts",
+      "sha256": "f8b77e98b95f30ace61375b972802e70771f99f1a0662608b923123401a1186d"
+    },
+    {
+      "path": "functions/src/finance/snapshot.ts",
+      "sha256": "de438bfa8b5e9f55b1bbe7538a9abd3c35026d66b969890dc88a42c99c8e8119"
+    },
+    {
+      "path": "functions/src/finance/money.ts",
+      "sha256": "b4b743e0966c28430ed8702de214b823ca371a17cbfd8aea93b51b402fd1b758"
+    },
+    {
+      "path": "functions/src/index.ts",
+      "sha256": "fa43dc14298e1e5a7e161910053a1e48d1ee6714beee2c13e7f2199e93a37acd"
+    },
+    {
+      "path": "firestore.rules",
+      "sha256": "82e1a41c507aefa73b392d2a8f7b88186284261b1c0b2e7354d06e5e6d516e62"
+    },
+    {
+      "path": "docs/plans/SM-LIVE-006.md",
+      "sha256": "053eab27dd812ffc4dbed300187a56f4dca904757c6cae0159ff059cf3038a40"
+    }
+  ],
+  "facts": [
+    {
+      "claim": "Catalog and appIdSchema enumerate five apps; registry and operations iterate APP_CATALOG; no add-app API export exists.",
+      "sources": [
+        "packages/contracts/src/index.ts",
+        "functions/src/api/registry.ts",
+        "functions/src/index.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Official Monitoring/Logging reads run on getOperations demand, not automatically. Resource mappings exist for hunpeolabs, satsunicseo, satsunicplan; Code and BeFam are explicitly unverified.",
+      "sources": [
+        "functions/src/integrations/operations.ts",
+        "functions/src/integrations/resources.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Public health targets exist only for HunpeoLabs; homepage and JSON readiness are distinct. No endpoint existence or current health was checked here.",
+      "sources": [
+        "functions/src/integrations/catalog.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "Finance only accepts owner preview/confirm CSV; snapshot explicitly labels manual/imported only. No provider revenue/cost collector exists in inspected source.",
+      "sources": [
+        "functions/src/finance/import.ts",
+        "functions/src/finance/snapshot.ts"
+      ],
+      "confidence": "high"
+    },
+    {
+      "claim": "ingestSignal verifies configured source capability, transactionally deduplicates source event and rejects older versions; preserves workflow, reopens resolved recovered incident on firing; writes pending email outbox blocked channel_not_verified. No authenticated transport or delivery worker is exported.",
+      "sources": [
+        "functions/src/alerts/ingest.ts",
+        "functions/src/index.ts"
+      ],
+      "confidence": "high"
+    }
+  ],
+  "findings": [
+    {
+      "id": "AUTO-1",
+      "priority": "P1",
+      "finding": "Static five-ID schema prevents adding verified apps without code deployment. Exact seven names and SatsunicMec project mapping are not available in inspected source; do not seed aliases guessed from repository names."
+    },
+    {
+      "id": "AUTO-2",
+      "priority": "P1",
+      "finding": "Current manual finance flow conflicts with auto-sync-only requirement. Approved live006 pilot excludes finance endpoints/production finance writes."
+    },
+    {
+      "id": "AUTO-3",
+      "priority": "P1",
+      "finding": "Registry missingSources remains static even where official operations adapters exist; capability coverage and freshness must derive from verified connector config/results, not homepage probe or every-source-success boolean."
+    },
+    {
+      "id": "AUTO-4",
+      "priority": "P1",
+      "finding": "Incident ingestion and outbox are incomplete end-to-end. Existing monotonic integer sourceVersion/event UUID cannot be assumed from arbitrary webhook provider events; adapter ordering/reconciliation contract is required."
+    }
+  ],
+  "recommended_delta": {
+    "id": "SM-AUTO-007",
+    "risk": "high: new persistence/public contracts/background runtime/IAM/provider finance",
+    "smallest_sequence": [
+      "Approve dynamic registry contract and exact initial product display names. Retain existing five stable IDs; represent unverified mappings explicitly. Server-owned apps documents contain bounded stable slug, displayName, enabled, revision, environment and capability summaries; replace enum with syntactic ID validation PLUS server existence/enabled checks in every consumer. Dynamic syntax alone must never authorize source access.",
+      "Add owner-authorized recent-auth create/update app callable with revision/idempotency/audit/rate controls. Form accepts name plus vetted connector-kind choice/config request, never arbitrary execution URLs, project access grants, credentials or provider payloads. Mapping stays pending until independent server verification and approval. Validate duplicate names/IDs and all scope references.",
+      "Choose one verified HunpeoLabs health source as first automatic collection slice; scheduler invokes private collector using dedicated identity. Keep public DNS pinning/HTTPS allowlist protections. Persist bounded health result/provenance, then atomically emit operational signal and in-app notification. Do not treat probe failure as billing/revenue failure.",
+      "Connector config: server-only resource IDs, official provider type, mapping evidence hash/revision, capability, enabled, schedule/backoff, retention and credential reference if needed. job state keyed connector+environment includes lease owner, expiry and fencing generation; transactions reject stale lease writers. Job request/idempotency independent from human ownerMutation.",
+      "Checkpoint state tracks provider cursor/event ordering and last committed observation; commit bounded page writes, receipts and checkpoint atomically. Never advance checkpoint on failed/partial page. Expiring leases allow crash takeover; request timeout/backoff/jitter/429 Retry-After/circuit breaker/bounded attempts and overlap reconciliation handle provider eventual consistency.",
+      "Add providers incrementally after exact configs are verified. Finance requires immutable provider-namespaced event IDs/account/app attribution, decimal-to-minor-unit validation, source currency/exponent, separate currency totals, explicit refund/fee/tax/net definitions and versioned adjustments. Current factKey app+transaction+currency+kind can collide across providers/accounts and cannot represent multiple partial refunds without new event identity. Never sum mixed currencies or call unknown zero.",
+      "Remove manual upload/preview/confirm from product navigation and production callable exports under approval; preserve existing historical records and audited lineage. Official scheduled exports may be consumed automatically after approved resource/schema/access config; no user CSV upload dependency. Export of reviewed results is a separate output capability, not manual ingest."
+    ]
+  },
+  "missing_source_configs": [
+    "Verified seven exact names/stable IDs, project/provider account mapping and allowed source capabilities; exact SatsunicMec must remain literal pending human/source proof.",
+    "Health: verified domain/readiness route and response contract per app; deployment existence/current status not established by source.",
+    "Operations: Code and BeFam resource mapping absent; additional two apps unknown; per-source resource IDs, regions/services/log views, runtime-read IAM and retention.",
+    "Incidents: chosen collector-to-signal severity policy, timing/debounce/recovery threshold, authenticated source transport, provider event ordering/reconciliation.",
+    "Finance cost: official billing account/export dataset/table/location/schema/currency/project attribution/access/cost ceiling; live006 reports no datasets in five checked projects, not account-wide absence.",
+    "Revenue: exact payment provider account/products/app attribution, official API/webhook signature/identity protocol, permissions, pagination/history/refund/fee/tax semantics; none configured in inspected adapter source.",
+    "Analytics: exact GA4 property or other official source identity/metrics/consent/retention; none configured in inspected adapter source.",
+    "External delivery: verified email provider/channel/sender/recipient approvals, idempotency behavior, credentials via platform secret reference, rate/budget/retention. Current live006 explicitly excludes external email."
+  ],
+  "minimal_next_vertical_slice": {
+    "recommendation": "automatic verified health -> incident -> persistent in-app notification first; external email separate approval",
+    "resources": [
+      "one scheduled invocation resource",
+      "one private collector function/service, bounded 256MiB/maxInstances1 initially subject to measured runtime",
+      "dedicated collector identity",
+      "existing Firestore collections plus connectorJobs/connectorCheckpoints and required indexes; no new bucket/BigQuery/queue needed for first bounded probe"
+    ],
+    "iam": [
+      "scheduler identity may invoke exact collector only; managed scheduler token machinery reviewed via exact IAM diff",
+      "collector has own Manager datastore access; public HTTPS health probe needs no source-project IAM",
+      "if extending official Monitoring/Logging, retain exact approved timeSeries.list and exact log-view viewAccessor; no source write/Editor/keys",
+      "in-app delivery requires no external provider IAM; external email requires separate exact provider/IAM/secret approval"
+    ],
+    "cost": "NOT ESTIMATED: no price/provider call performed. Schedule frequency \u00d7 enabled connectors drives invocations/probes/Firestore writes; 5-minute proposal implies 288 runs/day for one connector. Use measured unit usage and official current pricing before approval, configured caps/backoff and existing budget alerts; alerts are not hard spend caps. External email adds provider costs and cannot be claimed free."
+  },
+  "recommended_tests": [
+    "Dynamic app appears in registry/filter/operations without deployment; unknown/disabled app rejected across scope, incidents, finance and connection paths; old IDs remain valid; duplicate onboarding idempotent/conflicts audited.",
+    "Owner/App Check/recent auth protections and client writes denied; arbitrary URL/project/credential injection and SSRF private/redirect/rebinding targets rejected.",
+    "Lease concurrency/fencing, crash takeover, retry-after, bounded 429/backoff, duplicate scheduled invocations, partial-page checkpoint rollback and replay produce one accepted event.",
+    "Source event duplicate/out-of-order recovery/firing, workflow preservation/reopen, source principal mismatch, per-condition identity and debounce avoid cross-source merging.",
+    "Currency exponent/overflow/mixed-currency totals, provider-account key collisions, repeated/partial refunds, corrections/late arrival and missing coverage stay accurate.",
+    "In-app notification emitted once on incident state transition, read state persists; failed delivery retry does not change finance/incident truth.",
+    "Original owner Google sign-in/revocation and static five existing-app flows regressions; current browser accessibility/product content review after authorized UI changes.",
+    "Live evidence separate: exact source/IAM readback, authenticated collector invocation, approved source observation -> incident -> actual owner inbox; no emulator claim as production acceptance."
+  ],
+  "affected_paths": [
+    "packages/contracts/src/index.ts",
+    "packages/contracts/src/operations.ts",
+    "packages/contracts/src/finance.ts",
+    "functions/src/api/registry.ts",
+    "functions/src/api/connections.ts",
+    "functions/src/integrations/*",
+    "functions/src/alerts/ingest.ts",
+    "functions/src/finance/*",
+    "functions/src/index.ts",
+    "apps/**",
+    "firestore.rules",
+    "firestore.indexes.json",
+    "scripts/**",
+    "tests/**"
+  ],
+  "approval_boundaries": [
+    "SM-AUTO-007 reviewed plan before protected implementation; live006 does not authorize scheduler/worker/dynamic onboarding/finance writes/external email/new source IAM.",
+    "Separate exact deployment/IAM/resource/cost diff for first automatic collector; no source-app writes or provider keys.",
+    "Financial persistence/semantics and provider credentials require approved exact source/retention/security contracts.",
+    "Do not mutate historical finance/import documents or rename existing IDs automatically."
+  ],
+  "checks": "NOT RUN by design: no builds/tests/emulators/index/provider operations; source hashes are immutable handoff evidence only",
+  "dependencies": [
+    "Lead owns plan/approval/runtime/current candidate",
+    "Discovery agent supplies verified names/mappings",
+    "UI-QA supplies onboarding/product-content acceptance",
+    "Human/provider readback resolves sources and delivery authority"
+  ]
+}

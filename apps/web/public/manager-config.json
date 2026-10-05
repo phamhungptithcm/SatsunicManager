@@ -1,0 +1,12 @@
+{
+  "projectId": "satsunicmanager",
+  "apiKey": "AIzaSyB6enOSH33uM484Xd4hsqUlEMsGk4SjGG8",
+  "authDomain": "satsunicmanager.firebaseapp.com",
+  "appId": "1:317759361800:web:d4710116013ca2dca492bd",
+  "oauthClientId": "317759361800-jfafsctsaoglk8elan06iipt7bp3cuj2.apps.googleusercontent.com",
+  "region": "us-central1",
+  "appCheckSiteKey": "6LcnSN8tAAAAADKRL_56T7O_M6jfVb8KrMjihXS1",
+  "emulator": false,
+  "financeEnabled": false,
+  "addAppEnabled": true
+}

@@ -1,0 +1,13 @@
+import {createRequire} from 'node:module';
+import {writeFileSync} from 'node:fs';
+const require=createRequire(import.meta.url);
+const {requireAuth}=require('firebase-tools/lib/requireAuth');
+const {getGlobalDefaultAccount}=require('firebase-tools/lib/auth');
+const {Client}=require('firebase-tools/lib/apiv2');
+await requireAuth({project:'satsunicmanager-staging',...getGlobalDefaultAccount()});
+const client=new Client({urlPrefix:'https://firestore.googleapis.com',apiVersion:'v1'});
+const response=await client.post('/projects/satsunicmanager-staging/databases/(default)/documents:listCollectionIds',{pageSize:1000},{headers:{'x-goog-user-project':'satsunicmanager-staging'},resolveOnHTTPError:true});
+const report={projectId:'satsunicmanager-staging',checkedAt:new Date().toISOString(),httpStatus:response.status,rootCollectionCount:response.body?.collectionIds?.length??0,pagination:Boolean(response.body?.nextPageToken),emptyVerified:response.status===200 && !response.body?.collectionIds?.length && !response.body?.nextPageToken};
+writeFileSync('docs/evidence/staging-removal-preflight.json',JSON.stringify(report,null,2)+'\n');
+console.log(JSON.stringify(report));
+if(!report.emptyVerified) process.exitCode=1;

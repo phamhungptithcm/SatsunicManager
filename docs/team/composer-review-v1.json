@@ -1,0 +1,94 @@
+{
+  "revision": 1,
+  "briefHash": "5702cfe85ca49486423efc2640259f87a2b9b12e7e11de7130fa858e6cfd67b3",
+  "observedAt": "2026-10-05T00:48:29.865038+00:00",
+  "decision": "BLOCKED_FOR_VALIDATION",
+  "reviewerLimitation": "Fresh read-only review by implementation author; not independent-person approval. Lead final review must remain independent of this bounded source check.",
+  "evidence": [
+    {
+      "path": "apps/web/src/features/conversation/AskManager.tsx",
+      "sha256": "50913c36b1036e2d09e3f8f7849b5950855b34449ff3f344df19bd05f7fbe81d"
+    },
+    {
+      "path": "apps/web/src/features/conversation/AskManager.module.css",
+      "sha256": "5965de1fbe58d5add4c229cddc9e324d0c895e8a0abcf523ae4b95e7e848a010"
+    },
+    {
+      "path": "apps/web/src/features/shell.tsx",
+      "sha256": "ec396d76f87809eeda5743714b5587af49bd2ea523d77f39b981aa5ddec8774a"
+    },
+    {
+      "path": "docs/approval-SM-UI-008.md",
+      "sha256": "f07c1e74843e2333a5c527933986a9ea64f25201396cbeaf95979cfcde36e294"
+    },
+    {
+      "path": "docs/team/brief-v2.json",
+      "sha256": "5702cfe85ca49486423efc2640259f87a2b9b12e7e11de7130fa858e6cfd67b3"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/components/ask-hunpeolabs.tsx",
+      "sha256": "e8e9dfca5fff1641441fbe3bf83db9065cd752cfa5e84f467dedc8b940eff80e"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/components/ask-hunpeolabs.module.css",
+      "sha256": "9cf59755f6a38d2f0a81560fde21f53e1af87e410e953fff60ced18b98ecc147"
+    }
+  ],
+  "scope": "SM-UI-008 component/current Shell caller; no build/browser/test/runtime executed",
+  "verifiedDefects": [],
+  "findings": [
+    {
+      "id": "COMPOSER-R1",
+      "severity": "High",
+      "kind": "acceptance_evidence",
+      "location": "AskManager.tsx/AskManager.module.css integration",
+      "problem": "Required 100percent current reference visual/interaction acceptance remains NOT_RUN; source reuse alone cannot certify layout,motion,focus,mobile or screenreader behavior.",
+      "impact": "Successful parity/product handoff blocked; no observed runtime defect inferred.",
+      "correction": "Lead run current paired reference/Manager screenshot and interaction acceptance plus current product review."
+    }
+  ],
+  "sourceChecks": {
+    "modal": "showModal called when open; native modal focus behavior and body overflow restore; 360ms reference clip/transform opening preserved.",
+    "close": "Guard closing; captures in-flight clip/transform;320ms reference close; reduced-motion synchronous state transition; restores idle input focus using requestAnimationFrame.",
+    "focus": "Input on modal open; restored idle on close; launcher after hide; idle on empty-history reopen. Actual tab/focus restoration NOT_RUN.",
+    "IME": "Enter with nativeEvent.isComposing prevents form submission; max1000 and trimmed empty disabled; actual browser IME NOT_RUN.",
+    "backdrop": "Both pointerdown and pointerup must hit outside dialog bounds; pointercancel resets; Escape prevents native cancel then calls animated close.",
+    "hideReopen": "320ms collapse toward56px launcher; disabled emerging launcher; question allows resume dialog; no API or source data imported.",
+    "reducedMotion": "JS animation bypass checks preference; CSS transitions/keyframes disabled in reduced-motion declarations. Runtime media-toggle change while already animating NOT_RUN (same static preference model as canonical).",
+    "cleanup": "Unmount cancels dialog/idle Animation and hide timeout/latest focus frame; dialog effect cleanup closes native modal and restores body overflow. Hint effect clears timers.",
+    "blockedSemantics": "No fetch/provider/Firebase/auth import; local question remains input; blocked status explicitly unsent; no fabricated retrieval/answers/stop-response state.",
+    "css": "All remaining class selectors referenced by component; profile/source/suggestions/answer dead CSS removed; live canonical declarations retained.",
+    "caller": "Shell mounts component unkeyed with locale/scopeLabel; questions survive navigation/filter changes within shell. Existing question can show newly selected scope label because only question text is retained."
+  },
+  "boundedFollowups": [
+    {
+      "severity": "Medium",
+      "kind": "product_context",
+      "location": "Shell caller + AskManager question/scopeLabel",
+      "observation": "Local question persists while current scopeLabel prop changes; displayed scope reflects current selection, not submitted selection. No backend answer exists, so this is not a data-leak claim.",
+      "recommendation": "Lead decide approved session semantics: scope-key remount or capture submitted scopeLabel alongside local question; prove logout clears question.",
+      "status": "NEEDS_LEAD_DECISION"
+    }
+  ],
+  "requiredValidation": [
+    "Current compiler/lint/build via lead",
+    "Dialog open/close/resume hide/reopen rapid toggles; close during opening; navigation/logout/unmount restore overflow and no console exceptions",
+    "IME composition Enter does not submit; normal Enter submits local only; Tab/focus-visible; Escape; pointer backdrop drag-inside/outside/pointercancel",
+    "Reference/Manager1280desktop390mobile600breakpoint screenshots and geometry; virtual keyboard/safearea200percent zoom; blocked note remains visible",
+    "No-network question assertion; no questions in Firestore/storage/localStorage/telemetry",
+    "Reduced-motion fresh session and runtime preference change; reference motion duration/path comparison",
+    "Scope-change with retained question and owner logout privacy semantics",
+    "Current Product Language review eight principles,in-context all new strings,vi/en long text,screenreader log/status announcements"
+  ],
+  "principles": {
+    "Purpose": "Source provisional pass within approved blocked UI; scope retention meaning needs lead decision.",
+    "Agency": "Source close/hide/reopen/resume/focus present; browser NOT_RUN.",
+    "Responsibility": "Source no transmission and explicit unavailable status verified.",
+    "Familiarity": "Native web form/dialog/button controls verified source.",
+    "Flexibility": "Source responsive/IME/vi-en/reducedmotion present; actual zoom/mobile/AT NOT_RUN.",
+    "Simplicity": "Source unsupported provider states absent; rendering NOT_RUN.",
+    "Craft": "No concrete code defect confirmed; tests and current render NOT_RUN.",
+    "Delight": "Canonical motion source mapping only; actual motion NOT_RUN."
+  },
+  "memoryCandidates": "None"
+}

@@ -1,0 +1,5 @@
+# SM-AUTO-007 matching local real-data approval
+
+Human evidence verified with read_thread from coordination chat 01a10953-4798-7b62-a4fc-f13d4b92eb4a, user message01a1096f-4208-7553-bbe0-3e2c2a5a07ad: `apporved`, following displayed concrete six-step source→automatic backend sync→runtime Google owner/App Check verification→native-provider comparison→immutable real-source report→safe alert/incident/inbox/verified-delivery/recovery acceptance. Prior direct human steering specifies exact7app names, official API/webhook/export only, no manualCSV workflow and only add-app form as manual product entry.
+
+This approval supports matching LOCAL source/typed-connector/worker/report/registry/noCSV implementation and validation in SM-AUTO-007. It does not approve new IAM/billing/production data mutation, Scheduler/PubSub resources, secret access, provider OAuth/registration or external channel activation; exact cloud diff remains required. Actual external sources that lack credentials/authority/capability remain blocked. No blanket rights inferred from six-step approval. SM-LIVE-006 governs current pilot only.

@@ -1,0 +1,18 @@
+[
+  {
+    "bindings": {
+      "members": "serviceAccount:manager-api@satsunicmanager-staging.iam.gserviceaccount.com",
+      "role": "projects/satsunicmanager-staging/roles/managerTokenVerifier"
+    },
+    "etag": "BwZdC1QaazE=",
+    "version": 1
+  },
+  {
+    "bindings": {
+      "members": "serviceAccount:manager-api@satsunicmanager-staging.iam.gserviceaccount.com",
+      "role": "roles/datastore.user"
+    },
+    "etag": "BwZdC1QaazE=",
+    "version": 1
+  }
+]

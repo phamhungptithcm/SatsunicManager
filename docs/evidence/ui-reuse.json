@@ -1,0 +1,14 @@
+[
+  {
+    "source": "../HunpeoLabs/lib/ui/action-progress.ts",
+    "target": "apps/web/src/lib/ui/action-progress.ts",
+    "sha256": "763045beca99e892149d08875b6b7f210c2be38b17c75dc01cdde6d86edaca7d",
+    "adaptation": "none"
+  },
+  {
+    "source": "../HunpeoLabs/lib/ui/toast-countdown.ts",
+    "target": "apps/web/src/lib/ui/toast-countdown.ts",
+    "sha256": "6af02a51b9f63fb60fc13705f59d43187e1d33af1fb123c926a3c0c842dd7072",
+    "adaptation": "none"
+  }
+]

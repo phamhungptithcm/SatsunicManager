@@ -1,0 +1,30 @@
+{
+  "licenseCounts": {
+    "UNSPECIFIED": 6,
+    "MIT": 761,
+    "Apache-2.0": 146,
+    "ISC": 75,
+    "BSD-3-Clause": 25,
+    "MPL-2.0": 24,
+    "Python-2.0": 1,
+    "CC-BY-4.0": 1,
+    "BlueOak-1.0.0": 11,
+    "BSD-2-Clause": 12,
+    "public domain": 1,
+    "CC0-1.0": 1,
+    "(BSD-2-Clause OR MIT OR Apache-2.0)": 1,
+    "0BSD": 1,
+    "(MIT OR CC0-1.0)": 1,
+    "BSD": 1,
+    "MIT AND ISC": 1
+  },
+  "missingLicenseMetadata": [
+    "apps/web",
+    "functions",
+    "node_modules/fuzzy",
+    "node_modules/limiter",
+    "node_modules/valid-url",
+    "packages/contracts"
+  ],
+  "scope": "resolved lockfile metadata, not legal certification"
+}

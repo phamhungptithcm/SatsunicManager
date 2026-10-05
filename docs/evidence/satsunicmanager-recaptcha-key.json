@@ -1,0 +1,16 @@
+{
+  "createTime": "2026-10-04T22:49:35Z",
+  "displayName": "Manager App Check",
+  "labels": {},
+  "name": "projects/317759361800/keys/6LcnSN8tAAAAADKRL_56T7O_M6jfVb8KrMjihXS1",
+  "webSettings": {
+    "allowAllDomains": false,
+    "allowAmpTraffic": false,
+    "allowedDomains": [
+      "satsunicmanager.web.app",
+      "satsunicmanager.firebaseapp.com"
+    ],
+    "challengeSecurityPreference": "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED",
+    "integrationType": "SCORE"
+  }
+}

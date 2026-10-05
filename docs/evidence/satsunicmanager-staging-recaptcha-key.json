@@ -1,0 +1,16 @@
+{
+  "createTime": "2026-10-04T22:49:39Z",
+  "displayName": "Manager App Check",
+  "labels": {},
+  "name": "projects/274705062317/keys/6Lc4N98tAAAAAH2_nUFUWCxdx8OUZnsC3VYzVBUO",
+  "webSettings": {
+    "allowAllDomains": false,
+    "allowAmpTraffic": false,
+    "allowedDomains": [
+      "satsunicmanager-staging.web.app",
+      "satsunicmanager-staging.firebaseapp.com"
+    ],
+    "challengeSecurityPreference": "CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED",
+    "integrationType": "SCORE"
+  }
+}

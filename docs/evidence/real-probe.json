@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-04T20:41:57.760Z",
+  "source": "public_https",
+  "appId": "hunpeolabs",
+  "environment": "production",
+  "managerDeployed": false,
+  "coverage": "public_reachability and candidate readiness endpoint only",
+  "results": [
+    {
+      "status": "healthy",
+      "capability": "public_reachability",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "reason": "valid_response",
+      "checkedAt": "2026-10-04T20:41:57.513Z",
+      "latencyMs": 247
+    },
+    {
+      "status": "failed",
+      "capability": "backend_readiness",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=UTF-8",
+      "reason": "unexpected_status",
+      "checkedAt": "2026-10-04T20:41:57.520Z",
+      "latencyMs": 209
+    }
+  ]
+}

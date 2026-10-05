@@ -1,0 +1,74 @@
+{
+  "revision": 2,
+  "supersedes": "docs/team/collector-review-v1.json",
+  "frozenImplementation": {
+    "path": "docs/team/collector-implementation-v2.json",
+    "sha256": "7962d5b027491afc809e8d53777bf3bfc1b4db8c06533aa917b0d16355682c83"
+  },
+  "sourceEvidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/sync/collector.ts",
+      "sha256": "1ef41b6ef4246eb70acc75a7ef921ea02c763928beeed38242c0afc9f9a77f9c"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/shared/leases.ts",
+      "sha256": "de2665a3b46aee98ac772c37a6e0f51348adf34e6361d5a0fad5593258c3573f"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/operations.ts",
+      "sha256": "3e82e94e826fd4fd67043766c485bb66933f6ff7feb57ca8e606e8794960a161"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/google-read.ts",
+      "sha256": "d14012d6fc062f01acd3b77bee98b73c423f9a3db98ae992af1a85a91b438858"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/shared/admin.ts",
+      "sha256": "34f986f29c3f4fefe2ea2f4ef4cceb046682b57d6ee2fd20e6096182ff32c71f"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/packages/contracts/src/index.ts",
+      "sha256": "60231b5e39972fe8ef08593935362655d98b940e651658d510e7ddae57ffa3f0"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/tests/integration/collector.test.ts",
+      "sha256": "993610b2aa73e0348c49b7e53c2e31c618d1b5c1d624e325f1ea54c0a54c5ddf"
+    }
+  ],
+  "reviewMode": "Independent read-only source review, no checks/tests/runtime/cloud access; lead owns fresh suite",
+  "previousFindings": [
+    {
+      "id": "CR-001",
+      "status": "RESOLVED_IN_SOURCE",
+      "evidence": "Only successful window reference/base complete dedups. Failed base generates lease-revision-derived immutable attempt ID; successful retry stores successfulRunId atomically."
+    },
+    {
+      "id": "CR-002",
+      "status": "RESOLVED_IN_SOURCE",
+      "evidence": "Fenced preflight and completion require from <= existing cursor and to > cursor, allowing contiguous/overlap advancement and rejecting disjoint gaps before provider call."
+    },
+    {
+      "id": "CR-003",
+      "status": "DEFERRED_ENABLEMENT_BLOCKER",
+      "evidence": "Runtime account env remains a presence gate, not principal attestation. Explicit disabled/internal scope retains production prohibition; exact deployed principal readback required before enable."
+    },
+    {
+      "id": "CR-004",
+      "status": "RESOLVED_IN_SOURCE",
+      "evidence": "Scope dates canonicalized toISOString before ID; existing cursor validated as ISO string/finite instant then compared numerically in both transactions."
+    }
+  ],
+  "malformedCursor": "RESOLVED_IN_SOURCE: existing checkpoints with non-string or invalid ISO cursor throw failed-precondition before provider read; repeated commit guard also validates.",
+  "failureIntegrity": "Failed attempt does not write checkpoint/snapshot or lastSuccessfulSnapshotId. Window latest failed attempt remains independently durable, allowing subsequent retry.",
+  "fencingSecurity": "Token/revision/readTime expiry checked before provider selection attempt and before failure persistence; completion helper rechecks fence. External reader injection forbidden outside demo. Source resource allowlist unchanged; logs excluded from persisted report. No new credential authority inferred.",
+  "provenance": "Existing resource/query/metric version and fixture/freshness fields retained. Exact source hashes bind this review. Mapping revision and actual executing identity remain future provenance requirements.",
+  "newFindings": [],
+  "result": "PASS scoped correction source review; verification pending lead fresh suite; production NOT_READY",
+  "limitations": [
+    "No test pass claim from this agent",
+    "Collector remains internal disabled, no scheduling/backoff/deployment",
+    "Monitoring ingestion-lag/empty-history reconciliation not established by this correction",
+    "Dedicated runtime identity must be verified before production enablement"
+  ],
+  "memoryCandidates": "None"
+}

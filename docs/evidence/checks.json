@@ -1,0 +1,156 @@
+{
+  "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+  "commit": null,
+  "environment": "local/demo emulators; public HunpeoLabs HTTPS probes",
+  "checks": [
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "startedAt": "2026-10-05T01:37:10.148Z",
+      "endedAt": "2026-10-05T01:37:13.883Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "lint",
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "startedAt": "2026-10-05T01:37:13.886Z",
+      "endedAt": "2026-10-05T01:37:16.981Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "startedAt": "2026-10-05T01:37:16.982Z",
+      "endedAt": "2026-10-05T01:37:19.872Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "unit",
+      "command": [
+        "npm",
+        "exec",
+        "vitest",
+        "--",
+        "run",
+        "tests/unit",
+        "--reporter=json",
+        "--outputFile=docs/evidence/unit-tests.json"
+      ],
+      "startedAt": "2026-10-05T01:37:19.872Z",
+      "endedAt": "2026-10-05T01:37:22.530Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "approval_regression",
+      "command": [
+        "python3",
+        "tests/unit/approval_gate_test.py"
+      ],
+      "startedAt": "2026-10-05T01:37:22.530Z",
+      "endedAt": "2026-10-05T01:37:22.737Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "approval",
+      "command": [
+        "python3",
+        ".ai/scripts/validate_implementation_approval.py",
+        "--path",
+        "firebase.json"
+      ],
+      "startedAt": "2026-10-05T01:37:22.737Z",
+      "endedAt": "2026-10-05T01:37:22.820Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "secret_scan",
+      "command": [
+        "node",
+        "scripts/validate/secret-scan.mjs"
+      ],
+      "startedAt": "2026-10-05T01:37:22.820Z",
+      "endedAt": "2026-10-05T01:37:22.912Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "doctor",
+      "command": [
+        "node",
+        "scripts/validate/doctor.mjs"
+      ],
+      "startedAt": "2026-10-05T01:37:22.912Z",
+      "endedAt": "2026-10-05T01:37:22.958Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "emulator_rules_api",
+      "command": [
+        "npm",
+        "exec",
+        "vitest",
+        "--",
+        "run",
+        "tests/rules",
+        "tests/integration",
+        "--reporter=json",
+        "--outputFile=docs/evidence/emulator-tests.json"
+      ],
+      "startedAt": "2026-10-05T01:37:22.958Z",
+      "endedAt": "2026-10-05T01:37:43.592Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    },
+    {
+      "name": "e2e",
+      "command": [
+        "npm",
+        "run",
+        "test:e2e"
+      ],
+      "startedAt": "2026-10-05T01:37:54.632Z",
+      "endedAt": "2026-10-05T01:38:31.217Z",
+      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "exitCode": 0,
+      "status": "PASSED",
+      "error": null
+    }
+  ]
+}

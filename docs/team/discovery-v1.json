@@ -1,0 +1,180 @@
+{
+  "assignment": "discovery",
+  "revision": 1,
+  "briefHash": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf",
+  "intelligence": "DEGRADED inherited brief; bounded safe source and existing metadata only; no live requests, build, tests, index or credential access",
+  "policy": "Applicable root AGENTS read; nested policy filename search found no overrides in inspected provider subtrees; read-only source investigation permitted. No protected source changes.",
+  "evidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/AGENTS.md",
+      "sha256": "572260188d6b1efa390d170df23a9e238015586688dab24d0149b28f4a2ca03b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/.ai/guards/repository-intelligence-gate.yaml",
+      "sha256": "cfd65996d19e4b14a9b4beb7a5577587dd8e8e3d65e046238d7a9810cdcb12f1"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/packages/contracts/src/index.ts",
+      "sha256": "8515e8d03567c5f5628d892cdb5c7012168fbb12cb078d038ee51c2a69e1e8fa"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/resources.ts",
+      "sha256": "410db254cd1b26da30f3c88ee8f3c3a966bf15944b9eed6d1ba40dbb401cc52b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/operations.ts",
+      "sha256": "ec818d496b9184c83376a34be7eede7671463d99be35edcf0d29fe3bd845c7a4"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/google-read.ts",
+      "sha256": "d14012d6fc062f01acd3b77bee98b73c423f9a3db98ae992af1a85a91b438858"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/docs/evidence/source-discovery.json",
+      "sha256": "a7dfbe6357d47ec68044f519440c4ffb51f477852d7aa332bdcbbbbabcd9f345"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/lib/firebase-analytics.ts",
+      "sha256": "28eb70ca04a88859eeecd1ad4f67bfe7954e7b856f368c10071b798aa98dd505"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/gia-pha/.firebaserc",
+      "sha256": "5f831623e4bdaa502d8bcbe5ea769af1fd8b5ebc535f0e3da52d4b4c16540cb7"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/gia-pha/mobile/befam/lib/features/billing/services/store_iap_gateway.dart",
+      "sha256": "5879436f2a995d9a3ea6de0e6f2fc1ae5e6f6a84c22f57cd71054712c4c5d11a"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicGo/functions/src/payments/payos.ts",
+      "sha256": "988ad4ef0d9b0f81be93817975622d9b4afb47b1cedf4fa81add222890c8dcf5"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicGo/src/shared/firebase.ts",
+      "sha256": "8275090d88105ec6d29cb3800b45c26c460bed712ea08bde136dacaeb6beeb0c"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/Satsunic-SEO-Extension/services/satsunic-api/config/production.billing-enabled.yaml",
+      "sha256": "6a1f2a7e7e158cc57c637e8dd18625f76c8b0543e9ef9177f66833e616918799"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/AGENTS.md",
+      "sha256": "5db9c49617c4ad63f0c538d6aa2f021e3e65ba1ae8bd4e39ad5052d443870e7b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicCode/AGENTS.md",
+      "sha256": "572260188d6b1efa390d170df23a9e238015586688dab24d0149b28f4a2ca03b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicPlan/AGENTS.md",
+      "sha256": "572260188d6b1efa390d170df23a9e238015586688dab24d0149b28f4a2ca03b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/gia-pha/AGENTS.md",
+      "sha256": "76110d128dde1e350a05631d270324101264906fd21997989d673ffe3b27cdc2"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicGo/AGENTS.md",
+      "sha256": "572260188d6b1efa390d170df23a9e238015586688dab24d0149b28f4a2ca03b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/Satsunic-SEO-Extension/AGENTS.md",
+      "sha256": "572260188d6b1efa390d170df23a9e238015586688dab24d0149b28f4a2ca03b"
+    }
+  ],
+  "confirmed": [
+    {
+      "name": "HunpeoLabs",
+      "repo": "HunpeoLabs",
+      "project": "hunpeolabs-prod",
+      "services": [
+        "hunpeolabs"
+      ],
+      "paymentProvider": "unknown",
+      "analytics": "Firebase Analytics consent-gated implementation; measurement ID is not a GA4 property ID, actual property and Data API runtime IAM unknown"
+    },
+    {
+      "name": "SatsunicSEO",
+      "repo": "Satsunic-SEO-Extension",
+      "project": "satsunicseoextension",
+      "services": [
+        "billingmaintenance",
+        "maintenance",
+        "runjob",
+        "googleconnectioncallback",
+        "billingwebhook",
+        "api"
+      ],
+      "paymentProvider": "Lemon Squeezy selected in production config; Creem implementation also exists and must not be treated as active",
+      "providerCaveat": "satsunicgo.lemonsqueezy.com merchant domain is configured for SEO; domain does not prove SatsunicGo uses Lemon Squeezy"
+    },
+    {
+      "name": "SatsunicCode",
+      "repo": "SatsunicCode",
+      "project": "satsuniccode",
+      "services": null,
+      "paymentProvider": "unknown",
+      "serviceMetadataStatus": "403 in prior administrator metadata artifact"
+    },
+    {
+      "name": "SatsunicPlan",
+      "repo": "SatsunicPlan",
+      "project": "satsunicplan",
+      "services": [
+        "api"
+      ],
+      "paymentProvider": "unknown"
+    },
+    {
+      "name": "BeFam",
+      "repo": "gia-pha",
+      "project": "be-fam-3ab23",
+      "services": null,
+      "paymentProvider": "iOS/Android native store IAP in Flutter source; production commercial availability and finance export APIs not verified",
+      "caveat": "Repo .firebaserc confirms project mapping, but service metadata remains 403 in prior administrator artifact"
+    },
+    {
+      "name": "SatsunicGo",
+      "repo": "SatsunicGo",
+      "project": null,
+      "services": null,
+      "paymentProvider": "payOS server SDK/webhook/payment implementation; settings/payments activation gates provider",
+      "caveat": "Firebase project read from environment variable; no safe immutable project mapping read in bounded source"
+    }
+  ],
+  "unknown": [
+    {
+      "name": "SatsunicMec",
+      "repo": null,
+      "project": null,
+      "services": null,
+      "paymentProvider": null,
+      "reason": "Exact sibling SatsunicMec directory absent; satsunicmedic is not accepted as alias without user/source proof"
+    }
+  ],
+  "connectorReadiness": {
+    "registry": "Manager APP_CATALOG and appId enum contain five apps, excluding Go and Mec",
+    "operations": "Manager source has Monitoring and sanitized Logging readers for HunpeoLabs/SEO/Plan only; actual runtime IAM not newly verified",
+    "billingExport": "Prior administrator dataset-list artifact returned no datasets for five mapped projects. This does not establish absence of billing export in another host project or account. Dataset/table mapping and runtime IAM remain unknown.",
+    "revenue": "No verified Manager provider finance connector for Lemon Squeezy, payOS or native-store reporting in inspected integration surface; provider app code is not Manager read-access readiness.",
+    "analytics": "No GA4 property mapping/Data API connector verified; Firebase client instrumentation alone does not establish reporting access."
+  },
+  "blockers": [
+    "Exact seven-name human confirmation pending in brief",
+    "SatsunicMec identity unresolved",
+    "SatsunicGo project/services unresolved",
+    "GA4 property IDs and read-only property access unresolved",
+    "Billing export host dataset/table and attribution mapping unresolved",
+    "Provider reporting read scopes, account/product mappings and runtime identities unresolved"
+  ],
+  "recommendedReadOnlyNextActions": [
+    "Confirm exact Mec identity and portfolio aliases from raw user evidence",
+    "Enumerate safe project/service metadata for Go after project mapping is verified",
+    "Use Analytics Admin API safe property metadata; verify numeric property IDs and reader access without events or PII",
+    "Discover billing export configuration in selected billing account and verified dataset host project; verify schema and attribution without querying amounts",
+    "Verify provider finance reporting access and distinct merchant/product/app mapping; never infer from payment checkout code",
+    "Keep unavailable source values null with explicit status until official source readback succeeds"
+  ],
+  "memoryCandidates": "None",
+  "validation": "Artifact JSON parsed and brief hash asserted; no tests run for read-only discovery"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "satsunic-manager",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/web",
+    "functions",
+    "packages/contracts"
+  ],
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "npm run dev -w apps/web",
+    "build": "npm run build -w functions && npm run build -w apps/web",
+    "typecheck": "tsc -p apps/web/tsconfig.json --noEmit && tsc -p functions/tsconfig.json --noEmit",
+    "lint": "eslint apps/web/src functions/src packages tests",
+    "test": "vitest run tests/unit",
+    "test:rules": "firebase emulators:exec --project demo-satsunicmanager --only firestore,storage \"vitest run tests/rules\"",
+    "test:integration": "firebase emulators:exec --project demo-satsunicmanager --only auth,firestore,functions \"vitest run tests/integration\"",
+    "test:e2e": "playwright test",
+    "doctor": "node scripts/validate/doctor.mjs",
+    "emulators": "firebase emulators:start --project demo-satsunicmanager",
+    "check:approval": "python3 .ai/scripts/validate_implementation_approval.py --path firebase.json"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "@types/node": "22.19.15",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "10.12.0",
+    "@eslint/js": "10.0.1",
+    "typescript-eslint": "8.71.0",
+    "eslint-plugin-react-hooks": "7.1.1",
+    "eslint-plugin-react-refresh": "0.5.7",
+    "globals": "17.13.0",
+    "vitest": "5.0.3",
+    "@playwright/test": "1.63.0",
+    "@firebase/rules-unit-testing": "5.0.2",
+    "firebase-tools": "15.32.1"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "1.14.5",
+    "gaxios": {
+      "uuid": "11.1.1"
+    }
+  }
+}

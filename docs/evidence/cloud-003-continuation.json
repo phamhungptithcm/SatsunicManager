@@ -1,0 +1,32 @@
+{
+  "verifiedAt": "2026-10-04T23:01:38.000760+00:00",
+  "candidateHash": "33933d1e76f55e1088299d2ac44e73caeb7e35fed42a040258e60c1266dfcc64",
+  "approvalRef": "docs/approval-SM-CLOUD-003.md",
+  "decision": "BLOCKED",
+  "verified": [
+    "Both Manager projects upgraded to Identity Platform on Spark through Firebase Console",
+    "Both have sole Google provider and exact approved domains; signup/deletion locked",
+    "Both App Check Enterprise configurations registered and read back; SCORE keys limited to exact two per-project Firebase domains",
+    "Blocking endpoint options explicitly include dedicated identity/region, 256MiB, maxInstances2, concurrency8 and7s; regression asserts actual entry point manifest and missing-config denial",
+    "49 unit +7 Python approval +25 Rules/API +3 browser scenarios pass on current candidate"
+  ],
+  "notVerified": [
+    "Live Google owner/outsider login",
+    "Live App Check token/enforcement",
+    "Blocking/Hosting/Functions application deployment",
+    "Storage/report buckets",
+    "Source metrics/log/billing/revenue/analytics data",
+    "Cost or budget alert delivery"
+  ],
+  "blockers": [
+    "Approved billing account01428C-358437-2361F8 project-link quota; both billing links still disabled",
+    "USD10 budget create INVALID_ARGUMENT, precise root cause unknown",
+    "Local remaining slices2\u20134 require reviewed additional-module/contract delta SM-LOCAL-004; original local approval is explicitly slice1 only"
+  ],
+  "limitations": [
+    "REST initializeAuth requires billing, but Firebase Console supports Spark upgrade; earlier blocker was too broad and corrected by actual readback",
+    "Spark upgrade console warns irreversible and3000 DAU cap; no spend claim",
+    "First E2E connection call failed with generic error, rerun passed; root cause unverified",
+    "DEGRADED repository indexes; no runtime review receipt available"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "status": "success",
+  "result": {
+    "sites": [
+      {
+        "name": "projects/satsunicmanager-staging/sites/satsunicmanager-staging",
+        "defaultUrl": "https://satsunicmanager-staging.web.app",
+        "type": "DEFAULT_SITE"
+      }
+    ]
+  }
+}

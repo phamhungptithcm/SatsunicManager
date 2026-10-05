@@ -1,0 +1,64 @@
+{
+  "checkedAt": "2026-10-05T00:11:46.203Z",
+  "identity": "authenticated CLI administrator; not deployed Manager runtime",
+  "scope": {
+    "appId": "all",
+    "environment": "production",
+    "from": "2026-10-04T00:11:46.200Z",
+    "to": "2026-10-05T00:11:46.200Z",
+    "timezone": "America/Chicago"
+  },
+  "privateResult": ".ai/local/live-operations.json",
+  "sources": [
+    {
+      "appId": "hunpeolabs",
+      "projectId": "hunpeolabs-prod",
+      "metricsStatus": "available",
+      "metricObservationCount": 24,
+      "logsStatus": "available",
+      "logMetadataCount": 25,
+      "rawPayloadFetched": false,
+      "reason": null
+    },
+    {
+      "appId": "satsunicseo",
+      "projectId": "satsunicseoextension",
+      "metricsStatus": "available",
+      "metricObservationCount": 24,
+      "logsStatus": "available",
+      "logMetadataCount": 25,
+      "rawPayloadFetched": false,
+      "reason": null
+    },
+    {
+      "appId": "satsuniccode",
+      "projectId": null,
+      "metricsStatus": "not_configured",
+      "metricObservationCount": 0,
+      "logsStatus": "not_configured",
+      "logMetadataCount": 0,
+      "rawPayloadFetched": false,
+      "reason": "resource_not_verified"
+    },
+    {
+      "appId": "satsunicplan",
+      "projectId": "satsunicplan",
+      "metricsStatus": "available",
+      "metricObservationCount": 4,
+      "logsStatus": "available",
+      "logMetadataCount": 25,
+      "rawPayloadFetched": false,
+      "reason": null
+    },
+    {
+      "appId": "befam",
+      "projectId": null,
+      "metricsStatus": "not_configured",
+      "metricObservationCount": 0,
+      "logsStatus": "not_configured",
+      "logMetadataCount": 0,
+      "rawPayloadFetched": false,
+      "reason": "resource_not_verified"
+    }
+  ]
+}

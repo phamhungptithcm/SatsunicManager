@@ -1,0 +1,82 @@
+{
+  "observedAt": "2026-10-04T20:18:07.754552+00:00",
+  "environment": "local discovery plus read-only cloud/public HTTPS",
+  "commit": null,
+  "spec": {
+    "path": "SatsunicManager_MASTER_PROMPT_PRODUCTION.md",
+    "lines": 526,
+    "sha256": "bd80eb39f753a3b33e59f593bd9b4227adc71981bb3a9e6c6ff2cd134d2fcbee"
+  },
+  "checks": [
+    {
+      "command": "python3 .ai/scripts/check-repository-intelligence.py --json",
+      "exitCode": 0,
+      "status": "DEGRADED",
+      "detail": "Both executables installed; both project indexes missing, health failed."
+    },
+    {
+      "command": "gcloud projects list --format=json(projectId,name,lifecycleState) --limit=100",
+      "exitCode": 0,
+      "detail": "15 visible projects; no Manager project identified; not proof of absence outside visible scope."
+    },
+    {
+      "command": "firebase projects:list --json",
+      "exitCode": 0,
+      "detail": "10 visible Firebase projects; no Manager project identified."
+    },
+    {
+      "command": "firebase hosting:sites:list --project hunpeolabs-prod --json",
+      "exitCode": 2,
+      "status": "BLOCKED",
+      "detail": "Failed to authenticate; successful project listing is not proof of Hosting/deploy permissions."
+    },
+    {
+      "command": "python3 .ai/scripts/validate_implementation_approval.py --path firebase.json",
+      "exitCode": 1,
+      "detail": "Approval missing; target outside approved scope. Validator also hardcodes READY contrary to degraded fallback policy."
+    },
+    {
+      "command": "python3 .ai/scripts/validate_agent_config.py",
+      "exitCode": 1,
+      "detail": "FileNotFoundError: CLAUDE.md missing."
+    },
+    {
+      "command": "python3 .ai/scripts/sync_agent_assets.py --check",
+      "exitCode": 1,
+      "detail": "Missing generated resources for other adapters; no regeneration performed."
+    }
+  ],
+  "tools": {
+    "node": "25.9.0",
+    "npm": "11.12.1",
+    "firebase": "14.19.1",
+    "gcloud": "581.0.0",
+    "java": "17.0.16",
+    "terraform": "not found"
+  },
+  "publicProbes": [
+    {
+      "url": "https://hunpeolabs-prod.web.app/",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "url": "https://hunpeolabs.com/",
+      "httpStatus": 200,
+      "contentType": "text/html; charset=utf-8",
+      "coverage": "public homepage only"
+    },
+    {
+      "url": "https://hunpeolabs.com/healthz",
+      "httpStatus": 404,
+      "contentType": "text/html; charset=UTF-8",
+      "coverage": "readiness unavailable"
+    }
+  ],
+  "limitations": [
+    "Initial sandbox curl failed DNS; repeated public probes under approved network escalation.",
+    "No credential/token/secret contents read or saved.",
+    "No infrastructure, IAM, billing, production data or app-source changes.",
+    "Public probes are discovery, not a Manager connection or critical-journey verification."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "revision": 1,
+  "assignment": "discovery",
+  "review": "Independent read-only collector review under SM-AUTO-007",
+  "sourceEvidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/sync/collector.ts",
+      "sha256": "d94c990501ce37af5a5ebaafe2d4f062ce209c351324cf3b76e782b20b6950c1"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/shared/leases.ts",
+      "sha256": "de2665a3b46aee98ac772c37a6e0f51348adf34e6361d5a0fad5593258c3573f"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/operations.ts",
+      "sha256": "3e82e94e826fd4fd67043766c485bb66933f6ff7feb57ca8e606e8794960a161"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/shared/admin.ts",
+      "sha256": "34f986f29c3f4fefe2ea2f4ef4cceb046682b57d6ee2fd20e6096182ff32c71f"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/google-read.ts",
+      "sha256": "d14012d6fc062f01acd3b77bee98b73c423f9a3db98ae992af1a85a91b438858"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/packages/contracts/src/index.ts",
+      "sha256": "60231b5e39972fe8ef08593935362655d98b940e651658d510e7ddae57ffa3f0"
+    }
+  ],
+  "runtime": "Internal disabled collector; not scheduled/deployed. No readiness claim. No cloud calls/tests/index/source edits. Lead owns suite execution.",
+  "findings": [
+    {
+      "id": "CR-001",
+      "severity": "P1",
+      "path": "functions/src/sync/collector.ts",
+      "lines": [
+        27,
+        33,
+        58
+      ],
+      "title": "Transient failed windows cannot be retried",
+      "evidence": "A durable failed report is created at deterministic scope-derived run ID, then both duplicate checks return for any existing report including failed.",
+      "trigger": "Monitoring returns transient 429/503; next same-window attempt after recovery returns duplicate failed without provider fetch.",
+      "impact": "Failed window remains permanently missing unless scope/identity changes or run document is modified.",
+      "recommendedFix": "Separate immutable attempt records from successful idempotency key or support fenced retry of failed state; preserve successful snapshot/checkpoint.",
+      "recommendedValidation": "First attempt 429 then same scope succeeds; successful repeated run never re-fetches."
+    },
+    {
+      "id": "CR-002",
+      "severity": "P1",
+      "path": "functions/src/sync/collector.ts",
+      "lines": [
+        41,
+        48
+      ],
+      "title": "Watermark advances across uncollected gaps",
+      "evidence": "Existing checkpoint rejects only cursor >= scope.to; scope.from is never compared with prior cursor.",
+      "trigger": "After successful window ending 10:00, collect 11:00-12:00; 10:00-11:00 can be skipped and cursor advances to 12:00.",
+      "impact": "Checkpoint cannot represent contiguous collected-through history; later original gap is rejected as superseded.",
+      "recommendedFix": "Define contiguous cursor/initial window semantics and require next window to start at checkpoint, or separate latest queried window from contiguous progress and support backfill.",
+      "recommendedValidation": "Disjoint future window cannot advance contiguous watermark; gap can be recovered."
+    },
+    {
+      "id": "CR-003",
+      "severity": "P2",
+      "path": "functions/src/sync/collector.ts",
+      "lines": [
+        15,
+        16
+      ],
+      "title": "Identity gate validates configuration presence only",
+      "evidence": "MANAGER_COLLECTOR_SERVICE_ACCOUNT truthiness is checked but never matched against credential principal; admin initializes default credential and googleRead uses it.",
+      "trigger": "Enabled process supplies arbitrary nonempty service-account label while executing under different default principal.",
+      "impact": "Configured identity label does not prove dedicated least-privilege reader. Disabled current runtime prevents current exposure.",
+      "recommendedFix": "Before enabling, bind deployment principal to approved collector service account and attest actual identity; document trusted deployment-only invariant or implement safe principal verification.",
+      "recommendedValidation": "Wrong principal cannot collect when enabled; remote enable remains separate approval."
+    },
+    {
+      "id": "CR-004",
+      "severity": "P2",
+      "path": "functions/src/sync/collector.ts",
+      "lines": [
+        43,
+        44
+      ],
+      "title": "Noncanonical timestamp strings misorder checkpoint comparisons",
+      "evidence": "scope accepts ISO timestamps without canonical normalization; cursor >= scope.to compares text rather than parsed instants.",
+      "trigger": "Cursor 2026-10-04T10:00:00Z and later end 2026-10-04T10:00:00.500Z compare lexically in wrong chronological order because Z sorts after dot.",
+      "impact": "Legitimate later fractional-second window may be rejected; equivalent timestamp representations give distinct run IDs.",
+      "recommendedFix": "Normalize accepted dates to canonical UTC precision and compare numeric instants; canonicalize deterministic identity inputs.",
+      "recommendedValidation": "Equivalent timestamps yield same identity; fractional-second later cursor compares chronologically."
+    }
+  ],
+  "positiveEvidence": [
+    "Token plus lease revision and server readTime expiry fence transactions; stale worker release does not clear successor token.",
+    "Success checkpoint/snapshot/status commit atomically through transaction callback; provider calls remain outside retried callback.",
+    "Failed provider statuses do not advance checkpoint; incomplete Monitoring page token is rejected as partial.",
+    "Collector suppresses logs and persists only metric/provenance/freshness surface.",
+    "Provider failures and unavailable resource mappings preserve null metrics with explicit state."
+  ],
+  "limitations": [
+    "No tests executed; source findings require lead validation.",
+    "Current static-resource allowlist covers only three verified apps.",
+    "Empty response is accepted complete; before scheduling define ingestion delay/overlap reconciliation so eventual Monitoring data is not frozen as final.",
+    "Provenance records resource/query version but not mapping revision/actual executing identity; future contract should define required audit fields."
+  ],
+  "result": "CHANGES_REQUESTED for future enable/scheduling; current disabled status retained",
+  "memoryCandidates": "None"
+}

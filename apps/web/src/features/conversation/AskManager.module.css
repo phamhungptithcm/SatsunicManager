@@ -1,0 +1,94 @@
+/* Presentation adapted from HunpeoLabs ask-hunpeolabs.module.css; see docs/team/composer-implementation-v2.json. */
+.bottomSpace { height: 116px; }
+.idle { position: fixed; bottom: max(20px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); width: min(960px, calc(100% - 40px)); z-index: 40; }
+.composerArea { width: 100%; }
+.composer { display: flex; align-items: center; gap: 12px; padding: 10px 14px 10px 28px; min-height: 76px; border: 2px solid #6378ff; border-radius: 50px; background: #fff; box-shadow: 0 0 0 4px #edefff, 0 12px 36px rgb(17 28 53 / 7%); }
+.composer input { width: 100%; min-width: 0; flex: 1; border: 0; border-radius: 8px; color: #111c35; background: transparent; font: inherit; font-size: 18px; padding: 10px 0; }
+.composer input::placeholder { color: #767676; opacity: 1; }
+.composer input:focus-visible { outline: none; }
+.composer:has(input:focus-visible) { border-color: #163cff; box-shadow: 0 0 0 4px #dce3ff, 0 12px 36px rgb(17 28 53 / 7%); }
+.composer button { display: grid; place-items: center; width: 50px; height: 50px; flex-shrink: 0; border: 0; border-radius: 50%; cursor: pointer; }
+.send { background: #163cff; color: #fff; }
+.send:disabled { background: #8792ff; cursor: default; }
+.close { background: #f2f4fa; color: #111c35; }
+.composer button:focus-visible, .reopen:focus-visible, .resume:focus-visible { outline: 2px solid #163cff; outline-offset: 4px; }
+.notice { margin: 12px 0 0; text-align: center; font-size: 12px; color: #59677c; }
+.resume { display: block; margin: 0 auto 12px; padding: 5px 10px; background: #fff; border: 1px solid #e2e6f0; border-radius: 14px; color: #53627c; font: inherit; font-size: 12px; cursor: pointer; }
+.reopen { position: fixed; bottom: max(20px, env(safe-area-inset-bottom)); right: 24px; z-index: 40; border: 1px solid #6378ff; border-radius: 30px; background: #fff; color: #163cff; padding: 12px 20px; box-shadow: 0 6px 24px rgb(17 28 53 / 7%); font: inherit; cursor: pointer; }
+.dialog { padding: 0; margin: 0 auto; inset: auto 0 max(20px, env(safe-area-inset-bottom)); border: 1px solid #e2e6f0; border-radius: 28px; width: min(960px, calc(100% - 40px)); max-width: none; height: min(920px, calc(100dvh - 40px)); max-height: none; background: #fff; color: #111c35; overflow: hidden; box-shadow: 0 24px 80px rgb(17 28 53 / 16%); transform-origin: center bottom; }
+.dialog[open] { display: flex; flex-direction: column; }
+.dialog::backdrop { background: rgb(247 249 253 / 32%); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); opacity: 1; transition: opacity 320ms cubic-bezier(.22,1,.36,1); }
+.dialog[data-closing]::backdrop { opacity: 0; }
+@starting-style { .dialog::backdrop { opacity: 0; } }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 32px; border-bottom: 1px solid #edf0f5; }
+.header > span:first-child { font-size: 21px; font-weight: 700; letter-spacing: -.6px; }
+.header > span:first-child span { color: #163cff; }
+.header > span:last-child { color: #68748b; font-size: 13px; }
+.conversation { flex: 1; min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 28px 32px; scroll-padding-bottom: 24px; }
+.turn { margin-bottom: 52px; }
+.turn:last-child { margin-bottom: 24px; }
+.question { display: flex; justify-content: flex-end; margin-bottom: 38px; }
+.question p { margin: 0; padding: 12px 23px; border-radius: 28px; max-width: 85%; background: #f3f4f7; font-size: 17px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.status { display: flex; align-items: center; gap: 12px; color: #718099; font-size: 17px; margin: 0; }
+.dialogBottom { flex-shrink: 0; width: 100%; margin: 0 auto; padding: 16px 0 max(24px, env(safe-area-inset-bottom)); background: #fff; }
+@media (max-width: 600px) {
+  .dialog { width: calc(100% - 28px); height: min(760px, calc(100dvh - 32px)); bottom: max(16px, env(safe-area-inset-bottom)); border-radius: 24px; }
+  .idle { width: calc(100% - 28px); bottom: max(16px, env(safe-area-inset-bottom)); }
+  .composer { min-height: 64px; padding: 7px 9px 7px 18px; gap: 8px; }
+  .composer input { font-size: 16px; }
+  .composer button { width: 44px; height: 44px; }
+  .header { padding: 18px 20px; }
+  .conversation { padding: 28px 22px; }
+  .question { margin-bottom: 28px; }
+ .question p { font-size: 16px; }
+  .dialogBottom { width: 100%; padding-top: 10px; }
+  .notice { font-size: 11px; }
+}
+
+/* Keep animation on compositor properties; never animate layout or each keystroke. */
+.composer { transition: border-color 160ms ease, box-shadow 160ms ease; }
+.composer button { transition: background-color 140ms ease, transform 140ms ease; }
+.composer button:active:not(:disabled) { transform: scale(.94); }
+.idle { transition: opacity 180ms ease, transform 180ms cubic-bezier(.4,0,1,1); }
+.idle[data-hiding] { pointer-events: none; }
+.idle[data-returning] { animation: none; }
+.reopen { animation: none; }
+.conversation { scrollbar-gutter: stable; overflow-anchor: none; }
+.question{ animation: reveal 200ms cubic-bezier(.2,.8,.2,1) both; }
+@keyframes reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .dialog::backdrop, .idle, .dialog, .composer, .composer button{ transition: none; }
+  .question, .reopen { animation: none; }
+  .dialog, .dialog[open] { transform: none; }
+}
+.idle { animation: composerEnter 180ms cubic-bezier(.2,.8,.2,1); }
+@keyframes composerEnter { from { opacity: 0; transform: translate(-50%, 6px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@media (prefers-reduced-motion: reduce) { .idle { animation: none; } }
+
+.reopen { display: grid; place-items: center; width: 56px; height: 56px; padding: 0; border-radius: 50%; }
+.dialog[data-closing] .notice{ opacity: 0; transition: opacity 180ms ease; }
+@media (max-width: 600px) { .reopen { bottom: max(16px, env(safe-area-inset-bottom)); } }
+@media (prefers-reduced-motion: reduce) { .dialog[data-closing] .notice { transition: none; } }
+
+.reopen[data-emerging] { animation: reveal 180ms ease 140ms both; pointer-events: none; }
+
+.hint { position: absolute; right: calc(100% + 12px); top: 50%; display: flex; padding: 10px 15px; border: 1px solid #e2e6f0; border-radius: 24px; background: #fff; color: #163cff; font-size: 14px; white-space: nowrap; opacity: 0; transform: translate(4px, -50%); pointer-events: none; transition: opacity 180ms ease, transform 180ms ease; box-shadow: 0 6px 20px rgb(17 28 53 / 5%); }
+.reopen[data-hint] .hint, .reopen:hover .hint, .reopen:focus-visible .hint { opacity: 1; transform: translate(0, -50%); }
+.reopen[data-hint] .hint > span { animation: letterEnter 240ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes letterEnter { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .hint { transition: none; } .hint > span { animation: none !important; } }
+
+.reopen { background: #163cff; border-color: #163cff; color: #fff; box-shadow: 0 6px 18px rgb(22 60 255 / 20%), inset 0 1px 0 rgb(255 255 255 / 20%); }
+.reopen svg { width: 26px; height: 26px; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 12%)); }
+.reopen[data-hint] { animation: attentionNudge 640ms cubic-bezier(.22,1,.36,1); }
+@keyframes attentionNudge { 0%, 100% { transform: translateY(0); } 35% { transform: translateY(-3px); } 65% { transform: translateY(-1px); } }
+@media (prefers-reduced-motion: reduce) { .reopen[data-hint] { animation: none; } }
+
+.scope { margin: 0 auto 8px; text-align: center; color: #59677c; font-size: 12px; overflow-wrap: anywhere; }
+
+/* Keep the initial capsule at the canonical viewport inset; retain honest AI status above scope. */
+.idle:not([data-focused]) .notice { position: absolute; bottom: calc(100% + 4px); left: 0; right: 0; margin: 0; }
+
+/* Scope/status stay legible over scrolling content without moving the capsule. */
+.idle .scope, .idle .notice { width: fit-content; max-width: 100%; padding: 3px 10px; border-radius: 8px; background: rgb(255 255 255 / 96%); }
+.idle:not([data-focused]) .notice { left: 50%; right: auto; transform: translateX(-50%); width: max-content; max-width: 100%; }

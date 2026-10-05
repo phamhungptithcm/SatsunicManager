@@ -1,0 +1,47 @@
+{
+  "candidateHash": "33933d1e76f55e1088299d2ac44e73caeb7e35fed42a040258e60c1266dfcc64",
+  "firstRun": {
+    "command": "node scripts/validate/evidence.mjs --emulators",
+    "exitCode": 1,
+    "e2ePassed": 2,
+    "e2eFailed": 1,
+    "failedAssertion": "Expected Check results saved; actual The check did not complete. Refresh status before retrying.",
+    "rootCause": "NOT_VERIFIED"
+  },
+  "finalRun": {
+    "exitCode": 0,
+    "e2ePassed": 3,
+    "e2eFailed": 0,
+    "evidenceRef": "docs/evidence/checks.json"
+  },
+  "state": "Residual transient connection failure; not claimed fixed",
+  "continuationRetries": [
+    {
+      "task": "SM-LOCAL-004",
+      "candidate": "7117ee0ad67037ea20ab1ceca6442574d880e1ba981dd140dd6484aa52a7bdf6",
+      "endedAt": "2026-10-04T23:14:29.416Z",
+      "failedCheck": "e2e connection toast",
+      "observed": "Error toast; API HTTP body was not captured in that run. Standalone repeat passed.",
+      "rootCause": "NOT_VERIFIED",
+      "changes": "Capture checkConnection response status/body in assertion; respect existing 10-second shared demo-owner cooldown between API/browser suites. Production rate guard unchanged."
+    },
+    {
+      "task": "SM-LIVE-006",
+      "at": "2026-10-05T00:13:44.739970+00:00",
+      "observed": "First operations failure snapshot selected app before navigation settled; next diagnostic got demo API200/unconfigured source then finance preview wait timed out; later full suite passed operations/finance but incident two-login workflow exceeded 30s. Source rebuild during full suite also reloaded emulator; that suite is not a stable-candidate certification.",
+      "rootCause": "Navigation race corrected with rendered heading/URL assertions; demo response confirmed. Multi-login total timeout is observed; remaining transient emulator timing not fully diagnosed.",
+      "changes": "Bounded 15s expectations, explicit preview API200 assertion, 60s whole multi-step browser test; production API timeouts/auth/rates unchanged. Stable candidate full rerun pending."
+    }
+  ],
+  "currentLocalRetries": [
+    {
+      "observedAt": "2026-10-05T00:56:42.695304+00:00",
+      "scope": "SM-AUTO-007 / SM-UI-008",
+      "result": "Interrupted sandbox-localhost blocked attempt; localhost probe returned200 outside sandbox. Not a passing suite."
+    },
+    {
+      "scope": "current full suite before final test corrections",
+      "result": "60 unit passed; 38 Rules/API passed, two legacy five-app assertions failed; five browser scenarios passed including local composer focus/hide/reopen/no transport, operations remained loading at15s assertion. Added exact app-scoped API response assertion; next full suite pending."
+    }
+  ]
+}

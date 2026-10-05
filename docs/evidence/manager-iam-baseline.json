@@ -1,0 +1,48 @@
+{
+  "projectId": "satsunicmanager",
+  "mode": "read-only IAM baseline; unrelated principals hashed",
+  "bindings": [
+    {
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-firebase.iam.gserviceaccount.com"
+      ],
+      "role": "roles/firebase.managementServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:firebase-adminsdk-fbsvc@satsunicmanager.iam.gserviceaccount.com"
+      ],
+      "role": "roles/firebase.sdkAdminServiceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:firebase-adminsdk-fbsvc@satsunicmanager.iam.gserviceaccount.com"
+      ],
+      "role": "roles/firebaseauth.admin"
+    },
+    {
+      "members": [
+        "redacted-sha256:d65160c038d278845b78a01fa927e6f540c54cd719cd99a98f39f9686bd52917"
+      ],
+      "role": "roles/firebaserules.system"
+    },
+    {
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-firestore.iam.gserviceaccount.com"
+      ],
+      "role": "roles/firestore.serviceAgent"
+    },
+    {
+      "members": [
+        "serviceAccount:firebase-adminsdk-fbsvc@satsunicmanager.iam.gserviceaccount.com"
+      ],
+      "role": "roles/iam.serviceAccountTokenCreator"
+    },
+    {
+      "members": [
+        "user:hunpeo97@gmail.com"
+      ],
+      "role": "roles/owner"
+    }
+  ]
+}

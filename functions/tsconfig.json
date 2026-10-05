@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "..",
+    "outDir": "lib",
+    "types": [
+      "node"
+    ],
+    "sourceMap": false
+  },
+  "include": [
+    "src",
+    "../packages/contracts/src"
+  ]
+}

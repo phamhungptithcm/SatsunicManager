@@ -1,0 +1,16 @@
+{
+  "projectId": "satsunicmanager",
+  "verifiedAt": "2026-10-04T22:51:49.150Z",
+  "registered": true,
+  "config": {
+    "name": "projects/317759361800/apps/1:317759361800:web:d4710116013ca2dca492bd/recaptchaEnterpriseConfig",
+    "tokenTtl": "3600s",
+    "siteKey": "6LcnSN8tAAAAADKRL_56T7O_M6jfVb8KrMjihXS1",
+    "riskAnalysis": {
+      "minValidScore": 0.5
+    }
+  },
+  "liveTokenVerified": false,
+  "enforcementChanged": false,
+  "approvalRef": "docs/approval-SM-CLOUD-003.md"
+}

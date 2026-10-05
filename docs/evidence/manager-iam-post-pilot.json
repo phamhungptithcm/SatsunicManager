@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-10-05T00:39:02.251625+00:00",
+  "projectId": "satsunicmanager",
+  "status": 0,
+  "runtimeRoles": [
+    "projects/satsunicmanager/roles/managerTokenVerifier",
+    "roles/datastore.user"
+  ],
+  "managedAgents": [
+    {
+      "role": "roles/artifactregistry.serviceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-artifactregistry.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/cloudbuild.serviceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-cloudbuild.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/cloudfunctions.standardServiceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@gcf-admin-robot.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/containerregistry.ServiceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@containerregistry.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/firebase.managementServiceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-firebase.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/firebaseappcheck.serviceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-firebaseappcheck.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/firebasemods.serviceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-firebasemods.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/firebaserules.system",
+      "members": [
+        "serviceAccount:service-317759361800@firebase-rules.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/firestore.serviceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@gcp-sa-firestore.iam.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/run.serviceAgent",
+      "members": [
+        "serviceAccount:service-317759361800@serverless-robot-prod.iam.gserviceaccount.com"
+      ]
+    }
+  ],
+  "otherPrincipalsOmitted": true
+}

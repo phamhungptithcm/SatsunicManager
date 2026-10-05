@@ -1,0 +1,57 @@
+{
+  "projectId": "satsunicmanager-staging",
+  "checkedAt": "2026-10-04T22:52:31.025Z",
+  "mode": "read-only public/non-secret auth metadata",
+  "checks": [
+    {
+      "name": "auth_config",
+      "status": 200,
+      "data": {
+        "name": "projects/274705062317/config",
+        "signIn": {},
+        "authorizedDomains": [
+          "satsunicmanager-staging.firebaseapp.com",
+          "satsunicmanager-staging.web.app"
+        ],
+        "subtype": "IDENTITY_PLATFORM",
+        "client": {
+          "permissions": {
+            "disabledUserSignup": true,
+            "disabledUserDeletion": true
+          }
+        },
+        "blockingFunctions": {}
+      },
+      "errorCode": null,
+      "errorMessage": null,
+      "reasons": []
+    },
+    {
+      "name": "google_provider",
+      "status": 200,
+      "data": {
+        "name": "projects/274705062317/defaultSupportedIdpConfigs/google.com",
+        "enabled": true,
+        "clientId": "274705062317-0g45vqohc676malvvl6vni89841ifssh.apps.googleusercontent.com"
+      },
+      "errorCode": null,
+      "errorMessage": null,
+      "reasons": []
+    },
+    {
+      "name": "providers",
+      "status": 200,
+      "data": {
+        "defaultSupportedIdpConfigs": [
+          {
+            "name": "projects/274705062317/defaultSupportedIdpConfigs/google.com",
+            "enabled": true
+          }
+        ]
+      },
+      "errorCode": null,
+      "errorMessage": null,
+      "reasons": []
+    }
+  ]
+}

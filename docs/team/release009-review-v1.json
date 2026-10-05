@@ -1,0 +1,111 @@
+{
+  "revision": 1,
+  "approvedScope": "SM-RELEASE-009 exact pilot11; finance/collector/email/AI excluded",
+  "candidateHashProvidedByLead": "b29fe8377910983809dda074bb955075c8379be6b36c462c05ffcb3874eff0b1",
+  "candidateVerification": "Source hashes recorded from reads; no candidate gate/checks/tests/runtime executed by reviewer",
+  "sourceEvidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/scripts/cloud/deploy-release.mjs",
+      "sha256": "40279046271d528ded0aec803ab8d5b2e1f9157633a1792abf70d07a235de8ca"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/scripts/validate/doctor.mjs",
+      "sha256": "ac8adc6e39d87c17eeedcd549c763a289b2610e233922a3d53f572a7dd750caf"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/scripts/validate/candidate.mjs",
+      "sha256": "8dc09c3ae0b7dc846de24431437cd24758b7ee569061f3b4b00eaf994c051bd2"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/index.ts",
+      "sha256": "eb72232efafbad607cfea3ca273b978037efa6d73e788b82ed15609d94d68d31"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/api/apps.ts",
+      "sha256": "dc9f59f65a3ffc874a33f11d4fd54bb7419962a2f117b769083862022e8a8726"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/api/registry.ts",
+      "sha256": "df6d84b72b7fc31d376dd3008989010aa4b850c58d4ff94d848d8457943606fc"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/auth/authorize.ts",
+      "sha256": "f83aff6192a14bdb608bffd47a68b9035d868b1767ce89810a034adf4a67eba6"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/shared/mutation.ts",
+      "sha256": "20a392021a9c4320e7f9cd8e09ff8d56a955a9f3b6094ea122b70b80e22f8ea5"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/resources.ts",
+      "sha256": "410db254cd1b26da30f3c88ee8f3c3a966bf15944b9eed6d1ba40dbb401cc52b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/operations.ts",
+      "sha256": "3e82e94e826fd4fd67043766c485bb66933f6ff7feb57ca8e606e8794960a161"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/apps/web/src/lib/firebase.ts",
+      "sha256": "92a095ce3fc92976bdf088f2280bb0dc37bed2e82cdb3ebdad05e496231e245f"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/apps/web/src/features/apps.tsx",
+      "sha256": "d6c676b376a184a10719209eb670a89acc912f0d48d284060e936b3d47ad9dc0"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/tests/unit/runtime-options.test.ts",
+      "sha256": "9f99ce80ae93ce6400586c6b73b2480cfe024286e1e198ec14cd6ff4b1810fbc"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/tests/unit/release-boundary.test.ts",
+      "sha256": "680f401411bd9746aed42ac786e42104d911387da12f18d3967ad9865b240e76"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/.github/workflows/sanity.yml",
+      "sha256": "3d3dc732210095753698f13e92b837009a816127f917b8298cd554d030da37a9"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/firebase.json",
+      "sha256": "edd2e5a76bf7dc007dd8382f0cdb853ab53769b558546330ce975efa0f791562"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/docs/plans/SM-RELEASE-009.md",
+      "sha256": "0bfc9b4e5c0c4d0473d719ebaef3e732937d367da5b0325ae30395f3e4d009b2"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/docs/approval-SM-RELEASE-009.md",
+      "sha256": "16be138084488650a649741050967e53b31aed3f82bdf5983f66324e75c501e3"
+    }
+  ],
+  "findings": [
+    {
+      "id": "R009-01",
+      "severity": "P2",
+      "path": "tests/unit/runtime-options.test.ts",
+      "title": "Anonymous denial assertion does not independently prove AppCheck enforcement",
+      "evidence": "Request contains no authorization or AppCheck header and expects generic UNAUTHENTICATED. Same wrapper result is possible with enforceAppCheck false because Auth is absent.",
+      "impact": "SDK HTTP transport correction is useful, but AppCheck enforcement regression cannot be certified by this assertion alone.",
+      "recommendation": "Use discriminating valid owner Auth without AppCheck or verifier instrumentation proving AppCheck rejection; retain real browser token/missing-AppCheck acceptance gate."
+    }
+  ],
+  "boundedObservations": [
+    "Deploy wrapper permits only backend/hosting single phase, fixed eleven names and fixed project; extra arguments rejected. Receipt ref/environment and current source candidate must bind; backend scope excludes finance/preferences/collector exports.",
+    "Hosting wrapper checks exact11 active function names, runtime identity and maxInstanceCount2 against candidate-matching readback. It does not itself certify readback timestamp/source authenticity, AppCheck, concurrency/memory, blockers or latest suite completion; lead must separately verify them.",
+    "Doctor verifies approval receipt path existence and candidate, deployment config metadata presence, blocker phase and non-emulator Firestore setting; declarative config booleans are not independent cloud readback.",
+    "addApp requires AppCheck via callable options, allowlisted verified Google token with revocation/project checks, active owner access, recent Auth and durable rate cap. Transaction rechecks owner access and revision, enforces idempotency and registry bound, records audit.",
+    "User-supplied sourceProjectId remains metadata with mappingVerified false; appDefinitions output passes only id/name to operations; RESOURCE_CATALOG compiled verified source list remains query authority.",
+    "Production addApp UI defaults disabled and requires explicit config flag; UI onboarding states source requires verification. Browser flag is feature availability, never authorization.",
+    "Sanity workflow uses content-read permission only, pinned actions, Node22 and dedicated demo emulators; no production deploy or secrets configured. Local green cannot establish live owner/AppCheck/provider readiness."
+  ],
+  "actualUnverifiedLiveGates": [
+    "Fresh exact-candidate suite under lead execution",
+    "Actual deploy readback exact11 ACTIVE/identity/caps/AppCheck/config",
+    "Google-only Identity Platform domains and both allowlist blockers before signup unlock",
+    "Hosting config/content hashes and real browser AppCheck flow",
+    "Owner-personal Google login, outsider denial and revocation",
+    "Runtime audit0/dev9 supplied by lead; no independent dependency audit executed"
+  ],
+  "scopeResult": "No source security bypass identified in bounded review; P2 AppCheck test discrimination gap recorded. Release execution contingent on fresh suite and actual live gates, full master not used as scoped source blocker.",
+  "productionReadiness": "Scoped deployment not yet verified; excluded automatic finance/collector/email/AI remain excluded",
+  "memoryCandidates": "None"
+}

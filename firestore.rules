@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owner() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.firebase.sign_in_provider == 'google.com'
+        && request.auth.token.email in ['hunpeo97@gmail.com', 'phamhung.pitit@gmail.com']
+        && exists(/databases/$(database)/documents/ownerAccess/$(request.auth.uid))
+        && get(/databases/$(database)/documents/ownerAccess/$(request.auth.uid)).data.enabled == true
+        && get(/databases/$(database)/documents/ownerAccess/$(request.auth.uid)).data.role == 'owner'
+        && get(/databases/$(database)/documents/ownerAccess/$(request.auth.uid)).data.email == request.auth.token.email;
+    }
+    match /ownerAccess/{uid} { allow get: if owner() && uid == request.auth.uid; }
+    match /apps/{id} { allow read: if owner(); }
+    match /integrationConnections/{id} { allow read: if owner(); }
+    match /owners/{uid}/notificationStates/{id} { allow read: if owner() && uid == request.auth.uid; }
+    match /aiConversations/{id} { allow read: if owner() && resource.data.ownerUid == request.auth.uid; }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

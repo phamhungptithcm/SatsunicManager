@@ -1,0 +1,7 @@
+{
+  "projectId": "satsunicmanager",
+  "appId": "1:317759361800:web:d4710116013ca2dca492bd",
+  "operation": "Request Firebase Auth provisioning with all providers disabled",
+  "completedAt": "2026-10-04T22:04:51.603Z",
+  "verificationStatus": "CONFIGURATION_NOT_FOUND_AFTER_PROVISION"
+}

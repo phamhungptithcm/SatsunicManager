@@ -1,0 +1,16 @@
+{
+  "projectId": "satsunicmanager-staging",
+  "verifiedAt": "2026-10-04T22:51:52.811Z",
+  "registered": true,
+  "config": {
+    "name": "projects/274705062317/apps/1:274705062317:web:5db2f6b528dc8e01656924/recaptchaEnterpriseConfig",
+    "tokenTtl": "3600s",
+    "siteKey": "6Lc4N98tAAAAAH2_nUFUWCxdx8OUZnsC3VYzVBUO",
+    "riskAnalysis": {
+      "minValidScore": 0.5
+    }
+  },
+  "liveTokenVerified": false,
+  "enforcementChanged": false,
+  "approvalRef": "docs/approval-SM-CLOUD-003.md"
+}

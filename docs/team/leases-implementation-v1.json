@@ -1,0 +1,68 @@
+{
+  "revision": 1,
+  "scope": [
+    "functions/src/shared/leases.ts",
+    "tests/integration/leases.test.ts"
+  ],
+  "dependencyHashes": [
+    {
+      "path": "docs/approval-SM-AUTO-007.md",
+      "sha256": "099bf9eec4ee7caaba5d51e5c9f17e75e823e61b042764298fb29473abee1a86"
+    },
+    {
+      "path": "docs/team/brief-v1.json",
+      "sha256": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf"
+    },
+    {
+      "path": "functions/src/shared/admin.ts",
+      "sha256": "34f986f29c3f4fefe2ea2f4ef4cceb046682b57d6ee2fd20e6096182ff32c71f"
+    },
+    {
+      "path": "tests/integration/operations.test.ts",
+      "sha256": "fcb078a1a704499aa56bf1e8a69f113112c615acce8cd866f6033ea471ceb9f4"
+    },
+    {
+      "path": "functions/package.json",
+      "sha256": "c15448b2f458c88515946da6db9984d8c1a94bf3c089a2b22cfe873a4258e73a"
+    },
+    {
+      "path": "functions/tsconfig.json",
+      "sha256": "9921bf4d73b638e433761378e4ff2a6190532ec9740fd2892f855a520b3474e9"
+    }
+  ],
+  "briefV2": "Published and read before final handoff; dependency revision 2",
+  "sourceHashes": [
+    {
+      "path": "functions/src/shared/leases.ts",
+      "sha256": "de2665a3b46aee98ac772c37a6e0f51348adf34e6361d5a0fad5593258c3573f"
+    },
+    {
+      "path": "tests/integration/leases.test.ts",
+      "sha256": "85938084dad5286ee3c0ab8e65873b66218cec4f8d97ac02676ac2b46ee16b1b"
+    }
+  ],
+  "behavior": "Transactional acquire/renew/release with 1s\u20135min TTL; server snapshot readTime sets deadlines; serverTimestamp audit fields; monotonic revision plus UUID token fences stale workers. completeLeaseRun commits transaction-only persistence callback and cursor atomically only for complete validated pages, then releases lease.",
+  "testCoverage": "Five-way contention; renewal; persisted expiry takeover; stale renew/release/complete; partial page callback not invoked; write failure rolls back output and cursor; successful atomic commit; invalid job/duration",
+  "checks": "NOT RUN: lead owns tests/build/emulator. Source self-review complete; final implementation review and compiler/runtime validation pending lead.",
+  "integrationRequirements": [
+    "Internal module only, no index/public exports changed.",
+    "Consumer performs official reads outside transaction then calls completeLeaseRun only after full validated page; callback must be repeatable transaction reads/writes, bounded and no provider calls.",
+    "If an entire multi-page run must commit atomically, consumer must stage all pages first; this helper commits a validated page, not unvalidated full-run completeness.",
+    "Consumer must acquire and retain fencing handle and never write materialized results outside guarded transaction.",
+    "No scheduler/IAM/resource/provider or production operations executed."
+  ],
+  "limitations": [
+    "No runtime execution verified.",
+    "Long-running callback must remain bounded; expiry checked at transaction readTime and transaction serialization fences takeover writes.",
+    "Opaque cursor completeness is consumer responsibility; helper rejects explicit partial result but cannot validate provider semantics."
+  ],
+  "qualityProfiles": [
+    "universal",
+    "typescript-javascript",
+    "database",
+    "concurrency"
+  ],
+  "productionReadiness": "NOT_READY until lead compilation/integration and approved real collector/transport verification",
+  "knowledge_revision": 2,
+  "briefHash": "5702cfe85ca49486423efc2640259f87a2b9b12e7e11de7130fa858e6cfd67b3"
+}

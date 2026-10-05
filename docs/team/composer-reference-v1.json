@@ -1,0 +1,116 @@
+{
+  "revision": 1,
+  "assignment": "ui-qa composer reference",
+  "mode": "READ_ONLY",
+  "briefHash": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf",
+  "observedAt": "2026-10-05T00:18:11.460915+00:00",
+  "evidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/components/ask-hunpeolabs.tsx",
+      "sha256": "e8e9dfca5fff1641441fbe3bf83db9065cd752cfa5e84f467dedc8b940eff80e"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/components/ask-hunpeolabs.module.css",
+      "sha256": "9cf59755f6a38d2f0a81560fde21f53e1af87e410e953fff60ced18b98ecc147"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/components/ask-site.tsx",
+      "sha256": "96cf939f1461e17295a5e9ff9c8812345a9e7d9cfc6a4d3ac8e79c4463d0b8a5"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/tests/e2e/ask.spec.ts",
+      "sha256": "eb9b6f6054b4ad0aed4c2125474f700d508dff6625957b4b121348384d679148"
+    },
+    {
+      "path": "apps/web/src/features/shell.tsx",
+      "sha256": "b989915dd08f8055dc6677267b291f8e15a67f262f9492681de8672c2c17e6ab"
+    },
+    {
+      "path": "apps/web/src/styles.css",
+      "sha256": "ed22bde6a9b32692bd3ad889a3f694cfb829da37c1a635f7bc795d761adab52e"
+    },
+    {
+      "path": "apps/web/src/lib/i18n.ts",
+      "sha256": "4d2b59cfccc1067ea09ea9489b65540e8896f230e95c1bada03bcd0be9fc9b48"
+    },
+    {
+      "path": "docs/team/brief-v1.json",
+      "sha256": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf"
+    }
+  ],
+  "canonical": "HunpeoLabs components/ask-hunpeolabs.tsx with module CSS, mounted by AskSite; source snapshot only, no runtime 100percent claim.",
+  "decision": "NOT_READY: materially different current Manager composer; needs approved delta and visual/interaction acceptance.",
+  "mapping": [
+    {
+      "area": "idle geometry",
+      "reference": "Fixed centered min960px/calc100percent-40px bottom max20px/safearea; capsule radius50px border2px#6378ff,76px minimum, shadow4px halo, input18px, button50px circular.",
+      "manager": "Sidebar-offset max920px rectangle radius12px border1px; textarea14px,send34px.",
+      "gap": "Geometry/colors/shadow/input/control layout materially differ."
+    },
+    {
+      "area": "mobile",
+      "reference": "600px breakpoint; width calc100percent-28px,bottom16px-safearea,capsule64px,input16px,buttons44px; panel height min760px/100dvh-32px,radius24px.",
+      "manager": "720px shell breakpoint; composer padding11px13px,bottom12px; no panel.",
+      "gap": "Needs measured same viewport comparison; sidebar context intentional hosting adaptation must be recorded."
+    },
+    {
+      "area": "controls and focus",
+      "reference": "Single-line controlled input max1000; submit Enter with IME guard; send/stop plus close/hide; blue focus halo and ring; native modal showModal and input focus.",
+      "manager": "Disabled textarea+disabled send; no form/IME/modal/hide/reopen.",
+      "gap": "Interaction state machine absent; backend blocked state must remain truthful."
+    },
+    {
+      "area": "state machine",
+      "reference": "idle unfocused/focused suggestions+notice; expanded modal; closing; dismissed launcher; emerging/hint; resume conversation; pending retriever/selecter; answered/error/rate/stopped.",
+      "manager": "Always visible static scope text and unconnected message.",
+      "gap": "All interactive shell states absent; domain answers/providers should not be reused."
+    },
+    {
+      "area": "motion",
+      "reference": "Composer focus160ms/button140ms; idle entrance180ms; hide320ms collapse toward56px launcher; modal expand360ms/collapse320ms cubic-bezier(.22,1,.36,1); reveal200ms; user-cancellable300ms submitted-question scroll; hint5seconds then22seconds interval,2800ms display; reduced-motion disabling.",
+      "manager": "Sidebar-offset280ms transition only for composer; no source composer animation/state transitions.",
+      "gap": "Need same motion timing/path/cleanup and reduced-motion interaction evidence."
+    },
+    {
+      "area": "keyboard/backdrop",
+      "reference": "Escape onCancel calls close; true backdrop pointerdown+pointerup pair only; pointercancel resets; modal body scroll lock; close interrupts pending request; reopen/resume.",
+      "manager": "No modal or handlers.",
+      "gap": "Add approved presentation state transitions; prove no hidden network side effect while blocked."
+    },
+    {
+      "area": "content/auth boundary",
+      "reference": "Published FAQ locally answers even aiAvailable=false; outside retrieval may POST /api/ask; public knowledge/profile/contact/privacy routes and optional own AppCheck provider.",
+      "manager": "Own two-owner Firebase auth and scoped Manager data; AI not connected.",
+      "gap": "Must exclude public FAQ/provider/API/auth imports. Only presentation/state pattern reuse; supported Manager actions remain blocked until independently approved and connected."
+    }
+  ],
+  "acceptance": [
+    "Bind reference and Manager hashes to exact candidates; compare same desktop/mobile viewports idle/focus/expanded/closing/launcher/reopen/resume and reduced-motion.",
+    "Compare capsule geometry, typography, padding, colors, borders, shadow, send/stop/close/chat icons, header/conversation/notice spacing; document Manager scope placement without displacing canonical composer.",
+    "Keyboard Tab order/rings, Enter/IME, Escape, backdrop down/up/cancel, focus on open and safe restoration on close; no page scroll while modal open.",
+    "Motion expansion360ms,collapse/hide320ms,focus160ms,button140ms,entry180ms/reveal200ms; interruption/rapid toggles/unmount cleanup; reduced motion.",
+    "390px/600px boundary and desktop1280px; safe-area,virtual keyboard,long text,200percent zoom,no occluded final content or overflow.",
+    "Disconnected Manager AI: explicit vi/en status; cannot transmit questions or pretend retrieval/pending/answers; hide/close/reopen remain usable as presentation controls.",
+    "No HunpeoLabs public customer/service/founder suggestions, source links, contact/privacy claims, routes, knowledge fallback or transport; use approved Manager domain meaning only.",
+    "Real Manager auth/domain/backend remain separate; no public public-site auth or permission inheritance.",
+    "Current product review inventories all strings/states and eight principles; do not claim100percent until actual visual and interaction evidence pass."
+  ],
+  "productLanguageGate": {
+    "status": "BLOCKED",
+    "Purpose": "Manager scope/questions and unconnected meaning require approved mapping; public sales suggestions inappropriate.",
+    "Agency": "Canonical hide/reopen/close/focus patterns desirable; current Manager lacks them.",
+    "Responsibility": "Keep unconnected blocker and no provider processing claim before integration.",
+    "Familiarity": "Native form/dialog/button patterns; no platform imitation requirement.",
+    "Flexibility": "Mobile,safe-area,keyboard,IME,zoom,reduced-motion acceptance NOT_RUN.",
+    "Simplicity": "Place necessary Manager scope outside canonical capsule without changing its interaction geometry; concrete approved design needed.",
+    "Craft": "Current visual and state gaps; no parity evidence.",
+    "Delight": "Source measured motion reference only; real comparison NOT_RUN."
+  },
+  "limitations": [
+    "Read-only source/test definitions inspected; no browser/build/emulator/test launched.",
+    "Reference E2E definitions are acceptance inspiration, not current passing results.",
+    "No source or provider changes made.",
+    "Human100percent steering applies presentation fidelity with explicit Manager blocked-service boundary; unrestricted answer behavior is not authorized."
+  ],
+  "memoryCandidates": "None"
+}

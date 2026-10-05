@@ -1,0 +1,122 @@
+{
+  "revision": 2,
+  "supersedes": "docs/team/release009-review-v1.json",
+  "scope": "SM-RELEASE-009 exact eleven-function pilot; finance/collector/email/AI excluded",
+  "candidateHashProvidedByLead": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+  "sourceEvidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/scripts/cloud/deploy-release.mjs",
+      "sha256": "4e3df6d975ffbb2ad9ccafad6c589313cb8e63326eb663942e5139e065beb3d0"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/scripts/validate/doctor.mjs",
+      "sha256": "ac8adc6e39d87c17eeedcd549c763a289b2610e233922a3d53f572a7dd750caf"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/scripts/validate/candidate.mjs",
+      "sha256": "8dc09c3ae0b7dc846de24431437cd24758b7ee569061f3b4b00eaf994c051bd2"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/scripts/validate/evidence.mjs",
+      "sha256": "11a4522fe0dc11cb84c6c7452a98c431f98ff7f5c033813304159a9083858770"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/package.json",
+      "sha256": "ee5d099753dcf5c9c0db4fa33400d3345da00d2ee5bbf4ca586f757ca019181b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/package-lock.json",
+      "sha256": "f0d39f5394c52308534b08e5741592105982f5d6c12b6f7d2c8b8d37b652b34f"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/tests/unit/runtime-options.test.ts",
+      "sha256": "7bbd1d127ec2095d241f8f591bd1ad23c1b38569046118340c88ac56b47c9a5d"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/index.ts",
+      "sha256": "eb72232efafbad607cfea3ca273b978037efa6d73e788b82ed15609d94d68d31"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/auth/authorize.ts",
+      "sha256": "f83aff6192a14bdb608bffd47a68b9035d868b1767ce89810a034adf4a67eba6"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/api/apps.ts",
+      "sha256": "dc9f59f65a3ffc874a33f11d4fd54bb7419962a2f117b769083862022e8a8726"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/api/registry.ts",
+      "sha256": "df6d84b72b7fc31d376dd3008989010aa4b850c58d4ff94d848d8457943606fc"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/resources.ts",
+      "sha256": "410db254cd1b26da30f3c88ee8f3c3a966bf15944b9eed6d1ba40dbb401cc52b"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/integrations/operations.ts",
+      "sha256": "3e82e94e826fd4fd67043766c485bb66933f6ff7feb57ca8e606e8794960a161"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/functions/src/shared/mutation.ts",
+      "sha256": "20a392021a9c4320e7f9cd8e09ff8d56a955a9f3b6094ea122b70b80e22f8ea5"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/apps/web/src/lib/firebase.ts",
+      "sha256": "92a095ce3fc92976bdf088f2280bb0dc37bed2e82cdb3ebdad05e496231e245f"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/apps/web/src/features/apps.tsx",
+      "sha256": "d6c676b376a184a10719209eb670a89acc912f0d48d284060e936b3d47ad9dc0"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/.github/workflows/sanity.yml",
+      "sha256": "3d3dc732210095753698f13e92b837009a816127f917b8298cd554d030da37a9"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/firebase.json",
+      "sha256": "e503c9e3339d1f0fb4098b50c720b004b2d82e0ba221a67f90f6711838f93344"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/node_modules/firebase-functions/lib/common/providers/https.js",
+      "sha256": "805c70eeb1d683f2040bc1c270e06449e2ca4105f64fd28439cc2e0467fa57db"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/docs/plans/SM-RELEASE-009.md",
+      "sha256": "6d41af3bb748f51988ace159076f81c6cf0d6aadf8c91c41559db53d87ae2e0c"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/docs/approval-SM-RELEASE-009.md",
+      "sha256": "16be138084488650a649741050967e53b31aed3f82bdf5983f66324e75c501e3"
+    }
+  ],
+  "reviewMode": "Independent read-only source review; no tests/cloud/checks/index/runtime or source changes",
+  "correction": {
+    "finding": "R009-01",
+    "status": "RETRACTED_FALSE_POSITIVE",
+    "reason": "Prior review overlooked exact error message assertion. SDK tokenStatus.app MISSING with enforceAppCheck true throws Unauthenticated before domain handler; with false it reaches authorize missing Auth and throws Sign in required. Exact message distinguishes branches even in original test. New enforceAppCheck false mutation control explicitly exercises distinction.",
+    "sdkEvidenceLines": [
+      489,
+      490
+    ],
+    "testEvidence": "Actual SDK HTTP wrapper for nine release callables; explicit addApp unguarded mutation control."
+  },
+  "findings": [],
+  "observations": [
+    "Fixed backend exact11 selection and project/receipt/candidate match retained. Release wrapper now requires all ten check names each PASSED and matching same candidateHash; stale or missing check evidence fails closed.",
+    "Functions own npm-generated lock pins package install graph; Node22 manifest and approved grpc/uuid overrides present. Isolated audit0 is lead-supplied execution evidence, not independently rerun.",
+    "CSP includes recaptcha frame/connect paths; exact production browser AppCheck loading/token remains separate verification.",
+    "addApp remains owner/active access/recent-auth/AppCheck/rate/revision/idempotency protected; transaction rechecks access and persists audit. User project metadata cannot grant source query authority.",
+    "CI content-read-only permissions and pinned actions retained, demo-only check execution and no cloud deployment credentials.",
+    "Hosting release requires candidate-matching exact backend readback with ACTIVE state/dedicated runtime identity/max2; full cloud caps/AppCheck/blockers source authenticity remain separate lead readback obligations."
+  ],
+  "scopeResult": "PASS independent scoped source review; no concrete release source defect found in bounded inspected files. Fresh full suite still pending lead.",
+  "unverifiedLiveGates": [
+    "Lead fresh full same-candidate checks and all ten checks evidence",
+    "Exact backend ACTIVE/runtime principal/caps/config and Google-only identity blockers",
+    "Hosting output/config hashes and real browser AppCheck load/token",
+    "Safe signup sequence and personally completed owner Google login, outsider denial/revocation"
+  ],
+  "productionReadiness": "Pilot source review passes; production rollout/live acceptance not yet verified; excluded master capabilities do not block scoped source review",
+  "riskStatus": "Existing approved release-only Editor build-identity residual risk remains; no new IAM/provider/secret authority inferred. Runtime audit0/dev9 advisory status supplied by lead and not rerun.",
+  "memoryCandidates": "None"
+}

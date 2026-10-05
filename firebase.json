@@ -1,0 +1,106 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "manager",
+      "runtime": "nodejs22",
+      "predeploy": [
+        "npm run doctor -- --deployment",
+        "npm run build -w functions"
+      ]
+    }
+  ],
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "hosting": {
+    "public": "apps/web/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Robots-Tag",
+            "value": "noindex, nofollow"
+          },
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "no-referrer"
+          },
+          {
+            "key": "Content-Security-Policy",
+            "value": "default-src 'self'; script-src 'self' https://accounts.google.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://accounts.google.com; frame-src https://accounts.google.com https://*.firebaseapp.com https://www.google.com https://recaptcha.google.com/recaptcha/; connect-src 'self' https://*.googleapis.com https://*.cloudfunctions.net https://*.firebaseio.com https://accounts.google.com https://www.google.com/recaptcha/; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+          }
+        ]
+      },
+      {
+        "source": "/manager-config.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-store, max-age=0"
+          }
+        ]
+      }
+    ]
+  },
+  "emulators": {
+    "auth": {
+      "port": 29099,
+      "host": "127.0.0.1"
+    },
+    "functions": {
+      "port": 25001,
+      "host": "127.0.0.1"
+    },
+    "firestore": {
+      "port": 28080,
+      "host": "127.0.0.1"
+    },
+    "storage": {
+      "port": 29199,
+      "host": "127.0.0.1"
+    },
+    "ui": {
+      "enabled": false
+    },
+    "singleProjectMode": true,
+    "hub": {
+      "host": "127.0.0.1",
+      "port": 24400
+    },
+    "logging": {
+      "host": "127.0.0.1",
+      "port": 24500
+    }
+  },
+  "auth": {
+    "providers": {
+      "anonymous": false,
+      "emailPassword": false,
+      "googleSignIn": {
+        "oAuthBrandDisplayName": "SatsunicManager",
+        "supportEmail": "hunpeo97@gmail.com"
+      }
+    }
+  }
+}

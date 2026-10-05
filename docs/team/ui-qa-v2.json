@@ -1,0 +1,237 @@
+{
+  "assignment": "ui-qa",
+  "revision": 2,
+  "mode": "READ_ONLY",
+  "briefHash": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf",
+  "reviewedAt": "2026-10-05T00:04:35.595995+00:00",
+  "decision": "BLOCKED",
+  "intelligence": "Inherited brief DEGRADED; no index/test/build/browser/deployment launched. Bounded source and existing local screenshots only.",
+  "evidence": [
+    {
+      "path": "docs/team/brief-v1.json",
+      "sha256": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf"
+    },
+    {
+      "path": "apps/web/src/features/operations/pages.tsx",
+      "sha256": "c694bd1d8b788a038e880706072802f6a39e588f7eeee6ce9724d0cb5471e723"
+    },
+    {
+      "path": "apps/web/src/features/finance.tsx",
+      "sha256": "2d13ec98d9c8d7f422e30a9b8ef76f422c50bd137ba01eaf621f0b1a03131c72"
+    },
+    {
+      "path": "functions/src/integrations/operations.ts",
+      "sha256": "ec818d496b9184c83376a34be7eede7671463d99be35edcf0d29fe3bd845c7a4"
+    },
+    {
+      "path": "functions/src/integrations/google-read.ts",
+      "sha256": "d14012d6fc062f01acd3b77bee98b73c423f9a3db98ae992af1a85a91b438858"
+    },
+    {
+      "path": "functions/src/auth/authorize.ts",
+      "sha256": "f83aff6192a14bdb608bffd47a68b9035d868b1767ce89810a034adf4a67eba6"
+    },
+    {
+      "path": "functions/src/index.ts",
+      "sha256": "fa43dc14298e1e5a7e161910053a1e48d1ee6714beee2c13e7f2199e93a37acd"
+    },
+    {
+      "path": "functions/src/shared/rate.ts",
+      "sha256": "24c61a6731bcd594245e1c4d376c56e15d706e269efea5664b5c36f860510456"
+    },
+    {
+      "path": "functions/src/shared/pages.ts",
+      "sha256": "72ea078d77d797787287067853e7df05372fa91ec88364a5bb55136328f5fd62"
+    },
+    {
+      "path": "functions/src/api/incidents.ts",
+      "sha256": "bf81606b3cc85dbd7f58e4b34a97ac78d3b2a19e038cefa23629f843db144270"
+    },
+    {
+      "path": "functions/src/api/notifications.ts",
+      "sha256": "3d04221c3d8e6dcbc8d5bca673e1f031456de49dd1370071189f1d46153276d4"
+    },
+    {
+      "path": "functions/src/finance/import.ts",
+      "sha256": "f8b77e98b95f30ace61375b972802e70771f99f1a0662608b923123401a1186d"
+    },
+    {
+      "path": "functions/src/finance/snapshot.ts",
+      "sha256": "de438bfa8b5e9f55b1bbe7538a9abd3c35026d66b969890dc88a42c99c8e8119"
+    },
+    {
+      "path": "packages/contracts/src/index.ts",
+      "sha256": "8515e8d03567c5f5628d892cdb5c7012168fbb12cb078d038ee51c2a69e1e8fa"
+    },
+    {
+      "path": "scripts/validate/doctor.mjs",
+      "sha256": "4ddb1c9cca7aa36edcb76e793cd88d0adff35d9861c8ddda7128e52721b07028"
+    },
+    {
+      "path": "firebase.json",
+      "sha256": "edd2e5a76bf7dc007dd8382f0cdb853ab53769b558546330ce975efa0f791562"
+    },
+    {
+      "path": "docs/plans/SM-LIVE-006.md",
+      "sha256": "053eab27dd812ffc4dbed300187a56f4dca904757c6cae0159ff059cf3038a40"
+    },
+    {
+      "path": ".ai/templates/product-content-review.md",
+      "sha256": "b419f87c605b0e2a6679fabfbdbfa6b662cf33230049e591b201e66f612f6b71"
+    },
+    {
+      "path": "docs/evidence/checks.json",
+      "sha256": "9e7b4765384be3858c4608c720cd0a9cfdf920a5992d7d029b6e2292781b1cac"
+    },
+    {
+      "path": "docs/final-review.json",
+      "sha256": "9868085366ce1122e92c698cc24de75473ed4ed282ddad9154729663e3f19301"
+    },
+    {
+      "path": "tests/e2e/shell.spec.ts",
+      "sha256": "cb43e2cfca9aab46aa62d20cf7bec7995031b50c654fccbb34109d45798edc5f"
+    },
+    {
+      "path": "docs/evidence/inbox-workflow.png",
+      "sha256": "51860b167e6cea0bf12258205cb719b0ecbc0c2ecef1bb15427f73cfab055b29"
+    },
+    {
+      "path": "docs/evidence/finance-import.png",
+      "sha256": "7cc4c5e2b5d9dd314e16e22696fb3c6569b6d18d2621c63c04264b86cf2a7b5e"
+    },
+    {
+      "path": "apps/web/src/features/shell.tsx",
+      "sha256": "b989915dd08f8055dc6677267b291f8e15a67f262f9492681de8672c2c17e6ab"
+    }
+  ],
+  "skillsApplied": [
+    "repository-intelligence (inherited brief)",
+    "final-implementation-review",
+    "code-review",
+    "code-quality-review",
+    "security-review",
+    "write-product-content"
+  ],
+  "scope": "Approved local operations/incident/inbox/finance implementation and SM-LIVE-006 pilot boundary; SM-AUTO-007 remains unapproved delta.",
+  "findings": [
+    {
+      "id": "QA-001",
+      "severity": "High",
+      "kind": "release_evidence",
+      "location": ".ai/templates/product-content-review.md",
+      "verified": "Product review covers foundation shell and explicitly calls incident/inbox UI NOT_RUN; current operations/pages.tsx and finance.tsx not inventoried. Required current product gate cannot pass.",
+      "correction": "Lead update current review states/eight principles with candidate-bound screenshots and applicable accessibility/localization checks.",
+      "confidence": "high"
+    },
+    {
+      "id": "QA-002",
+      "severity": "High",
+      "kind": "release_evidence",
+      "location": "docs/evidence/checks.json; docs/final-review.json",
+      "verified": "Latest inspected checks candidate1f19a74599c119bd305cfbd0a993650e02ac191cd4c8476f2abf0db8c6c29710 has E2E exit1 FAILED. Existing final review candidate674ed6b30376e71b202ae45b07222b758c181360b26dcf1216fd60df360a12ce is BLOCKED and stale.",
+      "correction": "Lead diagnose latest failure and produce fresh checks/review for exact release candidate. Do not use historical retry pass.",
+      "confidence": "high"
+    },
+    {
+      "id": "QA-004",
+      "severity": "Medium",
+      "kind": "deployment_guard",
+      "location": "functions/src/index.ts; scripts/validate/doctor.mjs; docs/plans/SM-LIVE-006.md",
+      "verified": "Index exports finance/preferences beyond approved pilot allowlist; doctor validates candidate/approval but not selected functions. Frontend financeEnabled=false does not block callable endpoints if deployed.",
+      "correction": "Use exact approved --only function allowlist and verify deployed inventory; consider scoped automated allowlist check within approval. No evidence of actual forbidden deployment.",
+      "confidence": "high"
+    }
+  ],
+  "positiveFindings": [
+    "Authorization verifies revoked token, issuer/audience/provider/two-owner identity plus enabled ownerAccess on every business request.",
+    "Operations server selects project/services/location; resource filters and API field projection exclude raw log payload/URL/header/customer data.",
+    "Monitoring pagination incomplete => partial/null rather than undercount; no observations != numeric zero; 5xx numerator uses fixed response-code label.",
+    "Durable per-owner rate transaction, bounded response/deadline, Firestore keyset paging, incident revision/transition/idempotency and private notification state are present.",
+    "Pilot plan explicitly excludes finance import/source writes and leaves full production acceptance separate."
+  ],
+  "productContent": {
+    "platform": "Internal responsive web; vi/en native buttons/selects/links. Existing emulator screenshots are proxies, not real production auth.",
+    "audienceTask": "Two owners review operational source evidence, workflow incidents and notification read state; finance imported-only local preview conflicts with new auto-sync-only destination until delta approved.",
+    "inventory": [
+      "Operations metrics Requests/HTTP5xx/rate, source statuses, chart/table timestamps, logs metadata disclosure, Source detail, Load more",
+      "Incident source signal vs workflow labels, note/save/cancel/conflict, loading/empty/error/retry/paging",
+      "Inbox source title/severity, read/unread, View incident, loading/empty/error/retry/paging",
+      "Finance currency/net/cost/coverage/partial/empty/export/import/preview/save/cancel/error/source/amount/kind"
+    ],
+    "states": {
+      "default": "Reviewed source + inbox/finance screenshot proxy",
+      "loading": "Source-reviewed role=status",
+      "empty": "Source-reviewed distinct no-observation/no-result",
+      "error": "Source-reviewed safe generic retry",
+      "partial": "Source-reviewed explicit incomplete metrics/finance cap",
+      "unauthorized": "Server-source reviewed; current rendered state NOT_RUN",
+      "offline": "Current operations-specific in-context NOT_RUN",
+      "stale": "Source timestamps exist; stale observation indicator NOT_RUN",
+      "pending": "Disabled mutation controls source-reviewed; actual current pending UI NOT_RUN",
+      "success": "Existing inbox read screenshot; finance screenshot local only",
+      "keyboardZoomScreenReader": "NOT_RUN",
+      "longContentNarrowLocalization": "New operation/finance state coverage NOT_RUN"
+    },
+    "principles": {
+      "Purpose": {
+        "status": "FAILED",
+        "evidence": "Latest auto-sync-only/add-app requirement not matched by static five-app contract and manual local finance; requires delta approval, not unauthorized patch."
+      },
+      "Agency": {
+        "status": "PASSED",
+        "evidence": "Source caller key resets operations pagination on scope change; native scope controls and retry available. Source-level finding only, full interaction not rerun."
+      },
+      "Responsibility": {
+        "status": "PASSED",
+        "evidence": "Emulator banner, imported-only coverage, null source values, server metadata projection and separate signal/workflow."
+      },
+      "Familiarity": {
+        "status": "PASSED",
+        "evidence": "Native web controls and established shell navigation in inbox/finance screenshot."
+      },
+      "Flexibility": {
+        "status": "NOT_RUN",
+        "evidence": "Current new feature narrow/zoom/screenreader/English failure-state evidence absent."
+      },
+      "Simplicity": {
+        "status": "PASSED",
+        "evidence": "Progressive Source/table/import details; concise inbox controls in screenshot."
+      },
+      "Craft": {
+        "status": "FAILED",
+        "evidence": "Current product review incomplete; missing new-state in-context accessibility/localization evidence. Withdrawn cursor defect is not a rationale."
+      },
+      "Delight": {
+        "status": "NOT_RUN",
+        "evidence": "Current operation failure/pending accessibility interaction not independently exercised."
+      }
+    },
+    "gate": "BLOCKED"
+  },
+  "testGaps": [
+    "Latest E2E failure diagnosis and exact candidate rerun",
+    "Operations metric/log pagination then scope/refresh recovery execution NOT_RUN; source remount mechanism verified, no known defect.",
+    "Permission_denied/429/partial/timeout real rendered states",
+    "Current narrow/200percent zoom/keyboard/screenreader/new vi-en states",
+    "Production Google owner/AppCheck auth plus outsider denial and runtime-source reads",
+    "Exact pilot deployed function inventory, rollback/maintenance posture"
+  ],
+  "pendingDelta": "Do not implement dynamic seven-app onboarding/official autosync or replace CSV until SM-AUTO-007 concrete approved plan. Existing manual finance remains local-only; no production write endorsed.",
+  "limitations": [
+    "No test/build/deploy/index/browser run by reviewer",
+    "No full release certification or source IAM runtime verification",
+    "No raw production data/secrets inspected",
+    "Artifacts can become stale while lead edits; evidence hashes bind observed source"
+  ],
+  "memoryCandidates": "None",
+  "supersedes": "docs/team/ui-qa-v1.json",
+  "priorArtifactHash": "99ab51b4826bfd96f98d4231d13a7e11ef4fa56dc462bc460578060a0416d4af",
+  "corrections": [
+    {
+      "id": "QA-003",
+      "status": "WITHDRAWN_FALSE_POSITIVE",
+      "evidence": "apps/web/src/features/shell.tsx line96 keys OperationsPage by appId:days:timezone:scopeEnd; all selectable scope changes remount page and reset logCursor. Reviewer v1 omitted caller evidence. No source fix needed."
+    }
+  ],
+  "leadInvestigationContext": "Lead reports E2E snapshot on overview URL /?app=befam; navigation/select race under investigation. Reviewer did not verify race root cause and does not claim an operation runtime error."
+}

@@ -1,0 +1,40 @@
+{
+  "revision": 1,
+  "knowledge_revision": 1,
+  "lead": "current production implementation chat /root",
+  "repository": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager",
+  "git": "unborn, untracked WIP, no clean/reset/worktree",
+  "intelligence": "DEGRADED; CodeGraph stale, CocoIndex stale/unhealthy; bounded native evidence",
+  "authorized": "SM-LOCAL-004 local scope, SM-LIVE-006 production pilot and exact source-read IAM; billing account01D369-A6379A-DF9192 selected by user; existing Editor build identity approved for this pilot only",
+  "steering": "Verified user messages in chat01a10953-4798-7b62-a4fc-f13d4b92eb4a: auto-sync only, no manual CSV/product workflow; 7 names from delegated scope require raw user/source readback verification; user explicitly asked parallel agents and sync with current lead",
+  "pending_delta": "SM-AUTO-007 dynamic seven-app registry, add-app onboarding and official-source autosync; plan/approval before material implementation",
+  "current_runtime": "Lead alone owns demo emulators/auth29099/firestore28080/functions25001/storage29199/hub24400, E2E/build/index/deploy; Node22 + pinned Firebase15.32.1; never use global Firebase14",
+  "lead_write_scope": [
+    "packages/contracts/**",
+    "functions/**",
+    "apps/**",
+    "scripts/**",
+    "tests/**",
+    "firebase.json",
+    "firestore*",
+    "runtime/config/deploy"
+  ],
+  "assignments": [
+    {
+      "id": "discovery",
+      "scope": "Read-only repositories/provider metadata; write only docs/team/discovery-v1.json",
+      "lease_minutes": 30
+    },
+    {
+      "id": "autosync",
+      "scope": "Read-only architecture/API/data-integrity planning; write only docs/team/autosync-v1.json",
+      "lease_minutes": 30
+    },
+    {
+      "id": "ui-qa",
+      "scope": "Read-only UI/product/QA/security review; write only docs/team/ui-qa-v1.json",
+      "lease_minutes": 30
+    }
+  ],
+  "handoff": "Immutable JSON: briefHash, revision, source/evidence path+SHA256, bounded facts/findings/confidence, blockers, affected paths, recommended tests; never secrets/raw logs/production amounts. No global memory writes. Message lead on conflicts/blocker/contract change."
+}

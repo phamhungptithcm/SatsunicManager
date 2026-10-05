@@ -1,0 +1,7 @@
+[
+  {
+    "bindings": {
+      "role": "projects/hunpeolabs-prod/roles/managerMonitoringRead"
+    }
+  }
+]

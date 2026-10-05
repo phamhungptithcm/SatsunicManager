@@ -1,0 +1,69 @@
+{
+  "candidateHash": "6aefe3f3201d1e475691c67805155ff5378d086e719f97688fa74d9145deb2f6",
+  "checkedAt": "2026-10-05T00:17:28.832Z",
+  "environment": "Dedicated demo emulator; generated API responses only for explicit UI state fixtures",
+  "checks": [
+    {
+      "name": "Actual demo unknown source displays unavailable",
+      "status": "PASSED"
+    },
+    {
+      "name": "UI fixture loading",
+      "status": "PASSED"
+    },
+    {
+      "name": "UI fixture partial",
+      "status": "PASSED"
+    },
+    {
+      "name": "UI fixture permission_denied",
+      "status": "PASSED"
+    },
+    {
+      "name": "UI fixture empty",
+      "status": "PASSED"
+    },
+    {
+      "name": "UI fixture available",
+      "status": "PASSED"
+    },
+    {
+      "name": "UI fixture error",
+      "status": "PASSED"
+    },
+    {
+      "name": "Retry recovers from explicit UI failure fixture",
+      "status": "PASSED"
+    },
+    {
+      "name": "Narrow 390px no overflow",
+      "status": "PASSED"
+    },
+    {
+      "name": "Narrow 320px no overflow",
+      "status": "PASSED"
+    },
+    {
+      "name": "CSS 200 percent layout simulation; native browser zoom NOT_RUN",
+      "status": "PASSED"
+    },
+    {
+      "name": "English rendered unavailable source",
+      "status": "PASSED"
+    },
+    {
+      "name": "Keyboard reaches semantic control",
+      "status": "PASSED"
+    }
+  ],
+  "screenshots": [
+    "operations-demo-unconfigured.png",
+    "operations-fixture-loading.png",
+    "operations-fixture-partial.png",
+    "operations-fixture-permission_denied.png",
+    "operations-fixture-empty.png",
+    "operations-fixture-available.png",
+    "operations-fixture-error.png"
+  ],
+  "status": "PASSED"
+}

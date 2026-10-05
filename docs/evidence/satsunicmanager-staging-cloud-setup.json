@@ -1,0 +1,56 @@
+{
+  "apps": [
+    {
+      "appId": "1:274705062317:web:5db2f6b528dc8e01656924",
+      "projectId": "satsunicmanager-staging",
+      "displayName": "SatsunicManager Staging",
+      "state": "ACTIVE"
+    }
+  ],
+  "projectId": "satsunicmanager-staging",
+  "verifiedAt": "2026-10-04T22:32:24.751Z",
+  "approvalRef": "docs/approval-SM-CLOUD-003.md",
+  "database": {
+    "exitCode": 0,
+    "data": {
+      "createTime": "2026-10-04T22:31:14.485197Z",
+      "deleteProtectionState": "DELETE_PROTECTION_ENABLED",
+      "locationId": "us-central1",
+      "name": "projects/satsunicmanager-staging/databases/(default)",
+      "type": "FIRESTORE_NATIVE"
+    }
+  },
+  "billing": {
+    "exitCode": 0,
+    "data": {
+      "billingAccountName": "",
+      "billingEnabled": false,
+      "projectId": "satsunicmanager-staging"
+    }
+  },
+  "buckets": {
+    "exitCode": 0,
+    "data": []
+  },
+  "rules": {
+    "release": {
+      "name": "projects/satsunicmanager-staging/releases/cloud.firestore",
+      "rulesetName": "projects/satsunicmanager-staging/rulesets/901e0b61-f742-41fb-b964-e992da46622a",
+      "updateTime": "2026-10-04T22:31:48.170197Z"
+    },
+    "rulesetName": "projects/satsunicmanager-staging/rulesets/901e0b61-f742-41fb-b964-e992da46622a",
+    "localHash": "82e1a41c507aefa73b392d2a8f7b88186284261b1c0b2e7354d06e5e6d516e62",
+    "deployedHash": "82e1a41c507aefa73b392d2a8f7b88186284261b1c0b2e7354d06e5e6d516e62",
+    "exactSourceMatch": true
+  },
+  "anonymousRead": {
+    "httpStatus": 403,
+    "errorCode": "PERMISSION_DENIED",
+    "expectedDenied": true
+  },
+  "limitations": [
+    "No production Google session or backend deployment",
+    "No authenticated owner read tested",
+    "No production data write or deletion attempted"
+  ]
+}

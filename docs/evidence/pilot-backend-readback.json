@@ -1,0 +1,243 @@
+{
+  "checkedAt": "2026-10-05T00:28:51.838625+00:00",
+  "projectId": "satsunicmanager",
+  "deployedCandidate": "6aefe3f3201d1e475691c67805155ff5378d086e719f97688fa74d9145deb2f6",
+  "cliDeployExit": 1,
+  "cliDeployOutcome": "10 successful function create operations; cleanup-policy setup incomplete",
+  "readbackExit": 0,
+  "functions": [
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738638942",
+            "object": "bootstrapOwner/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/bootstrapOwner",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://bootstrapowner-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738655609",
+            "object": "checkConnection/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/checkConnection",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://checkconnection-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738662226",
+            "object": "listNotifications/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/listNotifications",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://listnotifications-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159647082665",
+            "object": "beforeCreated/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/beforeCreated",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 7,
+        "uri": "https://beforecreated-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738827926",
+            "object": "beforeSignedIn/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/beforeSignedIn",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 7,
+        "uri": "https://beforesignedin-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738654084",
+            "object": "updateIncident/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/updateIncident",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://updateincident-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738652090",
+            "object": "listApps/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/listApps",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://listapps-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738668067",
+            "object": "listIncidents/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/listIncidents",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://listincidents-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738617017",
+            "object": "getOperations/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/getOperations",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://getoperations-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "runtime": "nodejs22",
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com",
+        "source": {
+          "storageSource": {
+            "bucket": "gcf-v2-sources-317759361800-us-central1",
+            "generation": "1791159738653335",
+            "object": "markNotificationRead/function-source.zip"
+          }
+        }
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/markNotificationRead",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "timeoutSeconds": 30,
+        "uri": "https://marknotificationread-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    }
+  ],
+  "exactAllowlistVerified": true,
+  "runtimeIdentityVerified": true,
+  "allActive": true
+}

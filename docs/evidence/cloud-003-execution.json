@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-10-04T22:33:58.370Z",
+  "candidateHash": "6bc4bba8d41ac9328945f2c897f71995187df6076282391db25984131f2f90bf",
+  "decision": "BLOCKED",
+  "verified": [
+    "Two dedicated Firebase web apps",
+    "Two us-central1 delete-protected databases",
+    "Both exact deployed Rules hashes and anonymous403",
+    "Both runtime accounts with only own-project datastore.user and firebaseauth.users.get role",
+    "Production Google-only signup/deletion lock preserved",
+    "48 unit tests rerun PASS; Node syntax checks PASS"
+  ],
+  "blockers": [
+    {
+      "operation": "billing link, both projects",
+      "code": "FAILED_PRECONDITION",
+      "reason": "Cloud billing quota exceeded",
+      "account": "01428C-358437-2361F8"
+    },
+    {
+      "operation": "runtime API enablement",
+      "code": "FAILED_PRECONDITION",
+      "reason": "UREQ_PROJECT_BILLING_NOT_FOUND"
+    },
+    {
+      "operation": "USD10 filtered budget create",
+      "code": "INVALID_ARGUMENT",
+      "reason": "Request contains an invalid argument; currency codes observed USD; root cause not verified; no budget created"
+    }
+  ],
+  "notCompleted": [
+    "Identity Platform (billing required by official initializeAuth API)",
+    "Staging Auth initialization/Google configuration (CONFIGURATION_NOT_FOUND)",
+    "Storage/App Check",
+    "Hosting/Functions deployment"
+  ],
+  "costStatus": "No spend data verified; alert not active; USD10 is not a hard cap",
+  "approvalRef": "docs/approval-SM-CLOUD-003.md"
+}

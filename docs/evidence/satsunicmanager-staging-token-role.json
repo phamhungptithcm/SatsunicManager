@@ -1,0 +1,9 @@
+{
+  "etag": "BwZdC1Nzveo=",
+  "includedPermissions": [
+    "firebaseauth.users.get"
+  ],
+  "name": "projects/satsunicmanager-staging/roles/managerTokenVerifier",
+  "stage": "GA",
+  "title": "Manager token verifier"
+}

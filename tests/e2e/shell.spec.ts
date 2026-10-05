@@ -1,0 +1,185 @@
+import { test, expect, type Page } from '@playwright/test';
+// Auth emulator's optional Material CDN can block its own event handlers when offline.
+// Skip only emulator cosmetic assets; no app/API/Auth response is mocked.
+test.beforeEach(async ({context}) => {
+  await context.route('https://unpkg.com/material-components-web@10/**', route => route.fulfill({body:'',contentType:route.request().url().endsWith('.css')?'text/css':'application/javascript'}));
+  await context.route('https://fonts.googleapis.com/**', route => route.fulfill({body:'',contentType:'text/css'}));
+});
+async function login(page:Page,email='hunpeo97@gmail.com') {
+  await page.goto('/');
+  const popupPromise=page.waitForEvent('popup');
+  await page.getByRole('button',{name:'Đăng nhập bằng Google'}).click();
+  const popup=await popupPromise;
+  await popup.waitForFunction(() => typeof (window as unknown as {toggleForm?:unknown}).toggleForm === 'function');
+  await popup.getByRole('button',{name:'Add new account'}).click();
+  await popup.locator('#email-input').fill(email);
+  await popup.getByRole('button',{name:/Sign in/i}).click();
+  await expect(page.getByRole('heading',{name:'Tổng quan',exact:true})).toBeVisible();
+}
+test('real emulator auth, registry, filters, navigation, layout and logout',async({page})=>{
+  await login(page);
+  await expect(page.getByText('EMULATOR — danh tính kiểm thử, không phải phiên production')).toBeVisible();
+  for(const app of ['HunpeoLabs','SatsunicSEO','SatsunicCode','SatsunicPlan','BeFam','SatsunicGo','SatsunicMec']) await expect(page.getByRole('heading',{name:app,exact:true})).toBeVisible();
+  await page.getByRole('combobox',{name:'Ứng dụng',exact:true}).selectOption('satsuniccode');
+  await expect(page).toHaveURL(/app=satsuniccode/);
+  await expect(page.getByRole('heading',{name:'HunpeoLabs',exact:true})).toHaveCount(0);
+  await page.getByLabel('Múi giờ').selectOption('Asia/Ho_Chi_Minh');
+  await page.getByRole('link',{name:'Tích hợp',exact:true}).click();
+  await expect(page).toHaveURL(/integrations.*timezone=Asia/);
+  await page.goBack(); await expect(page).toHaveURL(/timezone=Asia/);
+  await page.getByLabel('Ngôn ngữ').selectOption('en');
+  await expect(page.getByRole('heading',{name:'Overview',exact:true})).toBeVisible();
+  await page.getByLabel('Switch light/dark theme').click();
+  await expect(page.locator('.workspace')).toHaveClass(/dark/);
+  await page.getByRole('combobox',{name:'Applications',exact:true}).selectOption('all');
+  const pilot=page.locator('.app-row').filter({has:page.getByRole('heading',{name:'HunpeoLabs',exact:true})});
+  const responsePromise=page.waitForResponse(response=>response.url().endsWith('/checkConnection'));
+  await pilot.getByRole('button',{name:'Test connection',exact:true}).click();
+  const response=await responsePromise;
+  expect(response.status(),await response.text()).toBe(200);
+  await expect(page.locator('.blog-toast')).toContainText('Check results saved.',{timeout:15000});
+  await page.locator('.blog-toast').hover();
+  await expect(page.locator('.blog-toast')).toHaveAttribute('data-paused','true');
+  await page.getByRole('button',{name:'Dismiss notification'}).focus();
+  await page.mouse.move(0,0);
+  await expect(page.locator('.blog-toast')).toHaveAttribute('data-paused','true');
+  await page.getByRole('button',{name:'Dismiss notification'}).click();
+  await expect(page.locator('.blog-toast')).toHaveCount(0);
+  await expect(pilot.getByText('Partial check',{exact:true})).toBeVisible({timeout:15000});
+  await expect(pilot.getByText('Checks passed · HTTP 200',{exact:true})).toBeVisible();
+  await expect(pilot.getByText('Check failed · HTTP 404',{exact:true})).toBeVisible();
+  await page.locator('main').evaluate(el=>el.scrollIntoView());
+  const sidebar=await page.locator('.sidebar').evaluate(el=>getComputedStyle(el).position);
+  const topbar=await page.locator('.topbar').evaluate(el=>getComputedStyle(el).position);
+  expect(sidebar).toBe('fixed'); expect(topbar).toBe('fixed');
+  await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+  const finalRow=await page.locator('.app-row').last().boundingBox();
+  const composer=await page.getByRole('complementary',{name:'Ask SatsunicManager',exact:true}).boundingBox();
+  expect(finalRow!.y+finalRow!.height).toBeLessThan(composer!.y);
+  await page.getByLabel('Switch light/dark theme').click();
+  await page.locator('#main').focus(); await page.evaluate(()=>window.scrollTo(0,0));
+  const inset=await page.getByRole('complementary',{name:'Ask SatsunicManager',exact:true}).locator('form').evaluate(el=>innerHeight-el.getBoundingClientRect().bottom);expect(inset).toBeCloseTo(20,0);await page.screenshot({path:'docs/evidence/shell-desktop.png'});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  expect(await page.locator('.registry').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
+  await page.getByLabel('Sign out',{exact:true}).click();
+  await expect(page.getByRole('button',{name:'Sign in with Google'})).toBeVisible();
+  await expect(page.locator('.app-row')).toHaveCount(0);
+});
+test('mobile shell has no horizontal overflow and drawer works',async({page})=>{
+  await page.setViewportSize({width:390,height:844}); await login(page,'phamhung.pitit@gmail.com');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  await page.getByRole('button',{name:'Mở điều hướng',exact:true}).click();
+  await page.getByRole('link',{name:'Ứng dụng',exact:true}).click();
+  await expect(page.getByRole('heading',{name:'Ứng dụng',exact:true,level:1})).toBeVisible();
+  await expect(page.locator('.scrim')).toHaveCount(0);
+  await expect.poll(()=>page.locator('.sidebar').evaluate(el=>el.getBoundingClientRect().right)).toBeLessThanOrEqual(0);
+  await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
+  await expect(page.locator('.product-footer')).toContainText('Product by HunpeoLabs');
+  await page.screenshot({path:'docs/evidence/shell-mobile-bottom.png'});
+  await page.locator('#main').focus(); await page.evaluate(()=>window.scrollTo(0,0));
+  await page.screenshot({path:'docs/evidence/shell-mobile.png'});
+});
+test('outsider sees no private data',async({page})=>{
+  await page.goto('/'); const popupPromise=page.waitForEvent('popup');
+  await page.getByRole('button',{name:'Đăng nhập bằng Google'}).click(); const popup=await popupPromise;
+  await popup.waitForFunction(() => typeof (window as unknown as {toggleForm?:unknown}).toggleForm === 'function');
+  await popup.getByRole('button',{name:'Add new account'}).click(); await popup.locator('#email-input').fill('outsider@example.test'); await popup.getByRole('button',{name:/Sign in/i}).click();
+  await expect(page.getByRole('alert')).toBeVisible(); await expect(page.locator('.app-row')).toHaveCount(0);
+});
+
+test('composer keeps questions local and restores keyboard focus',async({page})=>{
+ await login(page);
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const sent:string[]=[];
+ page.on('request',request=>{if(request.method()==='POST')sent.push(request.url());});
+ const idle=page.getByRole('complementary',{name:'Hỏi SatsunicManager',exact:true});
+ const input=idle.getByRole('textbox',{name:'Hỏi SatsunicManager',exact:true});
+ await input.fill('Tình trạng hệ thống hôm nay?');
+ await input.press('Enter');
+ const dialog=page.getByRole('dialog');
+ await expect(dialog).toBeVisible();
+ await expect(dialog.getByRole('status')).toHaveText('Chưa kết nối AI. Câu hỏi chưa được gửi.');
+ await expect(dialog.getByRole('textbox')).toBeFocused();await page.screenshot({path:'docs/evidence/composer-dialog-demo.png'});
+ await page.keyboard.press('Escape');
+ await expect(dialog).not.toBeVisible();
+ await expect(input).toBeFocused();
+ await idle.getByRole('button',{name:'Ẩn khung hỏi',exact:true}).click();
+ const launcher=page.getByRole('button',{name:'Hỏi SatsunicManager',exact:true});
+ await expect(launcher).toBeFocused();await page.screenshot({path:'docs/evidence/composer-hidden-demo.png'});
+ await launcher.click();
+ await expect(dialog).toBeVisible();
+ await expect(dialog.getByText('Tình trạng hệ thống hôm nay?',{exact:true})).toBeVisible();
+ await dialog.getByRole('button',{name:'Đóng hội thoại',exact:true}).click();
+ await expect(input).toBeFocused();
+ expect(sent.filter(url=>!/listApps|bootstrapOwner/.test(url))).toEqual([]);
+});
+
+test('incident source signal and workflow stay separate, inbox read persists',async({page})=>{
+ const {initializeApp,deleteApp}=await import('firebase-admin/app');
+ const {getFirestore}=await import('firebase-admin/firestore');
+ if(process.env.FIRESTORE_EMULATOR_HOST&&process.env.FIRESTORE_EMULATOR_HOST!=='127.0.0.1:28080')throw Error('Dedicated emulator only');
+ process.env.FIRESTORE_EMULATOR_HOST='127.0.0.1:28080';
+ const app=initializeApp({projectId:'demo-satsunicmanager'},'browser-incident-fixture');const db=getFirestore(app);
+ const {createHash}=await import('node:crypto');const id=createHash('sha256').update(`browser-${Date.now()}`).digest('hex');const now=new Date().toISOString();
+ try{
+ await db.doc(`incidents/${id}`).set({id,appId:'hunpeolabs',environment:'production',sourceId:'browser-fixture',sourceVersion:1,sourceState:'firing',workflow:'open',severity:'P2',title:'EMULATOR BROWSER INCIDENT',occurredAt:now,updatedAt:now,revision:1,evidence:[]});
+ await db.doc(`notifications/${id}`).set({id,incidentId:id,appId:'hunpeolabs',environment:'production',severity:'P2',title:'EMULATOR BROWSER INCIDENT',occurredAt:now});
+ await login(page);await page.getByRole('link',{name:'Sự cố',exact:true}).click();
+ const row=page.locator('.incident-row').filter({has:page.getByRole('heading',{name:'EMULATOR BROWSER INCIDENT',exact:true})});
+ await expect(row).toContainText('Đang lỗi');await row.getByRole('button',{name:'Xử lý',exact:true}).click();await page.getByLabel('Ghi chú',{exact:true}).fill('EMULATOR acknowledgement');await page.getByRole('button',{name:'Lưu xử lý',exact:true}).click();await expect(row).toContainText('Đã nhận');await expect(row).toContainText('Đang lỗi');
+ await page.getByRole('link',{name:'Thông báo',exact:true}).first().click();const notification=page.locator('.incident-row').filter({has:page.getByRole('heading',{name:'EMULATOR BROWSER INCIDENT',exact:true})});await notification.getByRole('button',{name:'Đánh dấu đã đọc',exact:true}).click();await expect(notification.getByRole('button',{name:'Đã đọc',exact:true})).toBeDisabled();
+ await page.reload();await expect(page.getByRole('button',{name:'Đăng nhập bằng Google',exact:true})).toBeVisible();await login(page);await page.getByRole('link',{name:'Thông báo',exact:true}).first().click();await expect(notification.getByRole('button',{name:'Đã đọc',exact:true})).toBeDisabled();await page.screenshot({path:'docs/evidence/inbox-workflow.png'});
+ }finally{await db.doc(`incidents/${id}`).delete();await db.doc(`notifications/${id}`).delete();await deleteApp(app);}
+});
+
+test('operations and finance show missing official sources without manual entry',async({page})=>{
+ await login(page);await page.getByRole('link',{name:'Vận hành',exact:true}).click();await expect(page.getByRole('heading',{name:'Vận hành',exact:true,level:1})).toBeVisible();const responsePromise=page.waitForResponse(response=>response.url().endsWith('/getOperations')&&response.request().postDataJSON()?.data?.scope?.appId==='befam',{timeout:30000});await page.getByRole('combobox',{name:'Ứng dụng',exact:true}).selectOption('befam');await expect(page).toHaveURL(/\/operations\?app=befam/);const response=await responsePromise;expect(response.status(),await response.text()).toBe(200);await expect(page.locator('.operation-section')).toContainText('Chưa kết nối',{timeout:15000});
+ await page.getByRole('link',{name:'Tài chính',exact:true}).click();await expect(page.getByRole('heading',{name:'Chưa kết nối nguồn tài chính',exact:true})).toBeVisible();await expect(page.getByRole('textbox',{name:'CSV',exact:true})).toHaveCount(0);await page.screenshot({path:'docs/evidence/finance-unconfigured.png'});
+});
+
+// Actual callable and Firestore persistence; only the dedicated demo is allowed.
+test('owner adds an app, sees it after refresh, and its source remains unverified',async({page})=>{
+ const {initializeApp,deleteApp}=await import('firebase-admin/app');
+ const {getFirestore}=await import('firebase-admin/firestore');
+ if(process.env.FIRESTORE_EMULATOR_HOST!=='127.0.0.1:28080'||process.env.GCLOUD_PROJECT!=='demo-satsunicmanager')throw Error('Dedicated emulator only');
+ const app=initializeApp({projectId:'demo-satsunicmanager'},'browser-app-fixture');const db=getFirestore(app);
+ const name=`Emulator app ${Date.now()}`,id=name.toLowerCase().replaceAll(' ','-');
+ try{
+  await login(page);await page.getByRole('link',{name:'Ứng dụng',exact:true}).click();
+  await page.getByRole('button',{name:'Thêm ứng dụng',exact:true}).click();
+  await page.getByLabel('Tên ứng dụng',{exact:true}).fill(name);
+  await page.getByLabel('Dự án Google Cloud (nếu có)',{exact:true}).fill('unverified-project');
+  const responsePromise=page.waitForResponse(response=>response.url().endsWith('/addApp'));
+  await page.getByRole('button',{name:'Thêm',exact:true}).click();
+  const response=await responsePromise;expect(response.status(),await response.text()).toBe(200);
+  await expect(page.getByRole('heading',{name,exact:true})).toBeVisible();
+  expect((await db.doc(`appDefinitions/${id}`).get()).get('mappingVerified')).toBe(false);
+  await page.getByRole('combobox',{name:'Ứng dụng',exact:true}).selectOption(id);
+  await page.getByRole('button',{name:'Làm mới',exact:true}).click();
+  await expect(page.getByRole('heading',{name,exact:true})).toBeVisible();
+  const row=page.locator('.app-row').filter({has:page.getByRole('heading',{name,exact:true})});
+  await expect(row.getByRole('button',{name:'Kiểm tra kết nối',exact:true})).toBeDisabled();
+ }finally{await db.doc(`appDefinitions/${id}`).delete();await deleteApp(app);}
+});
+
+test('composer IME, backdrop pairing and mobile capsule remain usable',async({page})=>{
+ await login(page);await page.setViewportSize({width:390,height:844});
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const idle=page.getByRole('complementary',{name:'Hỏi SatsunicManager',exact:true});
+ const input=idle.getByRole('textbox');
+ await input.fill('Câu hỏi thử nghiệm');
+ await input.dispatchEvent('keydown',{key:'Enter',code:'Enter',isComposing:true,bubbles:true,cancelable:true});
+ const dialog=page.getByRole('dialog');await expect(dialog).not.toBeVisible();
+ await input.press('Enter');await expect(dialog).toBeVisible();
+ await expect(dialog.getByRole('textbox')).toBeFocused();
+ await page.screenshot({path:'docs/evidence/composer-mobile-dialog-demo.png'});
+ const box=await dialog.boundingBox();
+ expect(box!.x).toBeGreaterThanOrEqual(0);expect(box!.width).toBeLessThanOrEqual(390);
+ // A drag starting inside the panel and ending on backdrop must not collapse.
+ await page.mouse.move(box!.x+30,box!.y+30);await page.mouse.down();
+ await page.mouse.move(1,1);await page.mouse.up();await expect(dialog).toBeVisible();
+ await page.mouse.click(1,1);await expect(dialog).not.toBeVisible();
+ await expect(input).toBeFocused();
+ expect(await page.evaluate(()=>document.body.style.overflow)).not.toBe('hidden');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

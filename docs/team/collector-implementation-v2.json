@@ -1,0 +1,37 @@
+{
+  "revision": 2,
+  "knowledge_revision": 2,
+  "supersedes": "docs/team/collector-implementation-v1.json",
+  "sourceHashes": [
+    {
+      "path": "functions/src/sync/collector.ts",
+      "sha256": "1ef41b6ef4246eb70acc75a7ef921ea02c763928beeed38242c0afc9f9a77f9c"
+    },
+    {
+      "path": "tests/integration/collector.test.ts",
+      "sha256": "993610b2aa73e0348c49b7e53c2e31c618d1b5c1d624e325f1ea54c0a54c5ddf"
+    }
+  ],
+  "changes": [
+    "Failed base window now allows one fresh provider attempt per invocation using immutable lease-revision retry ID. Prior failed reports stay untouched. Successful retry writes per-window successfulRunId atomically; future retries dedup that successful ID.",
+    "Canonical scope ISO timestamps normalize fractional precision before base-window hashing. Numerical validated-ISO cursor comparisons reject malformed strings and wrong types.",
+    "Fenced preflight rejects gaps before provider reads; final successful transaction repeats gap/superseded guard. Contiguous or overlapping windows may advance watermark; disjoint windows cannot.",
+    "Per-window latest attempt status and overall attempted failure status preserve lastSuccessfulSnapshotId/checkpoint."
+  ],
+  "regressionsAuthored": [
+    "Failed source then same-window success invokes provider and retains exact failed report",
+    "Successful retry subsequently dedups no additional provider call",
+    "Disjoint window rejected before source read",
+    "Boundary .1Z/.100Z numerical equivalence accepted and canonical request dedups",
+    "Overlapping recovery accepted",
+    "Invalid and numeric persisted checkpoint rejected before reader"
+  ],
+  "review": "Read-only source self-review after changes: atomic tx read-before-write order, fresh lease fencing, immutable tx.create reports, protected successful references, checkpoint failure preservation, disabled identity gate reviewed. Independent lead final review required.",
+  "checks": "NOT_RUN: lead owns test/build/emulator/runtime; earlier suite mixed-candidate diagnostic only per lead acknowledgement.",
+  "productionReadiness": "NOT_READY; no new cloud/deploy/provider authority used",
+  "limitations": [
+    "No scheduling/backoff loop added; retry needs explicit invocation, never infinite loop.",
+    "Server checkpoint per selected compiled app-set; dynamic mapping does not grant new source access.",
+    "Collector remains disabled pending exact runtime deployed-principal readback."
+  ]
+}

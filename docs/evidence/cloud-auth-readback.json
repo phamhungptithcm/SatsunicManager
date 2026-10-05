@@ -1,0 +1,57 @@
+{
+  "projectId": "satsunicmanager",
+  "checkedAt": "2026-10-04T22:16:35.068Z",
+  "mode": "read-only public/non-secret auth metadata",
+  "checks": [
+    {
+      "name": "auth_config",
+      "status": 200,
+      "data": {
+        "name": "projects/317759361800/config",
+        "signIn": {},
+        "authorizedDomains": [
+          "satsunicmanager.firebaseapp.com",
+          "satsunicmanager.web.app"
+        ],
+        "subtype": "FIREBASE_AUTH",
+        "client": {
+          "permissions": {
+            "disabledUserSignup": true,
+            "disabledUserDeletion": true
+          }
+        },
+        "blockingFunctions": {}
+      },
+      "errorCode": null,
+      "errorMessage": null,
+      "reasons": []
+    },
+    {
+      "name": "google_provider",
+      "status": 200,
+      "data": {
+        "name": "projects/317759361800/defaultSupportedIdpConfigs/google.com",
+        "enabled": true,
+        "clientId": "317759361800-jfafsctsaoglk8elan06iipt7bp3cuj2.apps.googleusercontent.com"
+      },
+      "errorCode": null,
+      "errorMessage": null,
+      "reasons": []
+    },
+    {
+      "name": "providers",
+      "status": 200,
+      "data": {
+        "defaultSupportedIdpConfigs": [
+          {
+            "name": "projects/317759361800/defaultSupportedIdpConfigs/google.com",
+            "enabled": true
+          }
+        ]
+      },
+      "errorCode": null,
+      "errorMessage": null,
+      "reasons": []
+    }
+  ]
+}

@@ -1,0 +1,287 @@
+{
+  "schema_version": 1,
+  "task_id": "SM-LOCAL-004 + SM-REMOVE-STAGING-005",
+  "status": "BLOCKED",
+  "dimensions": {
+    "requirement_match": {
+      "status": "NOT_RUN",
+      "summary": "Approved SM-CLOUD-003 partially executed and verified; remaining paid setup blocked by billing quota, full master acceptance incomplete.",
+      "evidence_refs": [
+        "docs/evidence/cloud-setup.json",
+        "docs/evidence/cloud-auth-readback.json",
+        "docs/plans/SM-CLOUD-002.md",
+        "docs/plans/SM-CLOUD-003.md"
+      ]
+    },
+    "security": {
+      "status": "NOT_RUN",
+      "summary": "Both actual Identity Platform Google-only signup locks and App Check registration verified. Runtime identity import-order defect fixed with regression. Live auth/App Check token/blocking remains NOT_TESTED.",
+      "evidence_refs": [
+        "docs/evidence/cloud-auth-hardening.json",
+        "docs/evidence/cloud-auth-readback.json",
+        "docs/evidence/cloud-setup.json",
+        "docs/evidence/npm-audit-final.json"
+      ]
+    },
+    "code_quality": {
+      "status": "PASSED",
+      "summary": "Current compiler/lint/build/tests plus source-manifest/Git regressions; no silent exclusion of src/lib.",
+      "evidence_refs": [
+        "docs/evidence/checks.json",
+        "docs/production-readiness.md",
+        "docs/task-report.md",
+        ".ai/templates/product-content-review.md"
+      ]
+    },
+    "failure_paths": {
+      "status": "PASSED",
+      "summary": "Anonymous, outsider, disabled, changed role, stale revision, idempotency mismatch, SSRF and countdown cleanup verified.",
+      "evidence_refs": [
+        "docs/evidence/checks.json",
+        "docs/production-readiness.md",
+        "docs/task-report.md",
+        ".ai/templates/product-content-review.md"
+      ]
+    },
+    "error_handling": {
+      "status": "PASSED",
+      "summary": "Safe errors, durable notices, null source states and async cleanup reviewed.",
+      "evidence_refs": [
+        "docs/evidence/checks.json",
+        "docs/production-readiness.md",
+        "docs/task-report.md",
+        ".ai/templates/product-content-review.md"
+      ]
+    },
+    "production_readiness": {
+      "status": "BLOCKED",
+      "summary": "Billing quota, absent live blocking/deploy/auth/source data and rejected budget; required local delta pending. Overall NOT_READY."
+    },
+    "trade_offs": {
+      "status": "PASSED",
+      "summary": "Source reuse versus framework adapters; limited public probe coverage; explicit remaining risks.",
+      "evidence_refs": [
+        "docs/evidence/checks.json",
+        "docs/production-readiness.md",
+        "docs/task-report.md",
+        ".ai/templates/product-content-review.md"
+      ]
+    }
+  },
+  "findings": [
+    {
+      "severity": "High",
+      "location": "docs/plans/SM-CLOUD-002.md",
+      "status": "OPEN",
+      "problem": "Required live identity, cloud/source configuration and deployment evidence missing.",
+      "recommendation": "Approve scoped cloud plan, then verify staging before production."
+    },
+    {
+      "severity": "High",
+      "location": "docs/evidence/npm-audit-final.json",
+      "status": "OPEN",
+      "problem": "Development dependency audit retains 7 high advisories.",
+      "recommendation": "Resolve compatible upstream fixes or reviewed tooling risk disposition before release."
+    }
+  ],
+  "residual_risks": [
+    "Full accessibility acceptance not run",
+    "Governance native adapters missing; runtime CLI unavailable",
+    "Bundle performance budget not measured in production"
+  ],
+  "limitations": [
+    "Emulator authentication is not production Google One Tap",
+    "Real homepage200 is not backend health; readiness endpoint404",
+    "No production data, deployment, token usage or billed cost claims"
+  ],
+  "review_cycles": [
+    {
+      "cycle": 1,
+      "decision": "BLOCKED",
+      "findings": [
+        "Missing approval and validator consistency; subsequently fixed with human approval."
+      ]
+    },
+    {
+      "cycle": 2,
+      "decision": "BLOCKED",
+      "findings": [
+        "Refresh/recent auth, Node22 DNS, mobile composition fixed and verified; tooling advisories remain."
+      ]
+    },
+    {
+      "cycle": 3,
+      "decision": "BLOCKED",
+      "findings": [
+        "Access-role bootstrap fixed with regression; duplicate heading and screenshot timing fixed; candidate hash now includes source lib."
+      ]
+    },
+    {
+      "cycle": 4,
+      "decision": "BLOCKED",
+      "scope": "Approved SM-CLOUD-002 steps1\u20132 and current candidate",
+      "findings": [
+        "Auth quota header error resolved; config initialization verified separately after noop provisioning.",
+        "Reserved document read ID fixed; valid anonymous Firestore read returns403.",
+        "Gitignore src/lib exclusion fixed with manifest/Git regression tests.",
+        "Google-only + disabled signup/deletion and standard subtype verified.",
+        "Blocking/Storage/IAM/staging/billing/application deployment remain outside completed scope."
+      ]
+    },
+    {
+      "cycle": 7,
+      "status": "BLOCKED",
+      "candidateHash": "674ed6b30376e71b202ae45b07222b758c181360b26dcf1216fd60df360a12ce",
+      "summary": "Reviewed auth/server scope, transaction read-before-write, dedup/version ordering, access recheck, private inbox state, durable caps, bounded queries/indexes and exact staging deletion. Local checks pass; full end-to-end and production dimensions remain incomplete.",
+      "evidence": [
+        "docs/evidence/checks.json",
+        "docs/evidence/staging-removal-result.json",
+        "docs/evidence/emulator-tests.json",
+        "docs/evidence/verification-retries.json"
+      ]
+    },
+    {
+      "cycle": 8,
+      "decision": "BLOCKED",
+      "candidateHash": "6aefe3f3201d1e475691c67805155ff5378d086e719f97688fa74d9145deb2f6",
+      "scope": "SM-LIVE-006 backend bootstrap; expanded UI/master and new deltas separately blocked",
+      "reviewedDimensions": [
+        "requirements/approval",
+        "server auth/revocation/active owner access/App Check",
+        "server resource selection/metadata-only fields",
+        "money bounds/incident transactions/inbox privacy",
+        "bounded rate/deadline/pagination/partial-null semantics",
+        "pilot exact function selection",
+        "product language/reuse/current fixture states",
+        "production rollout/signup locks/managed agent/build risk"
+      ],
+      "findingsFixed": [
+        {
+          "finding": "SEO Monitoring rejects mixed resource-label AND/OR",
+          "fix": "Monitoring one_of selector preserves region and exact services; Logging syntax separate",
+          "evidence": [
+            "tests/unit/operations.test.ts",
+            "docs/evidence/live-operations-read.json"
+          ]
+        },
+        {
+          "finding": "Browser route rendering and asynchronous workflow timeout",
+          "fix": "Rendered heading/URL, preview API response200 and bounded60s multistep test; guards unchanged",
+          "evidence": "docs/evidence/checks.json"
+        },
+        {
+          "finding": "Pilot selection includes unapproved local exports if generic deploy used",
+          "fix": "scripts/cloud/deploy-pilot.mjs fixed10 selector plus candidate/doctor gate; no free arguments",
+          "evidence": "docs/plans/SM-LIVE-006.md"
+        }
+      ],
+      "withdrawnFinding": "QA-003 cursor: Shell caller key resets child state; reviewer ui-qa-v2 correction verified",
+      "checks": {
+        "unit": 59,
+        "approvalRegression": 7,
+        "rulesApi": 33,
+        "browser": 5,
+        "uiStateSmoke": "PASSED explicit demo fixtures; native zoom/screen-reader NOT_RUN"
+      },
+      "backendBootstrapReview": "PASSED for bounded approved closed-signup provisioning; not application or full production acceptance",
+      "blockingFindings": [
+        "Latest seven-app/official autosync request requires proposed SM-AUTO-007 approval and implementation",
+        "Composer100% reference parity missing; proposed SM-UI-008 approval required",
+        "Actual owner/App Check runtime/source/report/delivery verification absent",
+        "Full Product Language and accessibility acceptance incomplete",
+        "Development dependency advisories remain outside backend runtime dependency set"
+      ],
+      "residualRisks": [
+        "Existing build Compute identity Editor accepted explicitly for one pilot; no role expansion",
+        "CLI-managed Firebase/Eventarc service APIs/identities must read back",
+        "No working previous application revision or restore drill",
+        "Bundle performance budget not measured in production"
+      ],
+      "tokenUsage": "Unavailable",
+      "billedCost": "Unavailable",
+      "memoryCandidates": "None"
+    }
+  ],
+  "candidateHash": "18e6937b5acb14d3274ce893e87452e6d08b5b311712c58944e2c142a260257d",
+  "reviewedAt": "2026-10-05T01:08:37.982817+00:00",
+  "evidenceRefs": [
+    "docs/evidence/checks.json",
+    "docs/evidence/cloud-setup.json",
+    "docs/evidence/cloud-auth-readback.json",
+    "docs/evidence/cloud-auth-hardening.json",
+    "docs/evidence/cloud-003-execution.json",
+    "docs/evidence/satsunicmanager-staging-cloud-setup.json",
+    "docs/evidence/cloud-003-continuation.json",
+    "docs/evidence/verification-retries.json"
+  ],
+  "cycles": [
+    {
+      "cycle": 5,
+      "decision": "BLOCKED",
+      "summary": "Reviewed approved cloud diff; exact IAM, database protection, Rules hashes and anonymous403 pass. Billing link quota blocks paid setup; budget rejection unresolved. No application deployment or live owner auth acceptance."
+    },
+    {
+      "cycle": 6,
+      "status": "BLOCKED",
+      "finding": "Identity endpoints captured defaults before global options; dedicated runtime region/serviceAccount missing from blocking manifests",
+      "fixed": "Explicit identity options + missing configuration denial",
+      "verification": "Actual source entry point endpoint assertions + full current local/emulator/browser suite",
+      "remaining": "Billing quota, rejected budget, absent production acceptance, transient E2E unknown cause and reviewed delta for remaining local modules"
+    },
+    {
+      "cycle": 9,
+      "status": "BLOCKED",
+      "scope": "SM-UI-008 / SM-AUTO-007",
+      "findings": [
+        "Old five-app test expectations corrected to seven.",
+        "Composer retained question beside new scope; remount on scope change implemented.",
+        "Failed collector window prevented retry; correction in progress.",
+        "Collector could skip history or compare ISO precision lexically; correction in progress."
+      ],
+      "evidence": "Diagnostic suite:60 unit,40 Rules/API,6 browser pass; collector source changed during browser phase, fresh stable suite required.",
+      "production": "10 pilot functions ACTIVE; Hosting/owner AppCheck/automatic collection/external delivery unverified.",
+      "visualParity": "NOT_VERIFIED for all canonical reference states",
+      "runtimeLedger": "Unavailable; manual record only"
+    },
+    {
+      "cycle": 10,
+      "status": "BLOCKED",
+      "candidateHash": "18e6937b5acb14d3274ce893e87452e6d08b5b311712c58944e2c142a260257d",
+      "localChecks": "Stable candidate:60 unit,7 Python approval,41 Rules/API,6 browser PASSED; typecheck/lint/build/approval/secret scan PASSED; doctor BLOCKED without deployment acceptance/config.",
+      "fixedFindings": [
+        "Seven-app assertions aligned to approved names",
+        "Composer scope-change reset",
+        "Immutable failed attempts retry safely and successful windows deduplicate",
+        "Gap/overlap and malformed/precision ISO checkpoint guards",
+        "Initial capsule bottom inset20px restored and browser asserted"
+      ],
+      "reviewEvidence": [
+        "docs/team/collector-review-v2.json",
+        "docs/evidence/checks.json",
+        "docs/evidence/composer-dialog-demo.png",
+        "docs/evidence/composer-hidden-demo.png",
+        "docs/evidence/shell-desktop.png",
+        "docs/evidence/shell-mobile.png"
+      ],
+      "remaining": [
+        "Full canonical reference interaction/visual parity, native zoom and screen reader NOT_VERIFIED",
+        "Collector deployed identity/schedule not configured; disabled by default",
+        "Hosting, real owner/AppCheck, runtime sources and source-to-report acceptance unverified",
+        "Finance/analytics/billing official-source configuration and verified alert delivery absent",
+        "Tooling advisories and native governance runtime ledger unresolved"
+      ],
+      "production": "NOT_READY",
+      "tokenUsage": "Unavailable",
+      "billedCost": "Unavailable"
+    }
+  ],
+  "current_checkpoint": {
+    "candidateHash": "18e6937b5acb14d3274ce893e87452e6d08b5b311712c58944e2c142a260257d",
+    "sourceStableChecks": "All10 records same hash;9PASSED,doctorBLOCKED",
+    "deployment": "Ten pilot backend functions ACTIVE on historical releasecandidate6aefe3; newest local changes NOT_DEPLOYED; Hosting absent and signupclosed",
+    "production": "NOT_READY",
+    "runtimeLedger": "Unavailable; manual record only",
+    "memoryCandidates": "None"
+  },
+  "decision": "BLOCKED"
+}

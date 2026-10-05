@@ -1,0 +1,15 @@
+{
+  "status": "success",
+  "result": {
+    "@type": "type.googleapis.com/google.firebase.service.v1beta1.WebApp",
+    "name": "projects/satsunicmanager-staging/webApps/1:274705062317:web:5db2f6b528dc8e01656924",
+    "appId": "1:274705062317:web:5db2f6b528dc8e01656924",
+    "displayName": "SatsunicManager Staging",
+    "projectId": "satsunicmanager-staging",
+    "webId": "ZGQ2NmY2YzAtOTJkMy00NTMyLThkMTAtZTBlZWE3OTM5MzVl",
+    "apiKeyId": "31b55aeb-a16f-4145-94b5-848c111b058e",
+    "state": "ACTIVE",
+    "expireTime": "1970-01-01T00:00:00Z",
+    "etag": "1_553730f4-9c0a-4542-aea4-29129b63458f"
+  }
+}

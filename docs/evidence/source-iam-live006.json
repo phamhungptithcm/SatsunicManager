@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-05T00:12:31.438682+00:00",
+  "principal": "serviceAccount:manager-api@satsunicmanager.iam.gserviceaccount.com",
+  "mode": "read-only exact role/view bindings; other principals omitted",
+  "sources": [
+    {
+      "projectId": "hunpeolabs-prod",
+      "customRoleStatus": 0,
+      "permissions": [
+        "monitoring.timeSeries.list"
+      ],
+      "monitoringBindingVerified": true,
+      "loggingViewStatus": 0,
+      "loggingViewBindingVerified": true
+    },
+    {
+      "projectId": "satsunicseoextension",
+      "customRoleStatus": 0,
+      "permissions": [
+        "monitoring.timeSeries.list"
+      ],
+      "monitoringBindingVerified": true,
+      "loggingViewStatus": 0,
+      "loggingViewBindingVerified": true
+    },
+    {
+      "projectId": "satsunicplan",
+      "customRoleStatus": 0,
+      "permissions": [
+        "monitoring.timeSeries.list"
+      ],
+      "monitoringBindingVerified": true,
+      "loggingViewStatus": 0,
+      "loggingViewBindingVerified": true
+    }
+  ]
+}

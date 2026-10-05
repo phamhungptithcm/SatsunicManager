@@ -1,0 +1,12 @@
+# Foundation architecture and operations
+
+Browser -> Firebase Auth Google -> bootstrapOwner -> verified Firebase token with revocation -> transaction ownerBindings/ownerAccess/audit -> authorized shell. Each callable rechecks provider, audience, issuer and active ownerAccess. Recent Google auth is required for new owner creation and connection changes. Client writes are denied. Client access listener clears session/cache after revocation.
+
+listApps reads a fixed five-product registry. checkConnection validates strict input, revision and hashed idempotency key, acquires transaction/rate guard, calls only server-owned allowlisted HTTPS targets with public DNS validation/pinning, then rechecks authorization and saves results + audit atomically. All source snapshots retain partial/null state. Pending interrupted operations fail closed; operators must inspect audit/idempotency state instead of blindly replaying.
+
+Deployment boundaries: dedicated Manager production and staging, separate API and ingestion/report identities, scoped source viewer roles, no customer data writes. This foundation has no ingestion/report worker yet. Runtime credential acquisition uses platform identities; credentials are never embedded in the frontend or repository.
+
+Runbook: if UI configuration is missing, leave sign-in disabled. If a source check partially fails, inspect per-capability result and last complete success, not merely homepage status. If authorization fails, sign in again; do not alter Rules. If deployment doctor fails, inspect cloud plan/config/readback evidence and keep deployment blocked. Rollback requires a previously verified artifact; none exists yet. Do not delete cloud resources or financial data as remediation.
+
+
+Cloud checkpoint: production project satsunicmanager has one verified web app and default Firestore native us-central1. Auth standard is initialized and Google-only enabled, but signup/self-deletion locked and localhost unauthorized. Runtime Web config is not published, because App Check, service identity and deployed callables/blocking triggers are absent. Firestore Rules active source was downloaded and hash-matched, with a real unauthenticated403 read. Storage Rules have only demo test evidence because no real bucket exists. Never interpret the SDK's default bucket name as existing infrastructure. No Identity Platform upgrade or billing link has occurred.

@@ -1,0 +1,126 @@
+{
+  "revision": 1,
+  "briefHash": "5702cfe85ca49486423efc2640259f87a2b9b12e7e11de7130fa858e6cfd67b3",
+  "approval": "docs/approval-SM-UI-008.md",
+  "observedAt": "2026-10-05T00:26:54.719133+00:00",
+  "mode": "Approved isolated local implementation; lead owns integration/tests/build/runtime",
+  "evidence": [
+    {
+      "path": "docs/team/brief-v2.json",
+      "sha256": "5702cfe85ca49486423efc2640259f87a2b9b12e7e11de7130fa858e6cfd67b3"
+    },
+    {
+      "path": "docs/approval-SM-UI-008.md",
+      "sha256": "f07c1e74843e2333a5c527933986a9ea64f25201396cbeaf95979cfcde36e294"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/components/ask-hunpeolabs.tsx",
+      "sha256": "e8e9dfca5fff1641441fbe3bf83db9065cd752cfa5e84f467dedc8b940eff80e"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/HunpeoLabs/components/ask-hunpeolabs.module.css",
+      "sha256": "9cf59755f6a38d2f0a81560fde21f53e1af87e410e953fff60ced18b98ecc147"
+    },
+    {
+      "path": "apps/web/src/features/conversation/AskManager.tsx",
+      "sha256": "50913c36b1036e2d09e3f8f7849b5950855b34449ff3f344df19bd05f7fbe81d"
+    },
+    {
+      "path": "apps/web/src/features/conversation/AskManager.module.css",
+      "sha256": "b19e911cab9c3787e54917ca06ea41cf9a51f9a3bc588cf630ad757cbc5db06d"
+    }
+  ],
+  "api": {
+    "export": "AskManager",
+    "props": {
+      "locale": "'vi'|'en'",
+      "scopeLabel": "string"
+    },
+    "integration": "Lead replace old shell composer; own shell placement/content clearance and key by identity/scope if session question retention should reset."
+  },
+  "sourceAttribution": {
+    "reference": "HunpeoLabs AskHunpeoLabs presentation and CSS",
+    "css": "Reference stylesheet retained verbatim after attribution comment, plus isolated scope label rule. Public profile/answer/suggestions selectors currently unused; no public content imported.",
+    "component": "Reference geometry/motion/icon/dialog/backdrop/IME/hide/reopen interaction adapted; React only dependency."
+  },
+  "implemented": [
+    "Canonical 76px capsule/50px radius/50px circular controls and 64px/44px mobile rules",
+    "Canonical dialog layout,360ms open/320ms close and hide,launcher56px,reopen hint timing,focus halo/button rings and reduced-motion",
+    "Pointer backdrop down/up pair,Escape handling,modal body scroll lock and restored previous overflow",
+    "Local controlled max1000 input; IME Enter guard; trimmed submit opens blocked question and preserves input",
+    "Focus chat input on open; idle input on close/reopen; launcher on hide; animation/timer/frame cleanup",
+    "Scope label outside canonical capsule and in conversation; localized truthful disconnected/service notice",
+    "No fetch, Firebase, credentials,provider,public FAQ/retrieval/routes,answer success,pending retrieval,rate-limit or stop-response claims"
+  ],
+  "intentionalDomainAdaptations": [
+    "Header/accessibility identify SatsunicManager",
+    "Reference public sales suggestions/privacy/contact and published answer presentation are omitted because unsupported in Manager",
+    "No busy/stop/stream/retry network states; a local submitted question always shows AI unconnected and unsent",
+    "No false Google processing notice",
+    "One local submitted question replaces prior local submitted question; no unconnected backend conversation history invented"
+  ],
+  "productContentReview": {
+    "platform": "Responsive web; native form,input,buttons,dialog; Apple-derived human principles only",
+    "inventory": [
+      "Ask SatsunicManager/H\u1ecfi SatsunicManager",
+      "Send question/G\u1eedi c\u00e2u h\u1ecfi",
+      "Close conversation/\u0110\u00f3ng h\u1ed9i tho\u1ea1i",
+      "Hide Ask SatsunicManager/\u1ea8n khung h\u1ecfi",
+      "Continue conversation/Ti\u1ebfp t\u1ee5c h\u1ed9i tho\u1ea1i",
+      "Conversation with SatsunicManager/H\u1ed9i tho\u1ea1i v\u1edbi SatsunicManager",
+      "Ask anything... placeholder",
+      "Ask Anything launcher title/hint",
+      "AI is not connected. Your question has not been sent./Ch\u01b0a k\u1ebft n\u1ed1i AI. C\u00e2u h\u1ecfi ch\u01b0a \u0111\u01b0\u1ee3c g\u1eedi.",
+      "Questions stay in this session and are not sent to an AI service./C\u00e2u h\u1ecfi ch\u1ec9 \u0111\u01b0\u1ee3c gi\u1eef trong phi\u00ean n\u00e0y; ch\u01b0a \u0111\u01b0\u1ee3c g\u1eedi \u0111\u1ebfn d\u1ecbch v\u1ee5 AI.",
+      "Caller-provided scopeLabel",
+      "SatsunicManager heading"
+    ],
+    "states": [
+      "idle",
+      "focused",
+      "blank submit disabled",
+      "typed",
+      "expanded blocked",
+      "closing",
+      "idle returning",
+      "hidden",
+      "launcher emerging/hint",
+      "resume",
+      "reduced motion"
+    ],
+    "principles": {
+      "Purpose": "Source: ask in current scope with explicit unconnected state; rendered verification NOT_RUN",
+      "Agency": "Source: local input preserved,hide/reopen/close/resume,focus recovery; rendered verification NOT_RUN",
+      "Responsibility": "Source: no question transport or invented answer; unconnected disclosure; rendered verification NOT_RUN",
+      "Familiarity": "Source: native web form/dialog and canonical source controls; rendered verification NOT_RUN",
+      "Flexibility": "Source: vi/en,IME,mobile,safearea,reducedmotion; keyboard/zoom/screenreader verification NOT_RUN",
+      "Simplicity": "Source: no unsupported suggestions/provider routes; progressive conversation; rendered verification NOT_RUN",
+      "Craft": "Source: copied reference geometry/motion and cleanup; compiler/browser verification NOT_RUN",
+      "Delight": "Source: reference motion with reducedmotion; actual motion comparison NOT_RUN"
+    },
+    "decision": "BLOCKED until lead rendered comparison and mandatory current review"
+  },
+  "validation": {
+    "sourceReview": "No network/provider/auth imports; handlers reviewed for IME,backdrop,cleanup and local blocked semantics",
+    "typecheck": "NOT_RUN per lead ownership",
+    "lint": "NOT_RUN per lead ownership",
+    "build": "NOT_RUN per lead ownership",
+    "browser": "NOT_RUN per lead ownership",
+    "hundredPercentParity": "NOT_VERIFIED"
+  },
+  "leadChecks": [
+    "Integrate shell; remove old composer styles/caller refs only in approved lead scope",
+    "Run compiler/lint and fix reported issues in owned component through coordination",
+    "Browser submit local question: no network request,dialog truthful block,input preserved",
+    "Keyboard/IME/tab/Escape/backdrop/pointercancel,rapidclose/unmount/hide/reopen focus",
+    "Compare reference idle/focus/dialog/hide/launcher/resume desktop/mobile,motion/reducedmotion,safearea200percent zoom",
+    "Ensure fixed canonical960px composer never hides sidebar action/final row; Manager dark theme parity disposition needed because reference white fixed design",
+    "Refresh exact candidate evidence and full Product Language/final review before handoff"
+  ],
+  "residualRisks": [
+    "Source faithful presentation not proven100percent without actual comparison",
+    "Canonical source fixed screen center differs from prior sidebar-aligned Manager host placement; lead owns layout acceptance",
+    "No pending/error/stop/answered provider state can be truthfully exercised while AI disconnected"
+  ],
+  "memoryCandidates": "None"
+}

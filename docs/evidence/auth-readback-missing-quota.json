@@ -1,0 +1,37 @@
+{
+  "projectId": "satsunicmanager",
+  "checkedAt": "2026-10-04T23:51:48.786Z",
+  "mode": "read-only public/non-secret auth metadata",
+  "checks": [
+    {
+      "name": "auth_config",
+      "status": 403,
+      "data": null,
+      "errorCode": "PERMISSION_DENIED",
+      "errorMessage": "Your application is authenticating by using local Application Default Credentials. The identitytoolkit.googleapis.com API requires a quota project, which is not set by default. To learn how to set your quota project, see https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds .",
+      "reasons": [
+        "SERVICE_DISABLED"
+      ]
+    },
+    {
+      "name": "google_provider",
+      "status": 403,
+      "data": null,
+      "errorCode": "PERMISSION_DENIED",
+      "errorMessage": "Your application is authenticating by using local Application Default Credentials. The identitytoolkit.googleapis.com API requires a quota project, which is not set by default. To learn how to set your quota project, see https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds .",
+      "reasons": [
+        "SERVICE_DISABLED"
+      ]
+    },
+    {
+      "name": "providers",
+      "status": 403,
+      "data": null,
+      "errorCode": "PERMISSION_DENIED",
+      "errorMessage": "Your application is authenticating by using local Application Default Credentials. The identitytoolkit.googleapis.com API requires a quota project, which is not set by default. To learn how to set your quota project, see https://cloud.google.com/docs/authentication/adc-troubleshooting/user-creds .",
+      "reasons": [
+        "SERVICE_DISABLED"
+      ]
+    }
+  ]
+}

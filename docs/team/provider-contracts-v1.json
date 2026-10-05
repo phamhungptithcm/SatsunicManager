@@ -1,0 +1,132 @@
+{
+  "revision": 1,
+  "assignment": "discovery",
+  "briefHash": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf",
+  "scope": "Official public documentation research only; no merchant credentials, live data requests, paid APIs, remote mutation or adapter changes",
+  "checkedAt": "2026-10-04",
+  "providers": [
+    {
+      "provider": "Lemon Squeezy",
+      "sources": [
+        "https://docs.lemonsqueezy.com/api/orders/list-all-orders",
+        "https://docs.lemonsqueezy.com/api/orders/the-order-object",
+        "https://docs.lemonsqueezy.com/api/subscription-invoices/the-subscription-invoice-object",
+        "https://docs.lemonsqueezy.com/help/webhooks/signing-requests",
+        "https://docs.lemonsqueezy.com/help/webhooks/event-types",
+        "https://docs.lemonsqueezy.com/help/getting-started/fees"
+      ],
+      "supported": "Paginated GET /v1/orders; order totals/taxes/refunded amounts, currency and test_mode; subscription invoices separate lifecycle source. Merchant store/product/variant attribution required.",
+      "auth": "Bearer API key; no credential was accessed and no read-only key scope asserted.",
+      "backfill": "List existing orders with pagination and store filter; no invented date-filter or retention guarantee. Reconcile invoices without double-counting initial purchase.",
+      "webhookSignature": "X-Signature HMAC-SHA256 over raw request body with signing secret; timing-safe comparison. Read-only scope does not authorize webhook registration.",
+      "refund": "Full/partial refund status and refunded_amount; order_refunded event. Observing refunds is distinct from issuing refunds.",
+      "netFees": "Order subtotal/tax/total/refund fields are not payout net or provider fee ledger. No payout reporting endpoint verified in API reference inspected. Fees vary; never derive actual fees from generic pricing.",
+      "cost": "API request monetary charge not established; merchant/platform/payout fees exist. Runtime cost separate.",
+      "blockers": [
+        "Approved merchant reporting authority and server key access absent",
+        "Store and product mapping unverified",
+        "Net settlement/fee source unresolved"
+      ]
+    },
+    {
+      "provider": "payOS",
+      "sources": [
+        "https://payos.vn/docs/api/",
+        "https://payos.vn/docs/sdks/back-end/node/",
+        "https://payos.vn/docs/du-lieu-tra-ve/webhook/"
+      ],
+      "supported": "GET /v2/payment-requests/{id} reports known payment-link information/transactions. Public docs also list payout APIs; payouts are outbound disbursement operations, not aggregate incoming sales reports.",
+      "auth": "x-client-id and x-api-key; SDK initialization also requires checksum key.",
+      "backfill": "Known order/link identifiers can be reconciled; no aggregate inbound transaction enumeration/reporting endpoint verified. Historical identifier inventory and retention are unresolved.",
+      "webhookSignature": "Use official SDK webhooks.verify against checksum key; implement exact documented canonicalization, not assumed raw-body Lemon signing.",
+      "refund": "Cancel payment link is not refund. No inbound refund reporting contract verified.",
+      "netFees": "Payment amount/status cannot prove bank settlement net, fees or profit. Payout fee estimate belongs to outbound disbursement and must not be used as incoming payment fees.",
+      "cost": "Pricing/merchant fees not verified; no paid or payout call authorized.",
+      "blockers": [
+        "Merchant reporting authority absent",
+        "Known payment identifiers and app mapping unresolved",
+        "Aggregate revenue/backfill/fees/refund source requires provider confirmation"
+      ]
+    },
+    {
+      "provider": "Apple native IAP",
+      "sources": [
+        "https://developer.apple.com/documentation/appstoreconnectapi/get-v1-financereports",
+        "https://developer.apple.com/help/app-store-connect/getting-paid/download-financial-reports/",
+        "https://developer.apple.com/documentation/appstoreconnectapi/generating-tokens-for-api-requests",
+        "https://developer.apple.com/documentation/appstoreserverapi/signedpayload"
+      ],
+      "supported": "App Store Connect financeReports API supplies financial report files; separate from purchase verification/server transaction history. Apple finance API page is JS-only in browser extraction; endpoint corroborated by official indexed page.",
+      "auth": "App Store Connect API uses signed ES256 JWT; key role/vendor number and financial reporting permission must be verified before access.",
+      "backfill": "Period-based available report files; no universal retention guarantee asserted. Fiscal reporting periods and region currencies require explicit normalization.",
+      "webhookSignature": "Server Notifications v2 signedPayload is JWS; verify certificate/signature and environment/app identity. Finance reports do not use webhook signatures.",
+      "refund": "Reconcile report adjustments/refunds and notification lifecycle; transaction entitlement state is not settled financial proceeds. Exact finance schema still needs bounded verification.",
+      "netFees": "Use actual financial report schema/proceeds rather than universal commission assumptions; fees/net fields not fully verified in this pass.",
+      "cost": "API request pricing unverified; developer program/commission/runtime costs are distinct.",
+      "blockers": [
+        "Reporting key authority/vendor/app mapping absent",
+        "Financial report field schema needs source verification"
+      ]
+    },
+    {
+      "provider": "Google Play native IAP",
+      "sources": [
+        "https://support.google.com/googleplay/android-developer/answer/6135870",
+        "https://developers.google.com/android-publisher/voided-purchases",
+        "https://developer.android.com/google/play/billing/rtdn-reference",
+        "https://docs.cloud.google.com/pubsub/docs/authenticate-push-subscriptions"
+      ],
+      "supported": "Official monthly earnings reports in developer GCS bucket support programmatic download with service-account reporting permissions. This is automated ingestion of official files, not a manual CSV user workflow. Android Publisher purchase validation/RTDN are separate from financial reporting.",
+      "auth": "Service account invited to Play Console with report permissions; verified developer bucket/package required.",
+      "backfill": "Enumerate available historical report objects; report type has its own generation timing. Voided Purchases API is supplementary and quota-bound, not a full historical financial ledger.",
+      "webhookSignature": "RTDN delivered through Pub/Sub; authenticated push JWT verification includes audience and trusted service-account identity, not arbitrary payload HMAC. Notification must be reconciled with purchase API.",
+      "refund": "Earnings report transaction types include charge refund, Google fee refund and full/partial refund metadata.",
+      "netFees": "Earnings report distinguishes charge, Google fee, tax and adjustments; derive finance totals only after report schema/currency and sign validation.",
+      "cost": "Storage/runtime/PubSub cost possible; exact merchant and API costs unverified.",
+      "blockers": [
+        "Play reporting identity permission and bucket/package mapping absent",
+        "No official financial report file read authorized"
+      ]
+    },
+    {
+      "provider": "Google Cloud billing export",
+      "sources": [
+        "https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery",
+        "https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery-setup"
+      ],
+      "supported": "Automatic usage-cost export to BigQuery; account export config and host dataset/table must exist. Dataset can be in another project. Project/service attribution must use actual schema.",
+      "auth": "Existing dataset read/query access and execution project permission; enabling export is a configuration mutation requiring separate authority.",
+      "backfill": "First enable to US/EU multi-region includes current and previous month; supported regional location starts at enabling date. Re-enable/relocation behavior needs explicit handling; never promise unlimited past data.",
+      "webhookSignature": "Not applicable; pull/query source.",
+      "refund": "Credits/adjustments require billing schema treatment, distinct from product refunds.",
+      "netFees": "GCP cloud cost source, not app revenue or profit. Preserve currency and cost/credit definitions.",
+      "cost": "BigQuery query/storage charges possible; approval needed for paid execution/export configuration.",
+      "blockers": [
+        "Dataset/table/export identity and current runtime IAM unresolved",
+        "No paid query or export mutation authorized"
+      ]
+    },
+    {
+      "provider": "GA4",
+      "sources": [
+        "https://developers.google.com/analytics/devguides/reporting/data/v1/quickstart",
+        "https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/PropertyQuota"
+      ],
+      "supported": "Data API runReport for numeric properties/{propertyId}, after API enabling and property access. GA4 property is separate from Firebase project and measurement ID.",
+      "auth": "OAuth user or service identity with analytics.readonly and actual Analytics property permission; GCP Editor does not establish GA4 access.",
+      "backfill": "Only collected and available Analytics data; quotas/thresholds/retention and dimensions constrain report availability. No historical reconstruction of uncollected events.",
+      "webhookSignature": "Not applicable to reporting API.",
+      "refund": "Analytics ecommerce events may report purchase/refund metrics but do not prove provider settlement.",
+      "netFees": "Analytics revenue metrics are not authoritative bank/provider net/fees or cloud cost.",
+      "cost": "Token quotas apply; no paid call or Analytics 360 purchase authorized; monetary API pricing not asserted.",
+      "blockers": [
+        "Numeric property/app mapping absent",
+        "Property read permission unresolved",
+        "Measurement definitions and reporting completeness unresolved"
+      ]
+    }
+  ],
+  "smallestNextStep": "Confirm exact merchant/vendor/package/property/export mappings and reporting authority via safe metadata before adapter design. Keep unsupported finance/net/fee values null with explicit blocker. No credential creation, webhook configuration, export enabling or paid queries implied.",
+  "validation": "JSON serialization/parse; documentation research only, no source tests required",
+  "memoryCandidates": "None"
+}

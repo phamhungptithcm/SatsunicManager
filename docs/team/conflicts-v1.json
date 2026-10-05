@@ -1,0 +1,13 @@
+{
+  "revision": 1,
+  "briefHash": "605561f2c3e4ec8f3e9a00788b424f9d78e844a7aa3380a4d0f969db1571b1bf",
+  "decisions": [
+    {
+      "finding": "QA-003",
+      "decision": "WITHDRAWN",
+      "evidence": "Shell OperationsPage key includes appId/days/timezone/scopeEnd; child state remounts. Reviewer verified and published ui-qa-v2.json. No source fix applied."
+    }
+  ],
+  "singleWriteOwner": "lead",
+  "automaticSyncDelta": "SM-AUTO-007 PROPOSED; seven exact names verified from human messages; no new cloud approval assumed"
+}

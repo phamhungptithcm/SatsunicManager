@@ -1,0 +1,48 @@
+name: Sanity
+on:
+  push:
+    branches: [main, 'hunpeolabs/**']
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: sanity-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  local-sanity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CI: 'true'
+      GCLOUD_PROJECT: demo-satsunicmanager
+      FIRESTORE_EMULATOR_HOST: 127.0.0.1:28080
+      FIREBASE_AUTH_EMULATOR_HOST: 127.0.0.1:29099
+      AI_AGENT_APPROVAL_RECORD: docs/approval-SM-LOCAL-004.md
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: npm ci
+      - run: npm exec playwright -- install --with-deps chromium
+      - run: npm run build
+      - name: Dedicated demo checks (no production deployment)
+        run: node node_modules/firebase-tools/lib/bin/firebase.js emulators:exec --project demo-satsunicmanager --only auth,firestore,storage,functions "node scripts/validate/evidence.mjs --emulators"
+      - name: Save bounded sanity evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: local-sanity-evidence
+          retention-days: 7
+          path: |
+            docs/evidence/checks.json
+            docs/evidence/unit-tests.json
+            docs/evidence/emulator-tests.json
+            playwright-report/
+      # A green job verifies local/demo checks only. Real owner/App Check,
+      # source/provider reconciliation and release approval are separate gates.
