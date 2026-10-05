@@ -1,0 +1,93 @@
+{
+  "checkedAt": "2026-10-05T01:43:47.108Z",
+  "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "sha256": "522393a443b4fd1c6998a6b05d56bb5bc3d3e459c30d12b897429452db641551",
+      "headers": {
+        "csp": "default-src 'self'; script-src 'self' https://accounts.google.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://accounts.google.com; frame-src https://accounts.google.com https://*.firebaseapp.com https://www.google.com https://recaptcha.google.com/recaptcha/; connect-src 'self' https://*.googleapis.com https://*.cloudfunctions.net https://*.firebaseio.com https://accounts.google.com https://www.google.com/recaptcha/; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+        "robots": "noindex, nofollow",
+        "frame": null
+      },
+      "localMatch": true
+    },
+    {
+      "path": "/manager-config.json",
+      "status": 200,
+      "sha256": "870ef054d7f40dc0ae1b08bd795256e59a0e60b3a0bfdb2423f091e3c99e47f8",
+      "headers": {
+        "csp": "default-src 'self'; script-src 'self' https://accounts.google.com https://www.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://accounts.google.com; frame-src https://accounts.google.com https://*.firebaseapp.com https://www.google.com https://recaptcha.google.com/recaptcha/; connect-src 'self' https://*.googleapis.com https://*.cloudfunctions.net https://*.firebaseio.com https://accounts.google.com https://www.google.com/recaptcha/; img-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+        "robots": "noindex, nofollow",
+        "frame": null
+      },
+      "localMatch": true
+    },
+    {
+      "path": "/__/auth/iframe",
+      "status": 200,
+      "sha256": "d1eea8206093f3c645b999e44787c4798a867a5a26bc482313cf9007b778a47d",
+      "headers": {
+        "csp": null,
+        "robots": null,
+        "frame": null
+      },
+      "localMatch": null
+    },
+    {
+      "name": "bootstrapOwner",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "listApps",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "checkConnection",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "getOperations",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "addApp",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "listIncidents",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "updateIncident",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "listNotifications",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    },
+    {
+      "name": "markNotificationRead",
+      "status": 401,
+      "error": "UNAUTHENTICATED",
+      "message": "Unauthenticated"
+    }
+  ]
+}

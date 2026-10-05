@@ -1,6 +1,6 @@
 {
   "projectId": "satsunicmanager",
-  "checkedAt": "2026-10-05T01:13:31.663Z",
+  "checkedAt": "2026-10-05T01:41:35.058Z",
   "mode": "read-only public/non-secret auth metadata",
   "checks": [
     {
@@ -23,12 +23,12 @@
         "blockingFunctions": {
           "triggers": {
             "beforeCreate": {
-              "functionUri": "https://us-central1-satsunicmanager.cloudfunctions.net/beforeCreated",
-              "updateTime": "2026-10-05T00:22:57.031Z"
+              "functionUri": "https://beforecreated-gjcmri2vyq-uc.a.run.app",
+              "updateTime": "2026-10-05T01:40:43.414Z"
             },
             "beforeSignIn": {
-              "functionUri": "https://us-central1-satsunicmanager.cloudfunctions.net/beforeSignedIn",
-              "updateTime": "2026-10-05T00:22:57.031Z"
+              "functionUri": "https://beforesignedin-gjcmri2vyq-uc.a.run.app",
+              "updateTime": "2026-10-05T01:40:43.414Z"
             }
           }
         }

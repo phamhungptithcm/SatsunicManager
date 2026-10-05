@@ -1,0 +1,159 @@
+{
+  "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+  "functions": [
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/bootstrapOwner",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://bootstrapowner-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/checkConnection",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://checkconnection-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/listNotifications",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://listnotifications-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/beforeCreated",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://beforecreated-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/beforeSignedIn",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://beforesignedin-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/updateIncident",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://updateincident-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/listApps",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://listapps-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/listIncidents",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://listincidents-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/getOperations",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://getoperations-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/addApp",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://addapp-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    },
+    {
+      "buildConfig": {
+        "serviceAccount": "projects/satsunicmanager/serviceAccounts/317759361800-compute@developer.gserviceaccount.com"
+      },
+      "name": "projects/satsunicmanager/locations/us-central1/functions/markNotificationRead",
+      "serviceConfig": {
+        "availableMemory": "256Mi",
+        "maxInstanceCount": 2,
+        "maxInstanceRequestConcurrency": 8,
+        "serviceAccountEmail": "manager-api@satsunicmanager.iam.gserviceaccount.com",
+        "uri": "https://marknotificationread-gjcmri2vyq-uc.a.run.app"
+      },
+      "state": "ACTIVE"
+    }
+  ]
+}
