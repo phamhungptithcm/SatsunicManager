@@ -14,7 +14,7 @@ async function login(page:Page,email='hunpeo97@gmail.com') {
   await popup.getByRole('button',{name:'Add new account'}).click();
   await popup.locator('#email-input').fill(email);
   await popup.getByRole('button',{name:/Sign in/i}).click();
-  await expect(page.getByRole('heading',{name:'Tổng quan',exact:true})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/^(Tổng quan|Overview)$/})).toBeVisible();
 }
 test('real emulator auth, registry, filters, navigation, layout and logout',async({page})=>{
   await login(page);
@@ -64,6 +64,33 @@ test('real emulator auth, registry, filters, navigation, layout and logout',asyn
   await page.getByLabel('Sign out',{exact:true}).click();
   await expect(page.getByRole('button',{name:'Sign in with Google'})).toBeVisible();
   await expect(page.locator('.app-row')).toHaveCount(0);
+});
+test('owner settings persist through a new authenticated session',async({page})=>{
+ await login(page,'phamhung.pitit@gmail.com');
+ await page.getByRole('link',{name:'Cài đặt',exact:true}).click();
+ const form=page.locator('form').filter({has:page.getByRole('button',{name:'Lưu thiết lập',exact:true})});
+ await form.getByRole('combobox',{name:'Ngôn ngữ',exact:true}).selectOption('en');
+ await form.getByRole('combobox',{name:'Giao diện',exact:true}).selectOption('dark');
+ await form.getByRole('combobox',{name:'Múi giờ mặc định',exact:true}).selectOption('Asia/Ho_Chi_Minh');
+ const saved=page.waitForResponse(response=>response.url().endsWith('/saveOwnerPreferences'));
+ await form.getByRole('button',{name:'Lưu thiết lập',exact:true}).click();expect((await saved).status()).toBe(200);
+ await expect(page.locator('.workspace')).toHaveClass(/dark/);
+ await expect(page.getByRole('heading',{name:'Settings & Audit',exact:true})).toBeVisible();
+ await expect(page.getByLabel('Timezone',{exact:true})).toHaveValue('Asia/Ho_Chi_Minh');
+ await page.reload();await login(page,'phamhung.pitit@gmail.com');
+ await expect(page.getByRole('heading',{name:'Overview',exact:true})).toBeVisible();
+ await expect(page.locator('.workspace')).toHaveClass(/dark/);
+ await expect(page.locator('html')).toHaveAttribute('lang','en');
+ await page.getByRole('link',{name:'Settings & Audit',exact:true}).click();
+ const restored=page.locator('form').filter({has:page.getByRole('button',{name:'Save preferences',exact:true})});
+ await expect(restored.getByRole('combobox',{name:'Default timezone',exact:true})).toHaveValue('Asia/Ho_Chi_Minh');
+ await expect.poll(()=>restored.evaluate(element=>getComputedStyle(element).opacity)).toBe('1');
+ await page.screenshot({path:'docs/evidence/settings-persisted-demo.png'});
+ await restored.getByRole('combobox',{name:'Language',exact:true}).selectOption('vi');
+ await restored.getByRole('combobox',{name:'Appearance',exact:true}).selectOption('light');
+ await restored.getByRole('combobox',{name:'Default timezone',exact:true}).selectOption('America/Chicago');
+ await restored.getByRole('button',{name:'Save preferences',exact:true}).click();
+ await expect(page.getByRole('heading',{name:'Cài đặt',exact:true})).toBeVisible();
 });
 test('mobile shell has no horizontal overflow and drawer works',async({page})=>{
   await page.setViewportSize({width:390,height:844}); await login(page,'phamhung.pitit@gmail.com');

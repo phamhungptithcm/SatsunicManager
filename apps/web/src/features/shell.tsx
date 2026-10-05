@@ -1,3 +1,5 @@
+import {SettingsPage} from './settings';
+import {ownerPreferencesSchema,type OwnerPreferences} from '../../../../packages/contracts/src/preferences';
 import {AddApp} from './apps';
 import {AskManager} from './conversation/AskManager';
 import {FinancePage} from './finance';
@@ -14,8 +16,14 @@ import { ActionProgress } from '../components/action-progress';
 import { useHeaderMotion } from '../components/motion';
 import { Button } from '../components/button';
 const navigation = [ ['/', 'overview', LayoutDashboard], ['/apps', 'apps', Boxes], ['/finance', 'finance', Wallet], ['/operations', 'operations', Activity], ['/traffic', 'traffic', ChartNoAxesCombined], ['/incidents', 'incidents', TriangleAlert], ['/reports', 'reports', FileText], ['/notifications', 'notifications', Bell], ['/integrations', 'integrations', Plug], ['/settings', 'settings', Settings] ] as const;
-export function Shell({ client, owner, locale, setLocale, logout }: { client: Client; owner: Owner; locale: Locale; setLocale: (value: Locale) => void; logout: () => Promise<void> }) {
+export function Shell({ client, owner, locale: fallbackLocale, setLocale: onLocale, logout }: { client: Client; owner: Owner; locale: Locale; setLocale: (value: Locale) => void; logout: () => Promise<void> }) {
+  const cache = useQueryClient();
+  const preferences=useQuery({queryKey:['preferences',owner.uid],queryFn:async()=>ownerPreferencesSchema.parse(await client.call('getOwnerPreferences',{})),enabled:client.config.emulator||client.config.preferencesEnabled,retry:false,staleTime:60000});
+  const [chosenLocale,setChosenLocale]=useState<Locale|null>(null);
+  const locale=chosenLocale??preferences.data?.locale??fallbackLocale;
+  const setLocale=(value:Locale)=>{setChosenLocale(value);onLocale(value);};
   const t = copy[locale];
+  useEffect(()=>{document.documentElement.lang=locale;},[locale]);
   const headerRef = useRef<HTMLElement>(null);
   const [notice, setNotice] = useState<{text:string;kind:ToastKind;pending?:boolean}>({text:"",kind:"info"});
   const [params, setParams] = useSearchParams();
@@ -23,7 +31,9 @@ export function Shell({ client, owner, locale, setLocale, logout }: { client: Cl
   const [collapsed, setCollapsed] = useState(false);
   const [drawer, setDrawer] = useState(false);
   useHeaderMotion(headerRef, drawer);
-  const [dark, setDark] = useState(false);
+  const [chosenDark,setChosenDark]=useState<boolean|null>(null);
+  const dark=chosenDark??(preferences.data?.theme==='dark');
+  const setDark=(value:boolean)=>setChosenDark(value);
   const [signingOut, setSigningOut] = useState(false);
   const [offline, setOffline] = useState(!navigator.onLine);
   useEffect(() => {
@@ -33,11 +43,10 @@ export function Shell({ client, owner, locale, setLocale, logout }: { client: Cl
   }, []);
   const [scopeEnd,setScopeEnd]=useState(()=>new Date().toISOString());
   const environment = 'production' as const;
-  const timezone = params.get('timezone') === 'Asia/Ho_Chi_Minh' ? 'Asia/Ho_Chi_Minh' : 'America/Chicago';
+  const timezone = params.get('timezone') === 'Asia/Ho_Chi_Minh' ? 'Asia/Ho_Chi_Minh' : params.get('timezone') === 'America/Chicago' ? 'America/Chicago' : preferences.data?.timezone??'America/Chicago';
   const appId = appIdSchema.safeParse(params.get('app')).success ? params.get('app')! : 'all';
   const days = ['1', '7', '30'].includes(params.get('days') ?? '') ? params.get('days')! : '30';
   const scope:Scope={appId:appId==='all'?'all':appIdSchema.parse(appId),environment,from:new Date(Date.parse(scopeEnd)-Number(days)*86400000).toISOString(),to:scopeEnd,timezone};
-  const cache = useQueryClient();
   const query = useQuery({ queryKey: ['registry', owner.uid, environment], queryFn: async () => registryResponseSchema.parse(await client.call('listApps', { environment })), staleTime: 30000, retry: 1 });
   const mutation = useMutation({ mutationFn: async (item: RegistryItem) => client.call('checkConnection', { appId: item.id, environment, revision: item.revision, idempotencyKey: crypto.randomUUID() }),
     onMutate: () => setNotice({text:t.testing,kind:'info',pending:true}),
@@ -88,7 +97,7 @@ export function Shell({ client, owner, locale, setLocale, logout }: { client: Cl
           </div><Button title={item.source ? t.test : t.noTarget} disabled={!item.source || mutation.isPending} onClick={() => mutation.mutate(item)}>{mutation.isPending && mutation.variables?.id === item.id ? t.testing : t.test}</Button></article>)}</div>
           {!query.isPending && !query.isError && items.length === 0 && <p className="empty">{t.noFiltered}</p>}
         </section><p className="footnote">{t.healthDisclaimer} {t.readOnly}</p>
-      </> : location.pathname==='/operations'?<OperationsPage key={`${appId}:${days}:${timezone}:${scopeEnd}`} {...pageProps}/>:location.pathname==='/incidents'?<IncidentsPage {...pageProps}/>:location.pathname==='/notifications'?<NotificationsPage {...pageProps}/>:location.pathname==='/finance'||location.pathname==='/reports'?<FinancePage {...pageProps} report={location.pathname==='/reports'}/>:<section className="empty-state"><Plug size={28}/><h2>{t.missing}</h2><p>{t.sectionBlocked}</p><NavLink className="button" to={`/integrations?${params}`}>{t.integrations}</NavLink></section>}
+      </> : location.pathname==='/settings'?<SettingsPage client={client} locale={locale} preferences={preferences.data} onNotice={pageProps.onNotice} onRefresh={()=>void preferences.refetch()} onSaved={(value:OwnerPreferences)=>{cache.setQueryData(['preferences',owner.uid],value);setChosenLocale(null);setChosenDark(null);onLocale(value.locale);}}/>:location.pathname==='/operations'?<OperationsPage key={`${appId}:${days}:${timezone}:${scopeEnd}`} {...pageProps}/>:location.pathname==='/incidents'?<IncidentsPage {...pageProps}/>:location.pathname==='/notifications'?<NotificationsPage {...pageProps}/>:location.pathname==='/finance'||location.pathname==='/reports'?<FinancePage {...pageProps} report={location.pathname==='/reports'}/>:<section className="empty-state"><Plug size={28}/><h2>{t.missing}</h2><p>{t.sectionBlocked}</p><NavLink className="button" to={`/integrations?${params}`}>{t.integrations}</NavLink></section>}
       <footer className="product-footer">Product by <a href="https://hunpeolabs.com" target="_blank" rel="noreferrer">HunpeoLabs</a></footer>
     </main>
     <AskManager key={`${appId}/${days}/${timezone}/${scopeEnd}`} locale={locale} scopeLabel={`${appId === 'all' ? t.all : catalog.find(a => a.id === appId)?.name} / ${environment} / ${days === '30' ? t.days30 : days === '7' ? t.days7 : t.today}`}/>

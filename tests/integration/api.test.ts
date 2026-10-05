@@ -27,7 +27,7 @@ beforeAll(async()=> {
 });
 afterAll(()=>deleteApp(app));
 describe('Callable API → verified identity → access record → Firestore',()=>{
-  it.each(['listIncidents','listNotifications','updateIncident','markNotificationRead'])('rejects anonymous %s',async name=>expect((await call(name,undefined,{})).status).toBe(401));
+  it.each(['listIncidents','listNotifications','updateIncident','markNotificationRead','getOwnerPreferences','saveOwnerPreferences'])('rejects anonymous %s',async name=>expect((await call(name,undefined,{})).status).toBe(401));
   it('rejects anonymous registry read',async()=>expect((await call('listApps',undefined,{environment:'production'})).status).toBe(401));
   it('rejects outsider bootstrap and cannot read registry',async()=>{
     const denied=await signIn('outsider@example.test','google.com',true);
