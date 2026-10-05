@@ -1,0 +1,33 @@
+{
+  "revision": 3,
+  "supersedes": "docs/team/release009-review-v2.json",
+  "candidateHashProvidedByLead": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
+  "scope": "Single additional auth diagnostic source change under scoped release009",
+  "sourceEvidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/apps/web/src/features/auth.tsx",
+      "sha256": "659bce2eef9a3acd55d6b3d8e5bc5e6e12a72d7541148c81629a9107cc55dc8a"
+    }
+  ],
+  "reviewMode": "Read-only source inspection; no source edits/checks/tests/runtime/cloud",
+  "findings": [],
+  "observations": [
+    "reportAuthFailure extracts only code and logs code matching auth namespace with lowercase letters/hyphens; otherwise constant unavailable. Does not log exception object/message/stack, credential, token, email or account details.",
+    "Both GIS credential and popup catch paths invoke same diagnostic then retain existing failed/pending UI state behavior. No Auth provider/allowlist/AppCheck/security bypass introduced.",
+    "Regex bounds allowed characters but has no maximum length; actual Firebase SDK codes are short. This is not a verified SDK exploit or release blocker in inspected call paths."
+  ],
+  "scopeResult": "PASS single diagnostic change source review",
+  "verification": "Fresh full candidate suite is running per lead; no pass asserted by reviewer",
+  "productionStatusReportedByLead": {
+    "pilot": "Eleven functions ACTIVE; Hosting hashes matched; nine anonymous callable denials401 reported by lead, not independently re-read",
+    "login": "Fails before popup; signup remains closed. Live owner authentication NOT_READY pending diagnosis",
+    "git": "main pushed cb2c382 per lead; GitHub workflow active, no run yet. CI NOT_RUN, not PASSED"
+  },
+  "remainingLiveGates": [
+    "Resolve real browser before-popup Google login failure",
+    "Personally completed owner login/AppCheck and outsider/revocation acceptance",
+    "Fresh exact-candidate full suite evidence",
+    "Actual GitHub workflow result when a run exists"
+  ],
+  "memoryCandidates": "None"
+}

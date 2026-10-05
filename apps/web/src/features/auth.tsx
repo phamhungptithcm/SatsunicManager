@@ -3,6 +3,11 @@ import { GoogleAuthProvider, signInWithCredential, signInWithPopup } from 'fireb
 import type { Client } from '../lib/firebase';
 import type { Text } from '../lib/i18n';
 import { Button } from '../components/button';
+function reportAuthFailure(error: unknown) {
+  const code = error && typeof error === 'object' && 'code' in error ? error.code : null;
+  // Only a bounded SDK error code; never credentials, account details or exception payloads.
+  console.warn('Manager Google sign-in:', typeof code === 'string' && /^auth\/[a-z-]+$/.test(code) ? code : 'unavailable');
+}
 type GoogleAPI = { accounts: { id: { initialize: (options: { client_id: string; callback: (data: { credential: string }) => void; use_fedcm_for_prompt: boolean; auto_select: boolean }) => void; prompt: () => void; cancel: () => void } } };
 declare global { interface Window { google?: GoogleAPI } }
 export function Login({ client, setup, t }: { client: Client | null; setup: boolean; t: Text }) {
@@ -18,7 +23,7 @@ export function Login({ client, setup, t }: { client: Client | null; setup: bool
           if (!active) return;
           setPending(true); setFailed(false);
           try { await signInWithCredential(client.auth, GoogleAuthProvider.credential(credential)); }
-          catch { if (active) setFailed(true); }
+          catch (error) { reportAuthFailure(error); if (active) setFailed(true); }
           finally { if (active) setPending(false); }
         } });
       window.google.accounts.id.prompt();
@@ -33,7 +38,7 @@ export function Login({ client, setup, t }: { client: Client | null; setup: bool
     if (!client) return;
     setPending(true); setFailed(false);
     try { const provider = new GoogleAuthProvider(); provider.setCustomParameters({ prompt: 'select_account' }); await signInWithPopup(client.auth, provider); }
-    catch { setFailed(true); }
+    catch (error) { reportAuthFailure(error); setFailed(true); }
     finally { setPending(false); }
   }
   return <main className="login-page"><section className="login-box"><span className="wordmark">Satsunic<span>Manager</span></span><p className="eyebrow">HunpeoLabs</p>

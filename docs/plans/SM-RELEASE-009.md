@@ -31,3 +31,5 @@ Capture actual pre-release function source storage references and Hosting releas
 Pre-release source review found Hosting CSP lacked reCAPTCHA connection and challenge-frame endpoints. Add only connect-src https://www.google.com/recaptcha/ and frame-src https://recaptcha.google.com/recaptcha/ per https://docs.cloud.google.com/recaptcha/docs/faq. Retain frame-ancestors/object/base restrictions and all Auth/App Check enforcement. This corrects the already-approved Google App Check integration; no provider, permission or source scope expansion. Verify exact deployed headers and live browser separately.
 
 Production archive correction: Functions now carries its own npm-generated lockfile and the same existing root security overrides. Direct dependency versions are unchanged; isolated installation audit reports zero vulnerabilities. This makes Cloud Build resolution reproducible within the approved release source scope.
+
+Live login diagnostic correction: bounded SDK auth error codes only are logged locally to the browser console; no account, credential or exception payload is exposed. Required to diagnose observed failed production login within approved auth flow.

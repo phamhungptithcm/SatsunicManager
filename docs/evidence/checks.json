@@ -1,5 +1,5 @@
 {
-  "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+  "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
   "commit": null,
   "environment": "local/demo emulators; public HunpeoLabs HTTPS probes",
   "checks": [
@@ -10,9 +10,9 @@
         "run",
         "typecheck"
       ],
-      "startedAt": "2026-10-05T01:37:10.148Z",
-      "endedAt": "2026-10-05T01:37:13.883Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:18.366Z",
+      "endedAt": "2026-10-05T01:47:28.876Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -24,9 +24,9 @@
         "run",
         "lint"
       ],
-      "startedAt": "2026-10-05T01:37:13.886Z",
-      "endedAt": "2026-10-05T01:37:16.981Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:28.884Z",
+      "endedAt": "2026-10-05T01:47:34.932Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -38,9 +38,9 @@
         "run",
         "build"
       ],
-      "startedAt": "2026-10-05T01:37:16.982Z",
-      "endedAt": "2026-10-05T01:37:19.872Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:34.932Z",
+      "endedAt": "2026-10-05T01:47:40.953Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -57,9 +57,9 @@
         "--reporter=json",
         "--outputFile=docs/evidence/unit-tests.json"
       ],
-      "startedAt": "2026-10-05T01:37:19.872Z",
-      "endedAt": "2026-10-05T01:37:22.530Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:40.953Z",
+      "endedAt": "2026-10-05T01:47:45.900Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -70,9 +70,9 @@
         "python3",
         "tests/unit/approval_gate_test.py"
       ],
-      "startedAt": "2026-10-05T01:37:22.530Z",
-      "endedAt": "2026-10-05T01:37:22.737Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:45.901Z",
+      "endedAt": "2026-10-05T01:47:46.193Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -85,9 +85,9 @@
         "--path",
         "firebase.json"
       ],
-      "startedAt": "2026-10-05T01:37:22.737Z",
-      "endedAt": "2026-10-05T01:37:22.820Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:46.193Z",
+      "endedAt": "2026-10-05T01:47:46.304Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -98,9 +98,9 @@
         "node",
         "scripts/validate/secret-scan.mjs"
       ],
-      "startedAt": "2026-10-05T01:37:22.820Z",
-      "endedAt": "2026-10-05T01:37:22.912Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:46.304Z",
+      "endedAt": "2026-10-05T01:47:46.463Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -111,9 +111,9 @@
         "node",
         "scripts/validate/doctor.mjs"
       ],
-      "startedAt": "2026-10-05T01:37:22.912Z",
-      "endedAt": "2026-10-05T01:37:22.958Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:46.463Z",
+      "endedAt": "2026-10-05T01:47:46.527Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -131,9 +131,9 @@
         "--reporter=json",
         "--outputFile=docs/evidence/emulator-tests.json"
       ],
-      "startedAt": "2026-10-05T01:37:22.958Z",
-      "endedAt": "2026-10-05T01:37:43.592Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:47:46.527Z",
+      "endedAt": "2026-10-05T01:48:29.774Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
@@ -145,9 +145,9 @@
         "run",
         "test:e2e"
       ],
-      "startedAt": "2026-10-05T01:37:54.632Z",
-      "endedAt": "2026-10-05T01:38:31.217Z",
-      "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+      "startedAt": "2026-10-05T01:48:40.935Z",
+      "endedAt": "2026-10-05T01:50:41.727Z",
+      "candidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
       "exitCode": 0,
       "status": "PASSED",
       "error": null
