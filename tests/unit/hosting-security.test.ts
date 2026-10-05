@@ -14,4 +14,7 @@ it('permits the configured Google App Check transport without lifting the framin
  expect(directives['frame-ancestors']).toEqual(["'none'"]);
  expect(directives['object-src']).toEqual(["'none'"]);
  expect(headers.find((header:{key:string})=>header.key==='X-Robots-Tag').value).toBe('noindex, nofollow');
+ expect(headers.find((header:{key:string})=>header.key==='Cache-Control').value).toBe('no-cache');
+ expect(config.hosting.headers.find((entry:{source:string})=>entry.source==='/assets/**').headers[0].value).toBe('public, max-age=31536000, immutable');
+ expect(config.hosting.headers.find((entry:{source:string})=>entry.source==='/manager-config.json').headers[0].value).toBe('no-store, max-age=0');
 });
