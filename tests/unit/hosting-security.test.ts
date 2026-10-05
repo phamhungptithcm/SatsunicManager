@@ -8,6 +8,7 @@ it('permits the configured Google App Check transport without lifting the framin
  expect(directives['connect-src']).toContain('https://www.google.com/recaptcha/');
  expect(directives['frame-src']).toContain('https://recaptcha.google.com/recaptcha/');
  expect(directives['script-src']).toContain('https://accounts.google.com');
+ expect(directives['script-src']).toContain('https://apis.google.com');
  expect(directives['script-src']).not.toContain("'unsafe-eval'");
  expect(directives['script-src']).not.toContain('*');
  expect(directives['frame-ancestors']).toEqual(["'none'"]);

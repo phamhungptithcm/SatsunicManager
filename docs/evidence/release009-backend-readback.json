@@ -1,5 +1,7 @@
 {
-  "candidateHash": "caa92cba588125ebc70091297ff097b798c39d0e2f10f53f809e9dd5a95a7989",
+  "candidateHash": "53c50e9d65dcffcaca9ce17b862dfb86d772eb031ce4b77a32b805e80ab4bc6f",
+  "deployedBackendCandidateHash": "a04143c03901c862fb7173a87413816b704ef010578e7d9254bc96fa3921cb9a",
+  "compatibilityEvidence": "Functions/shared contracts unchanged against fa059fb. Later changes affect Hosting CSP, regression assertions and demo CI trigger only. Current eleven ACTIVE runtime metadata readback verified.",
   "functions": [
     {
       "buildConfig": {

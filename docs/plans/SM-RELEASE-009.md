@@ -35,3 +35,5 @@ Production archive correction: Functions now carries its own npm-generated lockf
 Live login diagnostic correction: bounded SDK auth error codes only are logged locally to the browser console; no account, credential or exception payload is exposed. Required to diagnose observed failed production login within approved auth flow.
 
 Sanity workflow diagnostic: add manual workflow_dispatch to the same read-only/demo job because actual GitHub push events were received but no check-run was scheduled. No deployment or production credentials are added.
+
+Observed production auth/internal-error matches Firebase Auth SDK external script onerror at installed esm source lines11305-11314. Add only https://apis.google.com to script-src for the SDK Google iframe loader; retain frame-ancestors/object none and no unsafe-eval/wildcard script. Required in-scope login transport correction, no credentials/grants.

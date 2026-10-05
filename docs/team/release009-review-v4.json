@@ -1,0 +1,48 @@
+{
+  "revision": 4,
+  "supersedes": "docs/team/release009-review-v3.json",
+  "scope": "CSP gapi origin and workflow_dispatch delta only; functions/contracts unchanged per lead",
+  "candidateHashFromCurrentChecksEvidence": "b7c2055938bf274cff79cc99ba09c92ba38320eb1172280925fd13cc7f016bcf",
+  "sourceEvidence": [
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/firebase.json",
+      "sha256": "8d996f9e89a006afc56e91d1c5e0cb7f3ce2a12622d06005c2cbc9ff5190745c"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/tests/unit/hosting-security.test.ts",
+      "sha256": "c9c47dc0404583cb9570da94ffc8c7ec112325cabe62d5b57131c187c8655fea"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/.github/workflows/sanity.yml",
+      "sha256": "153e5184637f998d5c5d272c983fd0dcb7ee0f85fe9a426ee088a1beaf16f65e"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/node_modules/@firebase/auth/dist/esm/index-4NFEPWkC.js",
+      "sha256": "b3b14296a0a3977747010ce82d14edb51fc25bd055e0dc042f889c3cadc2c742"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/docs/evidence/github-sanity-release009.json",
+      "sha256": "24b40e0cb248e21474d5d5c1de5b785d866328cbb376c427bcaac1f3f636ebac"
+    },
+    {
+      "path": "/Users/hunpeo97/Desktop/Workspace/Coder/SatsunicManager/docs/evidence/release009-backend-readback.json",
+      "sha256": "b89595354ebf98df5f8cc273bf36ecce69419963a5f52ff0d5b1d5128ecb2a32"
+    }
+  ],
+  "reviewMode": "Read-only source/evidence reads, no tests/checks/cloud/runtime/index or source changes",
+  "findings": [],
+  "observations": [
+    "Installed Firebase Auth browser SDK loads gapi from https://apis.google.com/js/api.js; script load failure rejects internal-error. Existing CSP omitted required script origin, matching lead live before-popup diagnostic.",
+    "CSP now admits only additional https://apis.google.com script origin; no wildcard/unsafe-eval added; frame-ancestors none and object-src none retained. Regression assertion includes required origin.",
+    "workflow_dispatch enables manual trigger of existing dedicated demo sanity job; content-read permissions and no deployment credentials retained."
+  ],
+  "scopeResult": "PASS scoped source correction review; source explanation substantiated, actual browser login recovery still unverified",
+  "verificationBoundaries": {
+    "fullSuite": "Fresh full suite running per lead; no final pass claimed",
+    "github": "Evidence records success at headSha397cb7248eb588e6994fe17d1573ede3c4b215ed; cannot certify later source candidate by old CI run",
+    "backend": "Lead reports11ACTIVE deployed at earlier a041 frontend candidate; compatibility readback binding is not claim backend deployed current candidate/CI SHA",
+    "liveLogin": "Before-popup internal-error diagnosis has source-supported fix; personal Google login and AppCheck acceptance still need browser readback"
+  },
+  "productionReadiness": "Scoped source review PASS, full master NOT_READY; finance/collector/email/AI excluded without broadening release blocker",
+  "memoryCandidates": "None"
+}
