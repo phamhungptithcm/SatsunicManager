@@ -21,7 +21,7 @@ if (configPath && existsSync(configPath)) {
     check(`${name}_blocking_boundary`, c.phase==='bootstrap' ? env.signupClosedVerified===true : env.blockingTriggersVerified===true, 'Bootstrap requires closed signup; an active pilot requires both verified blocking triggers.');
   }
   if(deployment){
-    const receipts={'SM-LIVE-006':'docs/approval-SM-LIVE-006.md','SM-RELEASE-009':'docs/approval-SM-RELEASE-009.md'};
+    const receipts={'SM-LIVE-006':'docs/approval-SM-LIVE-006.md','SM-RELEASE-009':'docs/approval-SM-RELEASE-009.md','SM-PREFERENCES-011':'docs/approval-SM-PREFERENCES-011.md'};
     const receipt=receipts[process.env.MANAGER_RELEASE_APPROVAL];
     check('release_approval',Boolean(receipt&&c.approvalRef===receipt&&existsSync(receipt)), 'Provide exact human release approval.');
     check('candidate_binding',c.candidateHash===candidateHash(),'Review/test the current candidate and bind its hash before deployment.');
